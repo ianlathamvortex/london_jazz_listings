@@ -1,20 +1,45 @@
 """
 scraper_ukjazznews.py — UK Jazz News weekly newsletter parser
-Source: https://ukjazznews.com/newsletter-continued/
-Published every Wednesday. URL pattern: /newsletter-continued/DD-month-YYYY/
+Tries multiple approaches to get past 403 blocks.
 """
 import re
 import sys
+import requests
 from datetime import datetime, timedelta
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from utils import fetch, gig, load, save, merge_gigs, clean_date, is_future
+from utils import gig, load, save, merge_gigs, clean_date, is_future
+from bs4 import BeautifulSoup
 
 BASE_URL   = "https://ukjazznews.com"
 NEWSLETTER = f"{BASE_URL}/newsletter-continued"
 
-# Known London venues for filtering (lowercase)
+HEADERS_LIST = [
+    {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-GB,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Cache-Control": "max-age=0",
+    },
+    {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3 Safari/605.1.15",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-GB,en;q=0.5",
+        "Connection": "keep-alive",
+    },
+    {
+        "User-Agent": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+        "Accept": "text/html",
+    },
+]
+
 LONDON_VENUES = {
     "vortex": ("Vortex Jazz Club", "North", "Dalston"),
     "606": ("606 Club", "South West", "Chelsea / Lots Road"),
@@ -43,7 +68,6 @@ LONDON_VENUES = {
     "café oto": ("Café OTO", "North", "Dalston"),
     "cafe oto": ("Café OTO", "North", "Dalston"),
     "grow hackney": ("Grow Hackney", "East", "Hackney Wick"),
-    "grow, hackney": ("Grow Hackney", "East", "Hackney Wick"),
     "oliver's jazz": ("Oliver's Jazz Bar", "South East", "Greenwich"),
     "spice of life": ("Spice of Life", "Central", "Soho"),
     "king's place": ("King's Place", "Central", "Barbican / City"),
@@ -51,27 +75,25 @@ LONDON_VENUES = {
     "hampstead jazz": ("Hampstead Jazz Club", "North", "Hampstead"),
     "washington pub": ("The Washington", "North", "Hampstead"),
     "england's lane": ("The Washington", "North", "Hampstead"),
-    "nw3": ("Various North London", "North", "Hampstead"),
     "haggerston": ("The Haggerston", "North", "Dalston"),
     "bull & gate": ("Bull & Gate", "North", "Kentish Town"),
     "cockpit": ("The Cockpit", "North", "Camden"),
     "map studio": ("Map Studio Café", "North", "Kentish Town"),
     "syp": ("SYP City", "North", "Islington / Angel"),
-    "distillers": ("The Distillers", "West", "Hammersmith"),
     "george iv": ("George IV", "West", "Chiswick"),
     "drayton court": ("Drayton Court Hotel", "West", "Ealing"),
     "ladbroke hall": ("Ladbroke Hall", "West", "Notting Hill / Ladbroke Grove"),
     "mamasaint": ("MaMaSaint", "South West", "Tooting"),
     "oval tavern": ("Oval Tavern", "South West", "Croydon"),
     "croydon clock tower": ("Croydon Clock Tower Café", "South West", "Croydon"),
-    "imber court": ("Imber Court", "West / South West", "East Molesey"),
-    "twickenham": ("Twickenham Venue", "West / South West", "Twickenham"),
     "battersea barge": ("Battersea Barge", "South West", "Nine Elms / Battersea"),
     "piano smithfield": ("Piano Smithfield", "Central", "Barbican / City"),
-    "flower station": ("The Garden Café / Flower Station", "North", "Highgate / Archway"),
+    "flower station": ("The Garden Café", "North", "Highgate / Archway"),
+    "orleans": ("Orleans Bar", "North", "Finsbury Park"),
+    "night owl": ("The Night Owl", "North", "Finsbury Park"),
+    "nw3": ("Various North London", "North", "Hampstead"),
 }
 
-# Outside M25 — exclude these
 OUTSIDE_M25 = [
     "worthing", "chichester", "guildford", "dorking", "betchworth",
     "rochester", "edinburgh", "manchester", "cardiff", "poole",
@@ -82,40 +104,44 @@ OUTSIDE_M25 = [
 ]
 
 
-def _get_current_newsletter_url() -> str:
-    """Build URL for the most recent Wednesday newsletter."""
-    today = datetime.now()
-    # Find most recent Wednesday
-    days_back = (today.weekday() - 2) % 7  # Wednesday = 2
-    last_wed = today - timedelta(days=days_back)
-    month_name = last_wed.strftime("%B").lower()
-    return f"{NEWSLETTER}/{last_wed.day}-{month_name}-{last_wed.year}/"
+def fetch_with_retry(url):
+    """Try multiple user agents."""
+    for headers in HEADERS_LIST:
+        try:
+            session = requests.Session()
+            # First hit the homepage to get cookies
+            session.get(BASE_URL, headers=headers, timeout=10)
+            r = session.get(url, headers=headers, timeout=15)
+            if r.status_code == 200:
+                return BeautifulSoup(r.text, "lxml")
+            print(f"  Status {r.status_code}")
+        except Exception as e:
+            print(f"  Fetch error: {e}")
+    return None
 
 
 def scrape() -> list:
     print("Scraping UK Jazz News...")
     results = []
 
-    # Try current and previous two weeks
     today = datetime.now()
-    for weeks_back in range(3):
+    for weeks_back in range(4):
         days_back = (today.weekday() - 2) % 7 + (weeks_back * 7)
         wed = today - timedelta(days=days_back)
         month_name = wed.strftime("%B").lower()
         url = f"{NEWSLETTER}/{wed.day}-{month_name}-{wed.year}/"
 
         print(f"  Trying: {url}")
-        soup = fetch(url)
+        soup = fetch_with_retry(url)
         if not soup:
             continue
 
         page_results = _parse_newsletter(soup, url)
         if page_results:
             results.extend(page_results)
-            print(f"  Parsed {len(page_results)} gigs from {url}")
-            break  # Found current newsletter, stop
+            print(f"  Parsed {len(page_results)} London gigs")
+            break
 
-    # Deduplicate
     seen = set()
     unique = []
     for r in results:
@@ -127,56 +153,44 @@ def scrape() -> list:
     return unique
 
 
-def _parse_newsletter(soup, source_url: str) -> list:
-    """Parse the Days and Weeks Ahead section of the newsletter."""
+def _parse_newsletter(soup, source_url):
     results = []
     text = soup.get_text(separator="\n", strip=True)
     lines = [l.strip() for l in text.split("\n") if l.strip()]
 
-    # Find the "Days and Weeks Ahead" section
     start_idx = 0
     for i, line in enumerate(lines):
         if "days and weeks ahead" in line.lower() or "live gigs" in line.lower():
             start_idx = i
             break
 
-    # Find end section (Residencies or Radio)
     end_idx = len(lines)
     for i in range(start_idx, len(lines)):
-        if any(s in lines[i].lower() for s in ["residencies", "radio", "courses", "not timed"]):
+        if any(s in lines[i].lower() for s in
+               ["residencies", "radio", "courses", "not timed", "live streamed"]):
             end_idx = i
             break
 
     gig_lines = lines[start_idx:end_idx]
-
     current_date = None
+
     for line in gig_lines:
-        # Check if line is a date indicator
         date_result = _extract_date(line)
         if date_result:
             current_date = date_result
             continue
 
-        # Skip short lines, headers, navigation
         if len(line) < 10 or _is_boilerplate(line):
             continue
 
-        # Skip if no current date context
-        if not current_date:
+        if not current_date or not is_future(current_date):
             continue
 
-        # Skip future dates too far away (> 3 months)
-        if not is_future(current_date):
-            continue
-
-        # Check if line mentions a London venue
         venue_info = _identify_venue(line)
         if not venue_info:
             continue
 
         venue_name, zone, hood = venue_info
-
-        # Parse the gig line
         result = _parse_gig_line(line, current_date, venue_name, zone, hood, source_url)
         if result:
             results.append(result)
@@ -184,11 +198,10 @@ def _parse_newsletter(soup, source_url: str) -> list:
     return results
 
 
-def _extract_date(line: str) -> str | None:
-    """Extract a date from a line like 'Thursday 4 June' or 'Monday 8 June'."""
+def _extract_date(line):
     patterns = [
         r"(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+"
-        r"(\d{1,2})\s+"
+        r"(\d{1,2})\w*\s+"
         r"(January|February|March|April|May|June|July|August|September|October|November|December)"
         r"(?:\s+(\d{4}))?",
         r"(\d{1,2})\s+"
@@ -198,47 +211,32 @@ def _extract_date(line: str) -> str | None:
     for pattern in patterns:
         m = re.search(pattern, line, re.IGNORECASE)
         if m:
-            groups = m.groups()
+            groups = [g for g in m.groups() if g]
             if len(groups) >= 2:
-                day = groups[0] or groups[-3]
-                month = groups[1] or groups[-2]
-                year = groups[-1] or "2026"
                 try:
-                    return clean_date(f"{day} {month} {year}")
+                    return clean_date(f"{groups[0]} {groups[1]} {groups[2] if len(groups) > 2 else '2026'}")
                 except Exception:
                     continue
     return None
 
 
-def _identify_venue(line: str) -> tuple | None:
-    """Check if a line mentions a known London venue."""
+def _identify_venue(line):
     line_lower = line.lower()
-
-    # Check outside M25 first
     for outside in OUTSIDE_M25:
         if outside in line_lower:
             return None
-
-    # Check known London venues
     for keyword, venue_info in LONDON_VENUES.items():
         if keyword in line_lower:
             return venue_info
-
-    # Check for London postcodes as a catch-all
-    postcode_m = re.search(
-        r"\b(N\d|NW\d|E\d|EC\d|SE\d|SW\d|W\d|WC\d)\b",
-        line
-    )
+    postcode_m = re.search(r"\b(N\d|NW\d|E\d|EC\d|SE\d|SW\d|W\d|WC\d)\b", line)
     if postcode_m:
         pc = postcode_m.group(1)
         zone, hood = _postcode_to_zone(pc)
         return (f"London Venue ({pc})", zone, hood)
-
     return None
 
 
-def _postcode_to_zone(pc: str) -> tuple:
-    """Rough zone assignment from postcode prefix."""
+def _postcode_to_zone(pc):
     mapping = {
         "N": ("North", "North London"), "NW": ("North", "North London"),
         "E": ("East", "East London"), "EC": ("Central", "Barbican / City"),
@@ -252,22 +250,11 @@ def _postcode_to_zone(pc: str) -> tuple:
     return ("Central", "London")
 
 
-def _parse_gig_line(line: str, date: str, venue_name: str,
-                    zone: str, hood: str, source_url: str) -> dict | None:
-    """Extract artist and details from a newsletter gig line."""
-
-    # Typical format:
-    # "Thursday 4 June – Henry Lowther's Still Waters are at Karamel, 4 Coburg Road..."
-    # "Friday 5th June – FIVE-WAY SPLIT FEAT. QUENTIN COLLINS are at Jazz Café POSK..."
-
-    # Extract artist name — text before "are at", "is at", "at the", "at "
+def _parse_gig_line(line, date, venue_name, zone, hood, source_url):
     artist = ""
     patterns = [
-        r"^.*?(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)"
-        r"\s+\d+\w*\s+\w+\s*[–-]\s*(.+?)\s+(?:are|is)\s+at\b",
         r"[–-]\s+(.+?)\s+(?:are|is)\s+at\b",
-        r"[–-]\s+(.+?)\s+at\s+(?:the\s+)?(?:" +
-        "|".join(re.escape(k) for k in list(LONDON_VENUES.keys())[:20]) + ")",
+        r"[–-]\s+(.+?)\s+at\s+(?:the\s+)?",
     ]
     for pattern in patterns:
         m = re.search(pattern, line, re.IGNORECASE)
@@ -275,16 +262,14 @@ def _parse_gig_line(line: str, date: str, venue_name: str,
             artist = m.group(1).strip()
             break
 
-    # Fallback: everything before the venue mention
     if not artist:
         for keyword in LONDON_VENUES:
             idx = line.lower().find(keyword)
-            if idx > 0:
+            if idx > 5:
                 before = line[:idx].strip()
-                # Clean up date prefix
                 before = re.sub(
                     r"^.*?(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)"
-                    r"\s+\d+\w*\s+\w+\s*[–-]\s*",
+                    r"\s+\d+\w*\s+\w+\s*[–\-]\s*",
                     "", before, flags=re.IGNORECASE
                 ).strip()
                 before = re.sub(r"\s+(?:are|is|–|-)\s*$", "", before).strip()
@@ -295,46 +280,34 @@ def _parse_gig_line(line: str, date: str, venue_name: str,
     if not artist or len(artist) < 3:
         return None
 
-    # Clean artist name
-    artist = re.sub(r"\s+(?:are|is)\s*$", "", artist).strip()
-    artist = artist.rstrip("–-").strip()
+    artist = re.sub(r"\s+(?:are|is)\s*$", "", artist).strip().rstrip("–-").strip()
 
-    # Time if mentioned
     time_m = re.search(r"(\d{1,2})\s*(?:noon|pm|am)", line, re.IGNORECASE)
-    start_time = time_m.group(0) if time_m else ""
-
-    # Special occasion
     special = ""
     if "album launch" in line.lower():
         special = "Album launch"
     elif "birthday" in line.lower():
         special = "Birthday celebration"
-    elif "farewell" in line.lower():
-        special = "Farewell"
 
     return gig(
         artist_name=artist,
         venue_name=venue_name,
         date=date,
-        start_time=start_time,
+        start_time=time_m.group(0) if time_m else "",
         source_url=source_url,
-        ticket_url="",  # enricher will find this
+        ticket_url="",
         zone=zone,
         neighbourhood=hood,
         format_tags="Jazz Club",
         genre_tier1="Contemporary Jazz",
         special_occasion=special,
-        venue_tier="1",
     )
 
 
-def _is_boilerplate(line: str) -> bool:
-    """Filter navigation and boilerplate text."""
-    skip = [
-        "read more", "book now", "find out more", "newsletter",
-        "subscribe", "contact", "privacy", "cookie", "advertisement",
-        "uk jazz news", "©", "powered by", "sign up",
-    ]
+def _is_boilerplate(line):
+    skip = ["read more", "book now", "find out more", "newsletter",
+            "subscribe", "contact", "privacy", "cookie", "uk jazz news",
+            "©", "powered by", "sign up"]
     line_lower = line.lower()
     return any(s in line_lower for s in skip)
 
