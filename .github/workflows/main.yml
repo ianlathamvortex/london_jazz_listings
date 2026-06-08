@@ -1,0 +1,42 @@
+name: Nightly Jazz Scraper
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run scrapers
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python run_all.py
+
+      - name: Commit updated data files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Jazz Scraper Bot"
+          git add data/
+          git diff --staged --quiet || git commit -m "Auto: nightly scrape $(date +'%Y-%m-%d')"
+          git push
