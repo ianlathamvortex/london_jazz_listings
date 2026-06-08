@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gigs — The London Jazz List</title>
+  <meta name="description" content="Jazz gigs in London — searchable, filterable listings updated nightly.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="header"></div>
+
+  <main>
+    <div class="container">
+
+      <section class="page-hero">
+        <h1>Gigs</h1>
+        <p class="subtitle">Upcoming jazz concerts across London</p>
+      </section>
+
+      <div class="filters" id="date-filters">
+        <span class="filter-label">When</span>
+        <button class="date-btn active" data-range="all">All upcoming</button>
+        <button class="date-btn" data-range="today">Tonight</button>
+        <button class="date-btn" data-range="tomorrow">Tomorrow</button>
+        <button class="date-btn" data-range="week">This week</button>
+        <button class="date-btn" data-range="weekend">Weekend</button>
+      </div>
+
+      <div class="filters" id="zone-filters">
+        <span class="filter-label">Zone</span>
+        <button class="filter-btn active" data-zone="all">All</button>
+        <button class="filter-btn" data-zone="Central">Central</button>
+        <button class="filter-btn" data-zone="North">North</button>
+        <button class="filter-btn" data-zone="East">East</button>
+        <button class="filter-btn" data-zone="South West">South West</button>
+        <button class="filter-btn" data-zone="South East">South East</button>
+        <button class="filter-btn" data-zone="West">West</button>
+      </div>
+
+      <div class="filters">
+        <span class="filter-label">Genre</span>
+        <select class="filter-select" id="genre-filter">
+          <option value="all">All genres</option>
+        </select>
+        <span class="filter-label" style="margin-left:1rem">Format</span>
+        <select class="filter-select" id="format-filter">
+          <option value="all">All formats</option>
+        </select>
+        <label style="font-size:0.75rem;margin-left:1rem;cursor:pointer">
+          <input type="checkbox" id="picks-only" style="margin-right:0.3rem">
+          Editor's picks only
+        </label>
+      </div>
+
+      <div class="result-count" id="result-count"></div>
+
+      <div class="listings" id="listings">
+        <div class="loading">Loading</div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    document.getElementById('header').innerHTML = renderHeader('gigs.html');
+    document.getElementById('footer').innerHTML = renderFooter();
+
+    let allGigs = [];
+    let activeRange  = 'all';
+    let activeZone   = 'all';
+    let activeGenre  = 'all';
+    let activeFormat = 'all';
+    let picksOnly    = false;
+
+    async function init() {
+      const gigs = await fetchData('gigs');
+      const t = today();
+      allGigs = gigs
+        .filter(g => g.date >= t)
+        .sort((a, b) => {
+          if (a.date !== b.date) return a.date.localeCompare(b.date);
+          // Editors picks first within each day
+          const ap = a.editors_pick === true || a.editors_pick === 'TRUE';
+          const bp = b.editors_pick === true || b.editors_pick === 'TRUE';
+          return bp - ap;
+        });
+
+      // Populate genre dropdown
+      const genres = uniqueValues(allGigs, 'genre_tier1');
+      const genreSelect = document.getElementById('genre-filter');
+      genres.forEach(g => {
+        const opt = document.createElement('option');
+        opt.value = g; opt.textContent = g;
+        genreSelect.appendChild(opt);
+      });
+
+      // Populate format dropdown
+      const formats = uniqueValues(allGigs, 'format_tags');
+      const formatSelect = document.getElementById('format-filter');
+      formats.forEach(f => {
+        const opt = document.createElement('option');
+        opt.value = f; opt.textContent = f;
+        formatSelect.appendChild(opt);
+      });
+
+      render();
+    }
+
+    function getFiltered() {
+      const t = today();
+      return allGigs.filter(g => {
+        // Date range
+        if (activeRange === 'today'    && !isToday(g.date))    return false;
+        if (activeRange === 'tomorrow' && !isTomorrow(g.date)) return false;
+        if (activeRange === 'week'     && !isThisWeek(g.date)) return false;
+        if (activeRange === 'weekend') {
+          const d = new Date(g.date + 'T12:00:00');
+          const dow = d.getDay();
+          if (dow !== 5 && dow !== 6 && dow !== 0) return false;
+        }
+        // Zone
+        if (activeZone !== 'all' && g.zone !== activeZone) return false;
+        // Genre
+        if (activeGenre !== 'all' && g.genre_tier1 !== activeGenre) return false;
+        // Format
+        if (activeFormat !== 'all' && g.format_tags !== activeFormat) return false;
+        // Picks
+        if (picksOnly && g.editors_pick !== true && g.editors_pick !== 'TRUE') return false;
+        return true;
+      });
+    }
+
+    function render() {
+      const filtered = getFiltered();
+      const countEl = document.getElementById('result-count');
+      countEl.textContent = `${filtered.length} gig${filtered.length !== 1 ? 's' : ''}`;
+
+      const listingsEl = document.getElementById('listings');
+      if (!filtered.length) {
+        showEmpty(listingsEl, 'No gigs found for these filters.');
+        return;
+      }
+
+      const grouped = groupByDate(filtered);
+      const html = Object.entries(grouped)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([date, gigs]) => {
+          const label = isToday(date) ? 'Tonight' : isTomorrow(date) ? 'Tomorrow' : '';
+          return `
+            <div class="date-group">
+              <div class="date-group-header">
+                <div class="date-group-day">${formatDate(date)}</div>
+                ${label ? `<div class="date-group-meta">${label}</div>` : ''}
+              </div>
+              ${gigs.map(renderGigCard).join('')}
+            </div>`;
+        }).join('');
+
+      listingsEl.innerHTML = html;
+    }
+
+    // ── Event listeners ───────────────────────────────────────
+
+    document.querySelectorAll('.date-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeRange = btn.dataset.range;
+        render();
+      });
+    });
+
+    document.querySelectorAll('[data-zone]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-zone]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeZone = btn.dataset.zone;
+        render();
+      });
+    });
+
+    document.getElementById('genre-filter').addEventListener('change', e => {
+      activeGenre = e.target.value;
+      render();
+    });
+
+    document.getElementById('format-filter').addEventListener('change', e => {
+      activeFormat = e.target.value;
+      render();
+    });
+
+    document.getElementById('picks-only').addEventListener('change', e => {
+      picksOnly = e.target.checked;
+      render();
+    });
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Festivals — The London Jazz List</title>
+  <meta name="description" content="London jazz festivals — from the EFG London Jazz Festival to Battersea Jazz Festival.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="header"></div>
+
+  <main>
+    <div class="container">
+
+      <section class="page-hero">
+        <h1>Festivals</h1>
+        <p class="subtitle">Multi-day jazz events across London</p>
+      </section>
+
+      <div id="festivals-list" class="listings">
+        <div class="loading">Loading</div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    document.getElementById('header').innerHTML = renderHeader('festivals.html');
+    document.getElementById('footer').innerHTML = renderFooter();
+
+    async function init() {
+      const festivals = await fetchData('festivals');
+      const t = today();
+      const upcoming = festivals
+        .filter(f => !f.end_date || f.end_date >= t)
+        .sort((a, b) => (a.start_date || '').localeCompare(b.start_date || ''));
+
+      const el = document.getElementById('festivals-list');
+
+      if (!upcoming.length) {
+        showEmpty(el, 'No upcoming festivals listed yet.');
+        return;
+      }
+
+      el.innerHTML = upcoming.map(f => {
+        const dateRange = f.start_date && f.end_date
+          ? `${formatDateShort(f.start_date)} – ${formatDateShort(f.end_date)}`
+          : f.start_date ? formatDate(f.start_date) : '';
+
+        const isActive = f.start_date <= t && f.end_date >= t;
+        const isFree = f.ticketed === false || f.ticketed === 'FALSE';
+
+        return `
+          <div class="gig-card ${isActive ? 'editors-pick' : ''}">
+            <div class="gig-main">
+              <div class="gig-artist">${esc(f.festival_name)}</div>
+              <div class="gig-venue">
+                <span class="gig-venue-name">${esc(f.venue_summary || '')}</span>
+                ${f.zone ? ` · ${esc(f.zone)}` : ''}
+              </div>
+              ${f.description ? `<div class="gig-description">${esc(f.description)}</div>` : ''}
+              <div class="gig-tags">
+                ${isActive ? '<span class="tag tag-special">On now</span>' : ''}
+                ${isFree ? '<span class="tag tag-free">Free</span>' : ''}
+              </div>
+            </div>
+            <div class="gig-aside">
+              <div class="gig-time">${esc(dateRange)}</div>
+              ${f.price_range ? `<div class="gig-price">${esc(f.price_range)}</div>` : ''}
+              ${f.website ? `<a href="${esc(f.website)}" target="_blank" rel="noopener" class="gig-ticket-link">More info →</a>` : ''}
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Entry — The London Jazz List</title>
+  <meta name="description" content="Free jazz in London — conservatoire recitals, outdoor concerts, church sessions and free-entry bar gigs.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="header"></div>
+
+  <main>
+    <div class="container">
+
+      <section class="page-hero">
+        <h1>Free Entry</h1>
+        <p class="subtitle">Great jazz — no ticket required</p>
+      </section>
+
+      <div class="filters">
+        <span class="filter-label">Type</span>
+        <button class="filter-btn active" data-type="all">All</button>
+        <button class="filter-btn" data-type="Conservatoire recital">Conservatoire</button>
+        <button class="filter-btn" data-type="Festival free stage">Festival</button>
+        <button class="filter-btn" data-type="Free concert series">Concert series</button>
+        <button class="filter-btn" data-type="Outdoor / public space">Outdoor</button>
+        <button class="filter-btn" data-type="Church concert">Church</button>
+        <button class="filter-btn" data-type="Bar / restaurant free entry">Bar</button>
+      </div>
+
+      <div class="filters">
+        <span class="filter-label">Zone</span>
+        <button class="filter-btn active" data-zone="all">All</button>
+        <button class="filter-btn" data-zone="Central">Central</button>
+        <button class="filter-btn" data-zone="North">North</button>
+        <button class="filter-btn" data-zone="East">East</button>
+        <button class="filter-btn" data-zone="South West">South West</button>
+        <button class="filter-btn" data-zone="South East">South East</button>
+        <button class="filter-btn" data-zone="West">West</button>
+      </div>
+
+      <div class="result-count" id="result-count"></div>
+      <div class="free-list" id="free-list"></div>
+
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    document.getElementById('header').innerHTML = renderHeader('free.html');
+    document.getElementById('footer').innerHTML = renderFooter();
+
+    let allFree = [];
+    let activeType = 'all';
+    let activeZone = 'all';
+
+    async function init() {
+      const items = await fetchData('free_entry');
+      const t = today();
+      allFree = items
+        .filter(i => !i.date || i.date >= t)
+        .sort((a, b) => {
+          if (!a.date && !b.date) return 0;
+          if (!a.date) return 1;
+          if (!b.date) return -1;
+          return a.date.localeCompare(b.date);
+        });
+      render();
+    }
+
+    function getFiltered() {
+      return allFree.filter(i => {
+        if (activeType !== 'all' && i.free_entry_type !== activeType) return false;
+        if (activeZone !== 'all' && i.zone !== activeZone)            return false;
+        return true;
+      });
+    }
+
+    function render() {
+      const filtered = getFiltered();
+      document.getElementById('result-count').textContent =
+        `${filtered.length} event${filtered.length !== 1 ? 's' : ''}`;
+
+      const listEl = document.getElementById('free-list');
+      if (!filtered.length) {
+        showEmpty(listEl, 'No free events found for these filters.');
+        return;
+      }
+      listEl.innerHTML = filtered.map(renderFreeItem).join('');
+    }
+
+    document.querySelectorAll('[data-type]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-type]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeType = btn.dataset.type;
+        render();
+      });
+    });
+
+    document.querySelectorAll('[data-zone]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-zone]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeZone = btn.dataset.zone;
+        render();
+      });
+    });
+
+    init();
+  </script>
+</body>
+</html>

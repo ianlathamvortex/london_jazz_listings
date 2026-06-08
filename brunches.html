@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jazz Brunches — The London Jazz List</title>
+  <meta name="description" content="London's jazz brunches — Sunday roasts, hotel brunches and lunchtime sessions with live music.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="header"></div>
+
+  <main>
+    <div class="container">
+
+      <section class="page-hero">
+        <h1>Jazz Brunches</h1>
+        <p class="subtitle">Live jazz with food and drink — from Sunday roasts to hotel brunches</p>
+      </section>
+
+      <div class="filters">
+        <span class="filter-label">Day</span>
+        <button class="filter-btn active" data-day="all">All</button>
+        <button class="filter-btn" data-day="Saturday">Saturday</button>
+        <button class="filter-btn" data-day="Sunday">Sunday</button>
+        <button class="filter-btn" data-day="weekday">Weekday</button>
+      </div>
+
+      <div class="filters">
+        <span class="filter-label">Zone</span>
+        <button class="filter-btn active" data-zone="all">All</button>
+        <button class="filter-btn" data-zone="Central">Central</button>
+        <button class="filter-btn" data-zone="North">North</button>
+        <button class="filter-btn" data-zone="East">East</button>
+        <button class="filter-btn" data-zone="South West">South West</button>
+        <button class="filter-btn" data-zone="South East">South East</button>
+        <button class="filter-btn" data-zone="West">West</button>
+      </div>
+
+      <div class="filters">
+        <label style="font-size:0.75rem;cursor:pointer">
+          <input type="checkbox" id="food-only" style="margin-right:0.3rem">
+          Food served
+        </label>
+        <label style="font-size:0.75rem;cursor:pointer;margin-left:1rem">
+          <input type="checkbox" id="family-only" style="margin-right:0.3rem">
+          Family friendly
+        </label>
+        <label style="font-size:0.75rem;cursor:pointer;margin-left:1rem">
+          <input type="checkbox" id="free-brunch" style="margin-right:0.3rem">
+          Free entry
+        </label>
+      </div>
+
+      <div class="result-count" id="result-count"></div>
+      <div class="brunch-grid" id="brunch-grid"></div>
+
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    document.getElementById('header').innerHTML = renderHeader('brunches.html');
+    document.getElementById('footer').innerHTML = renderFooter();
+
+    let allBrunches = [];
+    let activeDay  = 'all';
+    let activeZone = 'all';
+    let foodOnly   = false;
+    let familyOnly = false;
+    let freeOnly   = false;
+
+    const WEEKDAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+
+    async function init() {
+      allBrunches = await fetchData('brunches');
+      render();
+    }
+
+    function getFiltered() {
+      return allBrunches.filter(b => {
+        if (activeDay === 'Saturday' && b.day_of_week !== 'Saturday') return false;
+        if (activeDay === 'Sunday'   && b.day_of_week !== 'Sunday')   return false;
+        if (activeDay === 'weekday'  && !WEEKDAYS.includes(b.day_of_week)) return false;
+        if (activeZone !== 'all' && b.zone !== activeZone)            return false;
+        if (foodOnly   && b.food_served !== true && b.food_served !== 'TRUE') return false;
+        if (familyOnly && b.family_friendly !== true && b.family_friendly !== 'TRUE') return false;
+        if (freeOnly   && b.price_type !== 'Free' && b.price_type !== 'Free (dining)') return false;
+        return true;
+      });
+    }
+
+    function render() {
+      const filtered = getFiltered();
+      document.getElementById('result-count').textContent =
+        `${filtered.length} brunch venue${filtered.length !== 1 ? 's' : ''}`;
+
+      const grid = document.getElementById('brunch-grid');
+      if (!filtered.length) {
+        showEmpty(grid, 'No brunch venues found for these filters.');
+        return;
+      }
+      grid.innerHTML = filtered.map(renderBrunchCard).join('');
+    }
+
+    document.querySelectorAll('[data-day]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-day]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeDay = btn.dataset.day;
+        render();
+      });
+    });
+
+    document.querySelectorAll('[data-zone]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-zone]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeZone = btn.dataset.zone;
+        render();
+      });
+    });
+
+    document.getElementById('food-only').addEventListener('change',   e => { foodOnly = e.target.checked; render(); });
+    document.getElementById('family-only').addEventListener('change', e => { familyOnly = e.target.checked; render(); });
+    document.getElementById('free-brunch').addEventListener('change', e => { freeOnly = e.target.checked; render(); });
+
+    init();
+  </script>
+</body>
+</html>

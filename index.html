@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The London Jazz List</title>
+  <meta name="description" content="London's most comprehensive jazz listings — gigs, jam sessions, brunches and free entry events.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="header"></div>
+
+  <main>
+    <div class="container">
+
+      <section class="home-hero">
+        <h1>London's<br>Jazz Listings</h1>
+        <p>Gigs, jam sessions, brunches and free entry events —<br>updated every night.</p>
+      </section>
+
+      <div class="home-sections" id="section-counts">
+        <a href="gigs.html" class="home-section-link">
+          <div class="home-section-count" id="count-gigs">—</div>
+          <div class="home-section-label">Gigs</div>
+          <div class="home-section-desc">Ticketed jazz concerts across London</div>
+        </a>
+        <a href="jams.html" class="home-section-link">
+          <div class="home-section-count" id="count-jams">—</div>
+          <div class="home-section-label">Jam Sessions</div>
+          <div class="home-section-desc">Weekly sessions open to all</div>
+        </a>
+        <a href="brunches.html" class="home-section-link">
+          <div class="home-section-count" id="count-brunches">—</div>
+          <div class="home-section-label">Brunches</div>
+          <div class="home-section-desc">Live jazz with food and drink</div>
+        </a>
+        <a href="free.html" class="home-section-link">
+          <div class="home-section-count" id="count-free">—</div>
+          <div class="home-section-label">Free Entry</div>
+          <div class="home-section-desc">Great jazz, no ticket required</div>
+        </a>
+      </div>
+
+      <section class="home-tonight">
+        <h2>Tonight</h2>
+        <div id="tonight-list">
+          <div class="loading">Loading</div>
+        </div>
+      </section>
+
+      <section class="home-tonight">
+        <h2>Editor's Picks — This Week</h2>
+        <div id="picks-list">
+          <div class="loading">Loading</div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    document.getElementById('header').innerHTML = renderHeader('index.html');
+    document.getElementById('footer').innerHTML = renderFooter();
+
+    async function init() {
+      const [gigs, jams, brunches, free] = await Promise.all([
+        fetchData('gigs'),
+        fetchData('jam_sessions'),
+        fetchData('brunches'),
+        fetchData('free_entry'),
+      ]);
+
+      const t = today();
+      const futureGigs = gigs.filter(g => g.date >= t);
+      const thisWeekGigs = futureGigs.filter(g => isThisWeek(g.date));
+
+      // Section counts
+      document.getElementById('count-gigs').textContent     = futureGigs.length;
+      document.getElementById('count-jams').textContent     = jams.filter(j => j.active !== false).length;
+      document.getElementById('count-brunches').textContent = brunches.length;
+      document.getElementById('count-free').textContent     = free.length;
+
+      // Tonight
+      const tonightEl = document.getElementById('tonight-list');
+      const tonightGigs = futureGigs.filter(g => isToday(g.date));
+      if (tonightGigs.length) {
+        tonightEl.innerHTML = tonightGigs.map(renderGigCard).join('');
+      } else {
+        showEmpty(tonightEl, 'No gigs listed for tonight yet — check back later.');
+      }
+
+      // Editor's picks this week
+      const picksEl = document.getElementById('picks-list');
+      const picks = thisWeekGigs
+        .filter(g => g.editors_pick === true || g.editors_pick === 'TRUE')
+        .slice(0, 5);
+      if (picks.length) {
+        picksEl.innerHTML = picks.map(renderGigCard).join('');
+      } else {
+        // Fall back to showing next 3 gigs
+        const next = futureGigs.slice(0, 3);
+        picksEl.innerHTML = next.length
+          ? next.map(renderGigCard).join('')
+          : '<div class="empty-state"><p>Check back soon.</p></div>';
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

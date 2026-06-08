@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jam Sessions — The London Jazz List</title>
+  <meta name="description" content="London's weekly jazz jam sessions — from the legendary Haggerston Sunday jam to Steam Down at Peckham Levels.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="header"></div>
+
+  <main>
+    <div class="container">
+
+      <section class="page-hero">
+        <h1>Jam Sessions</h1>
+        <p class="subtitle">London's weekly jazz jams — recurring sessions worth knowing about</p>
+      </section>
+
+      <div class="filters">
+        <span class="filter-label">Night</span>
+        <button class="filter-btn active" data-day="all">All nights</button>
+        <button class="filter-btn" data-day="Monday">Mon</button>
+        <button class="filter-btn" data-day="Tuesday">Tue</button>
+        <button class="filter-btn" data-day="Wednesday">Wed</button>
+        <button class="filter-btn" data-day="Thursday">Thu</button>
+        <button class="filter-btn" data-day="Friday">Fri</button>
+        <button class="filter-btn" data-day="Saturday">Sat</button>
+        <button class="filter-btn" data-day="Sunday">Sun</button>
+      </div>
+
+      <div class="filters">
+        <span class="filter-label">Zone</span>
+        <button class="filter-btn active" data-zone="all">All</button>
+        <button class="filter-btn" data-zone="Central">Central</button>
+        <button class="filter-btn" data-zone="North">North</button>
+        <button class="filter-btn" data-zone="East">East</button>
+        <button class="filter-btn" data-zone="South West">South West</button>
+        <button class="filter-btn" data-zone="South East">South East</button>
+        <button class="filter-btn" data-zone="West">West</button>
+      </div>
+
+      <div class="filters">
+        <label style="font-size:0.75rem;cursor:pointer">
+          <input type="checkbox" id="free-only" style="margin-right:0.3rem">
+          Free entry only
+        </label>
+        <label style="font-size:0.75rem;cursor:pointer;margin-left:1rem">
+          <input type="checkbox" id="sitin-only" style="margin-right:0.3rem">
+          Open sit-in only
+        </label>
+      </div>
+
+      <div class="result-count" id="result-count"></div>
+      <div id="jam-grid" class="jam-grid"></div>
+
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    document.getElementById('header').innerHTML = renderHeader('jams.html');
+    document.getElementById('footer').innerHTML = renderFooter();
+
+    let allJams = [];
+    let activeDay  = 'all';
+    let activeZone = 'all';
+    let freeOnly   = false;
+    let sitInOnly  = false;
+
+    const DAY_ORDER = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
+    async function init() {
+      const jams = await fetchData('jam_sessions');
+      allJams = jams
+        .filter(j => j.active !== false && j.active !== 'FALSE')
+        .sort((a, b) => {
+          // Editors picks first
+          const ap = a.editors_pick === true || a.editors_pick === 'TRUE';
+          const bp = b.editors_pick === true || b.editors_pick === 'TRUE';
+          if (ap !== bp) return bp - ap;
+          // Then by day of week
+          return DAY_ORDER.indexOf(a.day_of_week) - DAY_ORDER.indexOf(b.day_of_week);
+        });
+      render();
+    }
+
+    function getFiltered() {
+      return allJams.filter(j => {
+        if (activeDay !== 'all' && j.day_of_week !== activeDay) return false;
+        if (activeZone !== 'all' && j.zone !== activeZone)      return false;
+        if (freeOnly  && j.free_or_paid !== 'Free')             return false;
+        if (sitInOnly && j.open_to_sit_in !== true && j.open_to_sit_in !== 'TRUE') return false;
+        return true;
+      });
+    }
+
+    function render() {
+      const filtered = getFiltered();
+      document.getElementById('result-count').textContent =
+        `${filtered.length} session${filtered.length !== 1 ? 's' : ''}`;
+
+      const grid = document.getElementById('jam-grid');
+      if (!filtered.length) {
+        grid.outerHTML = '<div id="jam-grid"></div>';
+        showEmpty(document.getElementById('jam-grid'), 'No sessions found.');
+        return;
+      }
+      grid.innerHTML = filtered.map(renderJamCard).join('');
+    }
+
+    document.querySelectorAll('[data-day]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-day]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeDay = btn.dataset.day;
+        render();
+      });
+    });
+
+    document.querySelectorAll('[data-zone]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-zone]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeZone = btn.dataset.zone;
+        render();
+      });
+    });
+
+    document.getElementById('free-only').addEventListener('change', e => {
+      freeOnly = e.target.checked; render();
+    });
+    document.getElementById('sitin-only').addEventListener('change', e => {
+      sitInOnly = e.target.checked; render();
+    });
+
+    init();
+  </script>
+</body>
+</html>
