@@ -1,1 +1,86 @@
-[]
+[
+  {
+    "festival_id": "battersea-jazz-2026",
+    "festival_name": "Battersea Jazz Festival 2026",
+    "start_date": "2026-06-03",
+    "end_date": "2026-06-13",
+    "venue_summary": "St Mary's Battersea, Battersea Barge, Clapham Grand, Arches Lane",
+    "zone": "South West",
+    "website": "https://www.batterseajazzfestival.co.uk",
+    "ticketed": false,
+    "price_range": "Free — all events",
+    "description": "Ten days of completely free jazz across multiple Battersea venues. No booking required. Opens with a jazz ballet — Hugo Jennings Big Band performing Prokofiev's Romeo and Juliet at Clapham Grand. Includes Scott Hamilton & Nat Steele, Deschanel Gordon Trio, Dave O'Higgins closing party.",
+    "editors_pick": true,
+    "hidden": false
+  },
+  {
+    "festival_id": "meltdown-2026",
+    "festival_name": "Harry Styles' Meltdown 2026",
+    "start_date": "2026-06-10",
+    "end_date": "2026-06-17",
+    "venue_summary": "Southbank Centre — Royal Festival Hall, Queen Elizabeth Hall, Riverside Terrace",
+    "zone": "Central",
+    "website": "https://www.southbankcentre.co.uk/events/meltdown/",
+    "ticketed": true,
+    "price_range": "£47+ (some free outdoor events)",
+    "description": "Harry Styles curates Meltdown 2026. Jazz highlights: Kamasi Washington plays two shows (3pm tribute to Coltrane & Miles Davis, 8pm Fearless Movement Live), plus Steam Down free outdoor terrace takeover on 14 June.",
+    "editors_pick": true,
+    "hidden": false
+  },
+  {
+    "festival_id": "efg-london-jazz-2026",
+    "festival_name": "EFG London Jazz Festival 2026",
+    "start_date": "2026-11-13",
+    "end_date": "2026-11-22",
+    "venue_summary": "Barbican, Southbank, Ronnie Scott's, 606, Wigmore Hall + 60 venues across London",
+    "zone": "Various",
+    "website": "https://efglondonjazzfestival.org.uk",
+    "ticketed": true,
+    "price_range": "£5–£75",
+    "description": "The UK's biggest jazz festival — 10 days, 300+ events across 60+ London venues. 2026 highlights include Joe Lovano's Coltrane 100 project and Anouar Brahem. Also includes a free FreeStage at the Barbican.",
+    "editors_pick": true,
+    "hidden": false
+  },
+  {
+    "festival_id": "de-beauvoir-jazz-2026",
+    "festival_name": "De Beauvoir Jazz Festival 2026",
+    "start_date": "2026-07-01",
+    "end_date": "2026-07-05",
+    "venue_summary": "Various venues across De Beauvoir Town, Hackney & Islington",
+    "zone": "North",
+    "website": "",
+    "ticketed": true,
+    "price_range": "TBC",
+    "description": "Weekend-long jazz festival taking place across De Beauvoir Town, Hackney and Islington in July 2026.",
+    "editors_pick": false,
+    "hidden": false
+  },
+  {
+    "festival_id": "serious-summer-jazz-2026",
+    "festival_name": "Serious Summer Jazz Series 2026",
+    "start_date": "2026-05-13",
+    "end_date": "2026-07-19",
+    "venue_summary": "Barbican, Cadogan Hall, Union Chapel, Theatre Royal Drury Lane, Royal Albert Hall",
+    "zone": "Central",
+    "website": "https://serious.org.uk/summer-jazz-series-2026",
+    "ticketed": true,
+    "price_range": "£20–£65",
+    "description": "The EFG London Jazz Festival team's summer warm-up — global jazz stars across London's best venues. 2026 includes Pat Metheny (three shows at Barbican), Al Di Meola, Roberto Fonseca and more.",
+    "editors_pick": true,
+    "hidden": false
+  },
+  {
+    "festival_id": "high-tide-twickenham-2026",
+    "festival_name": "High Tide Festival Jazz Stage",
+    "start_date": "2026-07-26",
+    "end_date": "2026-07-26",
+    "venue_summary": "Orleans Gardens, Twickenham",
+    "zone": "West / South West",
+    "website": "",
+    "ticketed": false,
+    "price_range": "Free entry",
+    "description": "Free jazz stage at the High Tide Festival in Twickenham. Artists include Denys Baptiste/Tony Kofi Quintet, Misha Mullov-Abbado Sextet, GAB Trio. 1pm–7:30pm.",
+    "editors_pick": false,
+    "hidden": false
+  }
+]
