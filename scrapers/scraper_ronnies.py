@@ -137,15 +137,23 @@ def _parse(soup) -> list:
             continue
 
         # Artist lines — meaningful text after a date
-        # Skip lines that look like descriptions rather than artist names
-        if (current_date and len(line) > 4 and len(line) < 60 and
+        # Skip lines that are descriptions not artist names
+        desc_signals = [
+            "mixing", "blending", "unique", "signature sound", "musical",
+            "influenced", "inspired by", "known for", "one of the", "a true",
+            "an award", "sought-after", "alchemist", "virtuoso", "acclaimed",
+            "presents", "explores", "combines", "fusing", "surround themselves",
+            "rising stars", "late-night session", "reimagine", "electro-jazz",
+            "paris-based", "london-based", "new york-based", "co-founders",
+            "sensational evening", "cuban music", "blurring the lines",
+        ]
+        if (current_date and len(line) > 4 and len(line) < 65 and
                 not any(s in line.lower() for s in
                         ["book now", "find out more", "from £", "tickets",
-                         "ronnie scott", "late late", "main show", "upstairs",
-                         "mixing", "blending", "unique", "signature sound",
-                         "musical", "influenced", "inspired by", "known for",
-                         "one of the", "a true", "an award"]) and
-                not line[0].islower()):  # artist names start with capital
+                         "ronnie scott", "late late", "main show", "upstairs"] +
+                        desc_signals) and
+                not line[0].islower() and  # artist names start with capital
+                not line.endswith('.')):   # descriptions end with period
             results.append(gig(
                 artist_name=line,
                 venue_name=VENUE,
