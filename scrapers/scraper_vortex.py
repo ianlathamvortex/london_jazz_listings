@@ -1,6 +1,7 @@
 """
 scraper_vortex.py — Vortex Jazz Club, Dalston
-Source: https://www.vortexjazz.co.uk/events/
+Only returns ticketed gigs — skips jam sessions and recurring events.
+Vortex is closed Mondays.
 """
 import re
 import sys
@@ -8,152 +9,125 @@ from datetime import datetime, timedelta
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from utils import fetch, gig, load, save, merge_gigs, clean_date, is_future
+from utils import fetch, gig, load, save, merge_gigs, is_future
 
-VENUE    = "Vortex Jazz Club"
-ZONE     = "North"
-HOOD     = "Dalston"
-BASE_URL = "https://www.vortexjazz.co.uk"
-EVENTS   = f"{BASE_URL}/events/"
-
-# Scrape next 90 days
+VENUE      = "Vortex Jazz Club"
+ZONE       = "North"
+HOOD       = "Dalston"
+BASE_URL   = "https://www.vortexjazz.co.uk"
 DAYS_AHEAD = 90
+
+CLOSED_DAYS = {0}  # Monday
+
+# These are recurring sessions — exclude from gigs, they're in jam_sessions.json
+JAM_SESSION_NAMES = {
+    "midweek downstairs jam",
+    "vortex jam",
+    "jam session",
+    "open mic",
+    "monthly jam",
+    "weekly jam",
+    "sunday jam",
+    "jazz jam",
+}
+
+
+def _is_jam_session(title: str) -> bool:
+    return any(j in title.lower() for j in JAM_SESSION_NAMES)
 
 
 def scrape() -> list:
     print(f"Scraping {VENUE}...")
     results = []
-
-    # Vortex uses date-based URLs: /events/YYYY-MM-DD/
     today = datetime.now()
     seen_ids = set()
 
     for i in range(DAYS_AHEAD):
         date = today + timedelta(days=i)
+        if date.weekday() in CLOSED_DAYS:
+            continue
+
         date_str = date.strftime("%Y-%m-%d")
         url = f"{BASE_URL}/events/{date_str}/"
-
         day_gigs = _scrape_day(url, date_str)
+
         for g in day_gigs:
             if g["gig_id"] not in seen_ids:
                 results.append(g)
                 seen_ids.add(g["gig_id"])
 
-    print(f"  Found {len(results)} future gigs")
+    print(f"  Found {len(results)} future Vortex gigs")
     return results
 
 
 def _scrape_day(url: str, date_str: str) -> list:
-    """Scrape a single day page from the Vortex calendar."""
     soup = fetch(url)
     if not soup:
         return []
 
-    results = []
-
-    # Vortex event pages list events for that day
-    # Each event has artist name, time and price
-    event_blocks = (
-        soup.select("div.tribe-event") or
+    event_articles = (
         soup.select("article.type-tribe_events") or
-        soup.select("div.event-listing") or
-        soup.select("h2.tribe-events-list-event-title") or
+        soup.select("div.tribe-event") or
         []
     )
 
-    if not event_blocks:
-        # Try parsing the page text
-        text = soup.get_text(separator="\n", strip=True)
-        if "No events" in text or "404" in soup.title.string if soup.title else False:
-            return []
+    if not event_articles:
+        return []
 
-        # Look for event titles
-        titles = soup.find_all(["h1","h2","h3"],
-                               string=re.compile(r".{5,}"))
-        for title in titles:
-            artist = title.get_text(strip=True)
-            if _is_valid_artist(artist):
-                # Get surrounding context for time/price
-                parent_text = title.parent.get_text(separator=" ", strip=True) if title.parent else ""
-                time_m = re.search(r"(\d{1,2}[:.]\d{2})\s*(pm|am)?", parent_text, re.I)
-                price_m = re.search(r"£(\d+)", parent_text)
-
-                link = title.find("a") or title.parent.find("a") if title.parent else None
-                ticket_url = BASE_URL + link["href"] if link and link.get("href","").startswith("/") else (link["href"] if link else url)
-
-                results.append(gig(
-                    artist_name=artist,
-                    venue_name=VENUE,
-                    date=date_str,
-                    start_time=time_m.group(0) if time_m else "19:45",
-                    price_from=f"£{price_m.group(1)}" if price_m else "",
-                    ticket_url=ticket_url,
-                    source_url=url,
-                    zone=ZONE,
-                    neighbourhood=HOOD,
-                    format_tags="Standing / Gig",
-                    genre_tier1="Contemporary Jazz",
-                ))
-        return results
-
-    for block in event_blocks:
-        try:
-            result = _parse_event_block(block, date_str, url)
-            if result:
-                results.append(result)
-        except Exception as e:
-            print(f"  Parse error on {date_str}: {e}")
+    results = []
+    for article in event_articles:
+        result = _parse_article(article, date_str, url)
+        if result:
+            results.append(result)
 
     return results
 
 
-def _parse_event_block(block, date_str: str, source_url: str) -> dict | None:
-    # Artist name
-    title_el = block.find(["h1","h2","h3","h4"]) or block.find(class_=re.compile("title"))
+def _parse_article(article, date_str: str, source_url: str) -> dict | None:
+    from utils import gig as make_gig
+
+    title_el = (
+        article.find("h2", class_=re.compile("tribe-events")) or
+        article.find("h1", class_=re.compile("tribe-events")) or
+        article.find("h2") or
+        article.find("h3")
+    )
     if not title_el:
         return None
+
     artist = title_el.get_text(strip=True)
-    if not _is_valid_artist(artist):
+    if not artist or len(artist) < 3:
         return None
 
-    text = block.get_text(separator=" ", strip=True)
+    # Skip jam sessions
+    if _is_jam_session(artist):
+        return None
 
-    # Time
-    time_m = re.search(r"(\d{1,2}[:.]\d{2})\s*(pm|am)?", text, re.I)
-    start_time = time_m.group(0) if time_m else "19:45"
-
-    # Price
+    text = article.get_text(separator=" ", strip=True)
+    time_m  = re.search(r"(\d{1,2}[:.]\d{2})\s*(pm|am)?", text, re.I)
     price_m = re.search(r"£(\d+)", text)
-    price = f"£{price_m.group(1)}" if price_m else ""
 
-    # Ticket link
-    link = block.find("a", href=True)
+    link = title_el.find("a", href=True) or article.find("a", href=True)
     if link:
         href = link["href"]
-        ticket_url = BASE_URL + href if href.startswith("/") else href
+        ticket_url = href if href.startswith("http") else BASE_URL + href
     else:
         ticket_url = source_url
 
-    # Is it a downstairs/upstairs show?
     stage = ""
     if "downstairs" in text.lower():
         stage = "Downstairs"
     elif "upstairs" in text.lower():
         stage = "Upstairs"
 
-    # Special occasion
-    special = ""
-    if "album launch" in text.lower():
-        special = "Album launch"
-    elif "album release" in text.lower():
-        special = "Album launch"
+    special = "Album launch" if "album launch" in text.lower() else ""
 
-    return gig(
+    return make_gig(
         artist_name=artist,
         venue_name=VENUE,
         date=date_str,
-        start_time=start_time,
-        price_from=price,
+        start_time=time_m.group(0) if time_m else "19:45",
+        price_from=f"£{price_m.group(1)}" if price_m else "",
         ticket_url=ticket_url,
         source_url=source_url,
         stage=stage,
@@ -163,16 +137,6 @@ def _parse_event_block(block, date_str: str, source_url: str) -> dict | None:
         genre_tier1="Contemporary Jazz",
         special_occasion=special,
     )
-
-
-def _is_valid_artist(name: str) -> bool:
-    """Filter out navigation elements and boilerplate text."""
-    skip = {"vortex jazz club", "events", "home", "about", "contact",
-            "login", "book online", "members", "next", "previous",
-            "back to site", "export"}
-    if not name or len(name) < 3 or len(name) > 100:
-        return False
-    return name.lower() not in skip
 
 
 def run():
