@@ -238,6 +238,7 @@ JAM_SESSION_PATTERNS = [
     "jam with ", "midweek jam", "downstairs jam", "sunday jam",
     "open mic", "open stage", "sit in", "sit-in",
     "vortex jam", "stratos jam", "orii jam", "haggerston jam",
+    "dalston song club", "event views navigation", "what's on at",
     "living sounds open mic", "patterns weekly",
 ]
 
