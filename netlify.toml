@@ -1,5 +1,7 @@
 # netlify.toml — The London Jazz List
-# Updated: 2026-06-09 14:08
+
+[build]
+  publish = "."
 
 [[headers]]
   for = "/*.json"
@@ -7,6 +9,12 @@
     Access-Control-Allow-Origin = "*"
     Cache-Control = "no-cache, no-store, must-revalidate"
     Pragma = "no-cache"
+    Expires = "0"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
 
 [[headers]]
   for = "/*"
