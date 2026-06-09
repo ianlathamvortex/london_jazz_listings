@@ -35,6 +35,11 @@
           <div class="home-section-label">Brunches</div>
           <div class="home-section-desc">Live jazz with food and drink</div>
         </a>
+        <a href="dining.html" class="home-section-link">
+          <div class="home-section-count" id="count-dining">—</div>
+          <div class="home-section-label">Dining</div>
+          <div class="home-section-desc">Restaurants with live jazz</div>
+        </a>
         <a href="free.html" class="home-section-link">
           <div class="home-section-count" id="count-free">—</div>
           <div class="home-section-label">Free Entry</div>
@@ -68,11 +73,12 @@
     document.getElementById('footer').innerHTML = renderFooter();
 
     async function init() {
-      const [gigs, jams, brunches, free] = await Promise.all([
+      const [gigs, jams, brunches, free, dining] = await Promise.all([
         fetchData('gigs'),
         fetchData('jam_sessions'),
         fetchData('brunches'),
         fetchData('free_entry'),
+        fetchData('dining'),
       ]);
 
       const t = today();
@@ -84,6 +90,7 @@
       document.getElementById('count-jams').textContent     = jams.filter(j => j.active !== false).length;
       document.getElementById('count-brunches').textContent = brunches.length;
       document.getElementById('count-free').textContent     = free.length;
+      document.getElementById('count-dining').textContent   = dining.length;
 
       // Tonight
       const tonightEl = document.getElementById('tonight-list');
