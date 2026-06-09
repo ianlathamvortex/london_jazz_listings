@@ -104,7 +104,10 @@ function gigScore(g) {
 
   if (g.editors_pick === true || g.editors_pick === "TRUE") score += 20;
   if (g.special_occasion) score += 8;
-  if (g.venue_tier === "2" || PREMIUM_VENUES.has(g.venue_name)) score += 6;
+  // venue_tier "1" = premier (Vortex, Ronnie's, Barbican etc) = boost
+  // venue_tier "2" = good but not top tier (Karamel etc) = no boost
+  if (PREMIUM_VENUES.has(g.venue_name)) score += 6;
+  if (g.venue_tier === "2") score -= 2;  // demote second-tier venues
 
   const price = parseFloat((g.price_from || '').replace(/[^0-9.]/g, ''));
   if (!isNaN(price)) {
