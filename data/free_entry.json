@@ -362,5 +362,31 @@
     "editors_pick": true,
     "hidden": false,
     "last_verified": "2026-06-09"
+  },
+  {
+    "entry_id": "guildhall-jazz-trumpet-2026-06-22",
+    "event_name": "Guildhall Jazz Final Recitals: Trumpet",
+    "artist_name": "Guildhall School Jazz students",
+    "venue_name": "Guildhall School of Music & Drama",
+    "address": "Silk Street Music Hall, Barbican",
+    "postcode": "EC2Y 8DT",
+    "zone": "Central",
+    "neighbourhood": "Barbican / City",
+    "nearest_tube": "Barbican",
+    "venue_type": "University / Conservatoire",
+    "date": "2026-06-22",
+    "start_time": "10:30",
+    "end_time": "13:45",
+    "frequency": "Annual",
+    "booking_required": false,
+    "booking_url": "https://www.gsmd.ac.uk/whats-on/final-recitals-2026",
+    "free_entry_type": "Conservatoire recital",
+    "genre_tier1": "Contemporary Jazz",
+    "format_tags": "Concert Hall",
+    "description": "Jazz Trumpet BMUS/MMUS final recitals \u2014 the last jazz day of the season. Free drop-in, no tickets. Watch tomorrow's trumpet stars before they step into professional careers.",
+    "source_url": "https://www.gsmd.ac.uk/whats-on/final-recitals-2026",
+    "editors_pick": true,
+    "hidden": false,
+    "last_verified": "2026-06-09"
   }
 ]
