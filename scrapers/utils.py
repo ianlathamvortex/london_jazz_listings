@@ -64,6 +64,39 @@ def _is_near_duplicate(new_gig: dict, existing: dict) -> bool:
             return True
     return False
 
+
+# ── Free entry filter ─────────────────────────────────────────
+# Gigs with free entry belong in free_entry.json, not gigs.json
+# These venues/patterns always mean free entry
+
+FREE_ENTRY_VENUES = {
+    "guildhall school of music & drama",
+    "trinity laban",
+    "the garden cafe, flower station",
+    "croydon clock tower cafe",
+    "highams park jazz club",   # jams only — actual gigs stay
+}
+
+FREE_ENTRY_PATTERNS = [
+    "free entry", "free admission", "no tickets required",
+    "high tide festival",
+    "jazz in the gardens free",
+    "free outdoor",
+]
+
+def _is_free_entry(g: dict) -> bool:
+    """Return True if a gig is free entry and belongs in free_entry.json."""
+    price = g.get("price_from", "").strip().lower()
+    if price == "free":
+        # Only auto-remove if it's a venue or event we know is always free
+        venue = g.get("venue_name", "").lower()
+        if venue in FREE_ENTRY_VENUES:
+            return True
+        name = g.get("artist_name", "").lower()
+        if any(p in name for p in FREE_ENTRY_PATTERNS):
+            return True
+    return False
+
 def merge_gigs(existing: list, new_gigs: list) -> tuple:
     """Merge new gigs, deduplicating by gig_id and near-duplicate detection.
     Also filters out jam sessions and non-jazz events at the merge stage."""
