@@ -192,10 +192,20 @@ def _parse_block(block, config: dict) -> dict | None:
     artist = h.get_text(strip=True) if h else ""
     if not artist or len(artist) < 3:
         return None
-    # Truncate concatenated title+description (scraper sometimes merges them)
+    # Truncate concatenated title+description
     max_len = config.get("max_title_len", 120)
     if len(artist) > max_len:
         artist = artist[:max_len].rsplit(" ", 1)[0].strip()
+    # Remove description that runs on from title (Ladbroke Hall pattern)
+    import re as _re
+    desc_start = _re.search(
+        r'(Fast emerging|Rooted in|Experience a|With his quintet|brings together|'
+        r'Leading on|returns to|Camille Bertault|Lucy-Anne|EYM trio|joins journalist|'
+        r'Celebrate the energy|An evening of music)',
+        artist
+    )
+    if desc_start and desc_start.start() > 5:
+        artist = artist[:desc_start.start()].strip().rstrip('–-').strip()
 
     # Date
     date_m = re.search(
