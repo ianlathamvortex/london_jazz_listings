@@ -64,6 +64,34 @@ def _is_near_duplicate(new_gig: dict, existing: dict) -> bool:
             return True
     return False
 
+
+# ── Permanent blocklist — never add these to gigs.json ───────
+PERMANENT_BLOCKLIST = [
+    "event views navigation", "what's on at the 606 club", "load more",
+    "lunch show", "midweek downstairs jam", "vortex jam session",
+    "latin jam session", "karamel n22 events", "singing mamas",
+    "bolly dance", "vegan sunday roast", "sacred frequencies",
+    "language of glaze", "crafting type", "earthsonic", "climate justice",
+    "sanctum", "gong bath", "piano*grafik", "shimizu uichi",
+    "finding one's voice", "co-founders dani diodato",
+    "a high-energy late-night session", "one the most sought-after",
+    "a true musical alchemist", "paris-based electro-jazz",
+    "jazz on the lawn at fulham palace", "live jazz at grow",
+    "dalston song club", "graduate school showcase", "new lights festival",
+    "fidelio trio", "sounding the soul", "rosalie coopman",
+    "royal greenwich guitar", "runswick competition",
+]
+
+def _is_permanently_blocked(artist_name: str) -> bool:
+    name = artist_name.lower().strip()
+    if any(b in name for b in PERMANENT_BLOCKLIST):
+        return True
+    if name.endswith('.') and len(name) > 30:
+        return True
+    if len(name) > 80:
+        return True
+    return False
+
 def merge_gigs(existing: list, new_gigs: list) -> tuple:
     """Merge new gigs, deduplicating by gig_id and near-duplicate detection.
     Also filters out jam sessions and non-jazz events at the merge stage."""
@@ -71,6 +99,9 @@ def merge_gigs(existing: list, new_gigs: list) -> tuple:
     added = 0
 
     for new_gig in new_gigs:
+        # Permanent blocklist check
+        if _is_permanently_blocked(new_gig.get("artist_name", "")):
+            continue
         # Global jam session filter — these belong in jam_sessions.json
         if is_jam_session(new_gig.get("artist_name", "")):
             continue
