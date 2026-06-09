@@ -76,10 +76,12 @@ VENUES = {
     },
     "ladbroke_hall": {
         "name":   "Ladbroke Hall",
-        "url":    "https://ladbrokehall.com/live-programme/",
+        "url":    "https://ladbrokehall.com/live-programme/jazz/",
         "zone":   "West", "hood": "Notting Hill / Ladbroke Grove",
         "format": "Concert Hall", "genre": "Contemporary Jazz",
         "tier":   "1",
+        "jazz_filter": True,
+        "max_title_len": 70,
     },
     "cockpit": {
         "name":   "The Cockpit",
@@ -190,6 +192,10 @@ def _parse_block(block, config: dict) -> dict | None:
     artist = h.get_text(strip=True) if h else ""
     if not artist or len(artist) < 3:
         return None
+    # Truncate concatenated title+description (scraper sometimes merges them)
+    max_len = config.get("max_title_len", 120)
+    if len(artist) > max_len:
+        artist = artist[:max_len].rsplit(" ", 1)[0].strip()
 
     # Date
     date_m = re.search(
@@ -210,7 +216,7 @@ def _parse_block(block, config: dict) -> dict | None:
     # Price
     price_m = re.search(r"£(\d+)", text)
     price = f"£{price_m.group(1)}" if price_m else ""
-    if "free" in text.lower() and not price:
+    if any(p in text.lower() for p in ["free entry", "free admission", "admission free", "no charge", "free gig"]) and not price:
         price = "Free"
 
     # Ticket link
