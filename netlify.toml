@@ -1,10 +1,12 @@
-# netlify.toml
+# netlify.toml — The London Jazz List
+# Updated: 2026-06-09 14:08
 
 [[headers]]
   for = "/*.json"
   [headers.values]
     Access-Control-Allow-Origin = "*"
-    Cache-Control = "public, max-age=300, must-revalidate"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Pragma = "no-cache"
 
 [[headers]]
   for = "/*"
