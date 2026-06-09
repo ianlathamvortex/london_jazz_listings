@@ -19,7 +19,9 @@ jobs:
           python-version: '3.11'
           cache: ''
       - name: Install dependencies
-        run: pip install requests beautifulsoup4 lxml anthropic python-dateutil playwright
+        run: pip install requests beautifulsoup4 lxml anthropic python-dateutil
+      - name: Install Playwright
+        run: pip install playwright && playwright install chromium --with-deps
       - name: Install browsers
         run: playwright install chromium --with-deps
         - name: Install Playwright
