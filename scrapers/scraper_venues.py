@@ -76,7 +76,7 @@ VENUES = {
     },
     "ladbroke_hall": {
         "name":   "Ladbroke Hall",
-        "url":    "https://ladbrokehall.com/live-programme/jazz/",
+        "url":    "https://ladbrokehall.com/live-programme/jazz/",  # jazz-only page
         "zone":   "West", "hood": "Notting Hill / Ladbroke Grove",
         "format": "Concert Hall", "genre": "Contemporary Jazz",
         "tier":   "1",
@@ -192,20 +192,20 @@ def _parse_block(block, config: dict) -> dict | None:
     artist = h.get_text(strip=True) if h else ""
     if not artist or len(artist) < 3:
         return None
-    # Truncate concatenated title+description
-    max_len = config.get("max_title_len", 120)
-    if len(artist) > max_len:
-        artist = artist[:max_len].rsplit(" ", 1)[0].strip()
-    # Remove description that runs on from title (Ladbroke Hall pattern)
-    import re as _re
-    desc_start = _re.search(
-        r'(Fast emerging|Rooted in|Experience a|With his quintet|brings together|'
-        r'Leading on|returns to|Camille Bertault|Lucy-Anne|EYM trio|joins journalist|'
-        r'Celebrate the energy|An evening of music)',
-        artist
-    )
-    if desc_start and desc_start.start() > 5:
-        artist = artist[:desc_start.start()].strip().rstrip('–-').strip()
+    # Hard limit on title length — artist names should never exceed 70 chars
+    if len(artist) > 70:
+        # Try to split at common description start patterns
+        import re as _re
+        split = _re.search(
+            r'(Fast |Rooted |Experience |With his |brings |Leading |returns |'
+            r'Camille Bertault|Lucy-Anne|EYM trio|joins |Celebrate |An evening |'
+            r'Bassist|Guitarist|Pianist|Drummer|Saxophonist|Trumpeter|Vocalist)',
+            artist[10:]  # skip first 10 chars to avoid matching artist name itself
+        )
+        if split:
+            artist = artist[:split.start() + 10].strip().rstrip('–-|').strip()
+        else:
+            artist = artist[:70].rsplit(" ", 1)[0].strip()
 
     # Date
     date_m = re.search(
