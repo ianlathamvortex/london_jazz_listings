@@ -55,7 +55,7 @@
     "editors_pick": false,
     "hidden": false,
     "scraper_notes": "",
-    "description": "Black-led, queer-inclusive weekly session at Colour Factory in Hackney Wick, running every Monday without fail since 2019. Founded by multi-instrumentalist Neue Grafik (Fred Bwelle), it brings together nu-jazz, neo-soul, hip-hop and R&B in one of London's most genuinely diverse musical spaces. Thundercat once showed up unannounced. The Guardian called it 'the place to experience the raucous edge of London's new jazz scene.'"
+    "description": "Black-led, queer-inclusive weekly session at Colour Factory in Hackney Wick, running every Monday without fail since 2019. Founded by multi-instrumentalist Neue Grafik (Fred Bwelle), it brings together nu-jazz, neo-soul, hip-hop and R&B. Groove-based and spontaneous rather than standards-led \u2014 each session has its own personality shaped by whoever walks through the door. Thundercat once showed up unannounced. The Guardian: 'the place to experience the raucous edge of London's new jazz scene.'"
   },
   {
     "session_id": "off-the-cuff-herne-hill",
@@ -113,7 +113,7 @@
     "editors_pick": false,
     "hidden": false,
     "scraper_notes": "",
-    "description": "Monday jazz session at SYP City in Islington. Regular weekly gathering for the north London jazz community."
+    "description": "Run by the Ridout family at SYP City in Islington, this Monday session has become a popular fixture for Guildhall School students and graduates. Standards-based, welcoming, and with a musical standard that reflects its conservatoire connections."
   },
   {
     "session_id": "silver-bullet-finsbury-park",
@@ -342,7 +342,7 @@
     "editors_pick": false,
     "hidden": false,
     "scraper_notes": "",
-    "description": "Thursday night jam at Grow Hackney. Part of the rich Hackney Wick music community."
+    "description": "Stratos are the house band at Grow Hackney's Thursday night jam. They play jazz standards and invite musicians of all levels to sit in \u2014 a friendly, structured session with a strong local following in Hackney Wick."
   },
   {
     "session_id": "jago-thursday",
@@ -371,7 +371,7 @@
     "editors_pick": false,
     "hidden": false,
     "scraper_notes": "",
-    "description": "Regular Thursday jazz jam at The Jago, Stoke Newington."
+    "description": "Groove-based open session at The Jago in Stoke Newington \u2014 more spontaneous and feel-led than a standards jam. Expect soul, funk and improvised music alongside jazz. Walk in, find your moment, join in."
   },
   {
     "session_id": "haggerston-sunday",
@@ -418,8 +418,8 @@
     "house_band": "",
     "style_notes": "Broad jazz styles, high standard",
     "genre_tier1": "Contemporary Jazz",
-    "free_or_paid": "Paid",
-    "price_notes": "\u00a36 / Free members",
+    "free_or_paid": "Free (sit-in) / Paid (audience)",
+    "price_notes": "Free if you sit in, small charge for audience",
     "open_to_sit_in": true,
     "session_story": "",
     "website": "https://www.vortexjazz.co.uk",
@@ -429,7 +429,7 @@
     "editors_pick": false,
     "hidden": false,
     "scraper_notes": "",
-    "description": "The Sunday jam at Dalston's legendary Vortex \u2014 expect a strong standard of musicianship given the venue's reputation. A mix of Vortex regulars and visiting players."
+    "description": "House band model \u2014 four bands rotate across the month, each bringing their own character to a jazz standards-based open session. Free entry if you sit in. One of the few London jams where the standard of the house band reliably sets a high bar."
   },
   {
     "session_id": "jago-sunday",
@@ -458,6 +458,6 @@
     "editors_pick": false,
     "hidden": false,
     "scraper_notes": "",
-    "description": "Free entry Sunday session at The Jago, Stoke Newington. Open to all musicians."
+    "description": "The Sunday counterpart to the Thursday session \u2014 free entry, groove-led, spontaneous. The Jago has built a genuine community around these sessions. Relaxed enough for first-timers, musical enough for seasoned players."
   }
 ]
