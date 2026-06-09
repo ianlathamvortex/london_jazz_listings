@@ -35,6 +35,7 @@ SCRAPERS = [
     ("Lauderdale House",     "scraper_lauderdale"),
     ("World Heart Beat",    "scraper_worldheartbeat"),
     ("Highams Park Jazz",   "scraper_highamsparkjazz"),
+    ("Wigmore Hall",        "scraper_wigmorehall"),
     ("Café OTO",             "scraper_cafeoto"),
     ("King's Place",         "scraper_kingsplace"),
 ]
