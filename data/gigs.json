@@ -59,7 +59,9 @@
     "date_scraped": "2026-06-08",
     "last_updated": "2026-06-08 19:31",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "matt-anderson-quartet-vortex-jazz-club-2026-06-10",
@@ -90,7 +92,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:24",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "paul-g-smyth-at-50-vortex-jazz-club-2026-06-11",
@@ -121,7 +125,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:24",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "billy-cobham-with-the-guy-barker-big-band-ronnie-scott-s-2026-06-11",
@@ -152,7 +158,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 13:31",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "adrien-brandeis-ronnie-scott-s-2026-06-11",
@@ -183,7 +191,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 13:31",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "women-in-jazz-media-presents-jasna-jovicevic-karamel-2026-06-11",
@@ -209,7 +219,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "leo-richardson-quartet-vortex-jazz-club-2026-06-12",
@@ -271,7 +283,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 11:58",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "natalie-duncan-ronnie-scott-s-2026-06-12",
@@ -302,7 +316,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 13:31",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "moyses-dos-santos-ronnie-scott-s-2026-06-12",
@@ -333,7 +349,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 13:31",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "kaiyo-with-tori-freestone-karamel-2026-06-12",
@@ -359,7 +377,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "misha-mullov-abbado-group-world-heart-beat-2026-06-12",
@@ -390,7 +410,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026"
+    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "zoe-francis-jim-mullen-ross-stanley-vortex-jazz-club-2026-06-13",
@@ -421,7 +443,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:24",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "royal-academy-of-music-free-improv-group-vortex-jazz-club-2026-06-16",
@@ -452,7 +476,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:24",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "raffy-bushman-new-life-album-launch-vortex-jazz-club-2026-06-17",
@@ -483,7 +509,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:24",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "outhouse-vortex-jazz-club-2026-06-18",
@@ -514,7 +542,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "sun-mi-hong-s-noctilume-feat-mette-rasmussen-vortex-jazz-club-2026-06-18",
@@ -545,7 +575,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "kaiyo-presents-jazz-stories-with-malcolm-earle-smith-karamel-2026-06-18",
@@ -571,7 +603,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "nick-ramm-ensemble-vortex-jazz-club-2026-06-19",
@@ -602,7 +636,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "karl-onibuje-groupbassist-and-composer-karl-onibuje-presents-orun-a-project-that",
@@ -633,7 +669,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 11:58",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "tony-kofi-quartet-world-heart-beat-2026-06-19",
@@ -664,7 +702,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026"
+    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "david-austin-grey-a-hologram-maze-vortex-jazz-club-2026-06-20",
@@ -695,7 +735,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "mopomoso-international-free-improvised-music-june-2026-vortex-jazz-club-2026-06-",
@@ -726,7 +768,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "windrush-day-2026-carrying-the-flame-world-heart-beat-2026-06-22",
@@ -757,7 +801,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026"
+    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "evelyn-axton-with-strings-vortex-jazz-club-2026-06-23",
@@ -819,7 +865,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "whirlpool-jonah-phillips-vortex-jazz-club-2026-06-25",
@@ -850,7 +898,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "jim-rattigan-quintet-vortex-jazz-club-2026-06-25",
@@ -881,7 +931,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "al-di-meola-barbican-centre-2026-06-25",
@@ -912,7 +964,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 13:32",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "51st-state-band-51st-state-big-band-world-heart-beat-2026-06-25",
@@ -943,7 +997,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026"
+    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "keefe-roberts-brice-holub-vortex-jazz-club-2026-06-26",
@@ -974,7 +1030,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "vaughan-hawthorne-nelson-quartet-vortex-jazz-club-2026-06-26",
@@ -1036,7 +1094,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 13:32",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "zeeks-and-the-brotherhood-world-heart-beat-2026-06-26",
@@ -1067,7 +1127,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026"
+    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "ed-jones-quartet-vortex-jazz-club-2026-06-27",
@@ -1098,7 +1160,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "finn-carter-quartet-vortex-jazz-club-2026-06-30",
@@ -1129,7 +1193,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "lex-korten-group-vortex-jazz-club-2026-07-01",
@@ -1160,7 +1226,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "breen-boizi-vortex-jazz-club-2026-07-02",
@@ -1222,7 +1290,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "lucy-anne-daniels-hanging-with-betty-carterrooted-in-the-vibrant-ladbroke-hall-2",
@@ -1253,7 +1323,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 13:32",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "coltrane-and-hartman-on-impulse-feat-mark-lockheart-and-marvin-muonek-vortex-jaz",
@@ -1284,7 +1356,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "london-jazz-orchestra-vortex-sessions-primetime-for-henry-vortex-jazz-club-2026-",
@@ -1346,7 +1420,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "terence-blanchard-ravi-coltrane-cadogan-hall-2026-07-09",
@@ -1377,7 +1453,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 13:32",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "zoe-rahman-trio-album-launch-2-shows-vortex-jazz-club-2026-07-10",
@@ -1408,7 +1486,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "eym-trio-feat-varijashree-jazz-dinnerexperience-a-unique-musical-ladbroke-hall-2",
@@ -1439,7 +1519,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 13:32",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "de-beauvoir-jazz-festival-lucy-anne-daniels-liselotte-stblom-vortex-jazz-club-20",
@@ -1470,7 +1552,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "anatole-muster-vortex-jazz-club-2026-07-14",
@@ -1501,7 +1585,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "panika-vortex-jazz-club-2026-07-15",
@@ -1532,7 +1618,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "ruth-naomi-floyd-quartet-with-julian-joseph-world-heart-beat-2026-07-16",
@@ -1563,7 +1651,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026"
+    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "phillip-golub-alex-hitchcock-andrew-lisle-vortex-jazz-club-2026-07-17",
@@ -1594,7 +1684,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "damian-nueva-quintetwith-his-quintet-dami-n-delivers-a-powerful-ladbroke-hall-20",
@@ -1625,7 +1717,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:55",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "stacey-kent-cadogan-hall-2026-07-17",
@@ -1656,7 +1750,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 13:32",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "julian-joseph-s-60th-birthday-concert-world-heart-beat-2026-07-17",
@@ -1687,7 +1783,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026"
+    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "tony-kofi-s-tentet-plays-monk-at-the-town-hall-vortex-jazz-club-2026-07-18",
@@ -1718,7 +1816,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "pat-metheny-side-eye-iii-barbican-centre-2026-07-18",
@@ -1749,7 +1849,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 13:32",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "pat-metheny-side-eye-iii-barbican-centre-2026-07-19",
@@ -1780,7 +1882,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 13:32",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "sam-eastmond-the-composers-workshop-big-band-vortex-jazz-club-2026-07-21",
@@ -1811,7 +1915,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "reuben-goldmark-trio-vortex-jazz-club-2026-07-22",
@@ -1842,7 +1948,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "kate-williams-trio-vortex-jazz-club-2026-07-23",
@@ -1873,7 +1981,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "five-way-split-ft-quentin-collinsfive-way-split-brings-together-five-ladbroke-ha",
@@ -1904,7 +2014,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:55",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "myele-manzana-vortex-jazz-club-2026-07-25",
@@ -1935,7 +2047,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "rana-farhan-persian-soul-world-heart-beat-2026-07-25",
@@ -1966,7 +2080,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026"
+    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "george-johnson-quartetleading-on-tenor-saxophone-and-composing-the-ladbroke-hall",
@@ -1997,7 +2113,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:55",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "leon-foster-thomas-group-vortex-jazz-club-2026-08-08",
@@ -2028,7 +2146,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "tomorrow-s-warriors-presents-bxl-x-ldn-interplay-iii-vortex-jazz-club-2026-08-21",
@@ -2059,7 +2179,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "finn-carter-with-yves-fernandez-and-richard-spaven-vortex-jazz-club-2026-08-25",
@@ -2090,7 +2212,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "luiza-zan-muse-quartet-world-heart-beat-2026-11-18",
@@ -2121,7 +2245,9 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026"
+    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
+    "description_verified": false,
+    "description_source": "auto"
   },
   {
     "gig_id": "amira-kheir-world-heart-beat-2026-11-19",
@@ -2152,6 +2278,8 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026"
+    "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
+    "description_verified": false,
+    "description_source": "auto"
   }
 ]
