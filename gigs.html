@@ -152,13 +152,14 @@
         .sort(([a], [b]) => a.localeCompare(b))
         .map(([date, gigs]) => {
           const label = isToday(date) ? 'Tonight' : isTomorrow(date) ? 'Tomorrow' : '';
+          const ranked = sortGigsWithinDay(gigs);
           return `
             <div class="date-group">
               <div class="date-group-header">
                 <div class="date-group-day">${formatDate(date)}</div>
                 ${label ? `<div class="date-group-meta">${label}</div>` : ''}
               </div>
-              ${gigs.map(renderGigCard).join('')}
+              ${ranked.map(renderGigCard).join('')}
             </div>`;
         }).join('');
 
