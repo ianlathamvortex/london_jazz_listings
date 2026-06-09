@@ -1,92 +1,85 @@
 """
 scraper_ronnies.py — Ronnie Scott's Jazz Club
-503/403 blocks scrapers — uses hardcoded known residencies as fallback.
+Hardcoded programme — Ronnie's blocks scrapers.
+Main Shows and named Upstairs shows only.
+Late Late Shows are weekly residencies — excluded (they go in jam_sessions.json).
+Update KNOWN_SHOWS each season from https://www.ronniescotts.co.uk/find-a-show
 """
-import re
 import sys
-import requests
 from pathlib import Path
-from bs4 import BeautifulSoup
 sys.path.insert(0, str(Path(__file__).parent))
 
 from utils import gig, load, save, merge_gigs, is_future
 
-VENUE    = "Ronnie Scott's"
+VENUE    = "Ronnie's Scott's"
 ZONE     = "Central"
 HOOD     = "Soho"
 BASE_URL = "https://www.ronniescotts.co.uk"
 
-# Known residencies — updated each season
-# These are the ONLY entries we trust from Ronnie's
-KNOWN_RESIDENCIES = [
-    {
-        "artist_name": "Billy Cobham with the Guy Barker Big Band",
-        "dates": ["2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13",
-                  "2026-06-14"],
-        "start_time": "20:00", "stage": "Main Stage",
-        "price_from": "£35", "genre_tier1": "Big Band",
-        "ticket_url": "https://www.ronniescotts.co.uk/performances/view/billy-cobham",
-        "editors_pick": True,
-    },
-    {
-        "artist_name": "Benito Gonzalez Trio",
-        "dates": ["2026-06-09"],
-        "start_time": "20:00", "stage": "Main Stage",
-        "price_from": "£30", "genre_tier1": "Contemporary Jazz",
-        "ticket_url": "https://www.ronniescotts.co.uk",
-        "editors_pick": True,
-    },
-    {
-        "artist_name": "Adrien Brandeis",
-        "dates": ["2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14"],
-        "start_time": "20:00", "stage": "Main Stage",
-        "price_from": "£25", "genre_tier1": "Contemporary Jazz",
-        "ticket_url": "https://www.ronniescotts.co.uk",
-        "editors_pick": False,
-    },
-    {
-        "artist_name": "Natalie Duncan",
-        "dates": ["2026-06-12", "2026-06-13", "2026-06-14"],
-        "start_time": "23:00", "stage": "Late Late Show",
-        "price_from": "£15", "genre_tier1": "Vocal & Standards",
-        "ticket_url": "https://www.ronniescotts.co.uk",
-        "editors_pick": False,
-    },
-    {
-        "artist_name": "Moyses Dos Santos",
-        "dates": ["2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18",
-                  "2026-06-19", "2026-06-20", "2026-06-21"],
-        "start_time": "20:00", "stage": "Main Stage",
-        "price_from": "£25", "genre_tier1": "Brazilian / MPB",
-        "ticket_url": "https://www.ronniescotts.co.uk",
-        "editors_pick": False,
-    },
+# Each entry: (artist, [dates], stage, price, ticket_slug, genre, editors_pick)
+KNOWN_SHOWS = [
+    ("Billy Cobham with the Guy Barker Big Band",
+     ["2026-06-09","2026-06-10","2026-06-11"], "Main Show", "£35",
+     "billy-cobham-guy-barker", "Big Band", True),
+    ("Benito Gonzalez Trio",
+     ["2026-06-09"], "Upstairs at Ronnie's", "£25",
+     "benito-gonzalez-trio", "Contemporary Jazz", True),
+    ("Adrien Brandeis",
+     ["2026-06-11"], "Upstairs at Ronnie's", "£20",
+     "adrien-brandeis", "Contemporary Jazz", False),
+    ("Natalie Duncan",
+     ["2026-06-12"], "Upstairs at Ronnie's", "£20",
+     "natalie-duncan-2", "Vocal & Standards", False),
+    ("Moyses Dos Santos",
+     ["2026-06-12"], "Main Show", "£25",
+     "moyses-dos-santos", "Brazilian / MPB", False),
+    ("Sam Greenfield",
+     ["2026-06-13"], "Main Show", "£25",
+     "sam-greenfield", "Contemporary Jazz", False),
+    ("Phebe Edwards",
+     ["2026-06-13"], "Upstairs at Ronnie's", "£15",
+     "phebe-edwards", "Vocal & Standards", False),
+    ("Jive Aces",
+     ["2026-06-14"], "Sunday Lunch", "£30",
+     "jive-aces", "Mainstream / Swing", False),
+    ("Ben Sidran Quartet",
+     ["2026-06-15"], "Main Show", "£25",
+     "ben-sidran", "Mainstream / Swing", True),
+    ("Lakecia Benjamin",
+     ["2026-06-17"], "Main Show", "£30",
+     "lakecia-benjamin", "Contemporary Jazz", True),
+    ("Nicole Zuraitis",
+     ["2026-06-30"], "Main Show", "£25",
+     "nicole-zuraitis-idan-morim-dan-pugach", "Vocal & Standards", False),
+    ("Kiefer",
+     ["2026-07-02"], "Main Show", "£30",
+     "kiefer", "Contemporary Jazz", True),
 ]
 
 
 def scrape() -> list:
-    print(f"Scraping {VENUE} (hardcoded fallback)...")
+    print(f"Scraping Ronnie Scott's (hardcoded)...")
     results = []
-    for residency in KNOWN_RESIDENCIES:
-        for date in residency["dates"]:
+    for artist, dates, stage, price, slug, genre, editors_pick in KNOWN_SHOWS:
+        for date in dates:
             if not is_future(date):
                 continue
             g = gig(
-                artist_name=residency["artist_name"],
-                venue_name=VENUE,
+                artist_name=artist,
+                venue_name="Ronnie Scott's",
                 date=date,
-                start_time=residency.get("start_time", ""),
-                ticket_url=residency.get("ticket_url", BASE_URL),
-                source_url=BASE_URL,
-                stage=residency.get("stage", ""),
-                price_from=residency.get("price_from", ""),
+                start_time="20:00" if stage == "Main Show" else "23:00" if "Late" in stage else "19:00",
+                ticket_url=f"{BASE_URL}/find-a-show/{slug}",
+                source_url=f"{BASE_URL}/find-a-show",
+                stage=stage,
+                price_from=price,
                 zone=ZONE,
                 neighbourhood=HOOD,
                 format_tags="Jazz Club",
-                genre_tier1=residency.get("genre_tier1", "Contemporary Jazz"),
+                genre_tier1=genre,
                 venue_tier="1",
             )
-            g["editors_pick"] = residency.get("editors_pick", False)
+            g["editors_pick"] = editors_pick
             results.append(g)
     print(f"  Found {len(results)} future Ronnie's gigs")
     return results
