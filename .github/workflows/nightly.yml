@@ -1,1 +1,37 @@
+name: Nightly Jazz Scraper
 
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: ''
+      - name: Install Python packages
+        run: pip install requests beautifulsoup4 lxml anthropic python-dateutil playwright
+      - name: Install Chromium
+        run: playwright install chromium --with-deps
+      - name: Scrape
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python run_all.py
+      - name: Copy data to root
+        run: cp data/*.json .
+      - name: Commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Jazz Scraper Bot"
+          git add -A
+          git diff --staged --quiet || git commit -m "Auto: nightly scrape $(date +'%Y-%m-%d')"
+          git push
