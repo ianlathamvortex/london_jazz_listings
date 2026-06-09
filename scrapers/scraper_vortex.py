@@ -19,6 +19,13 @@ DAYS_AHEAD = 90
 
 CLOSED_DAYS = {0}  # Monday
 
+# Titles that are navigation elements, not events
+NAV_TITLES = {
+    "event views navigation", "find events", "previous day",
+    "next day", "view as", "list month", "back to site",
+    "dalston song club",  # not jazz
+}
+
 # These are recurring sessions — exclude from gigs, they're in jam_sessions.json
 JAM_SESSION_NAMES = {
     "midweek downstairs jam",
@@ -97,6 +104,8 @@ def _parse_article(article, date_str: str, source_url: str) -> dict | None:
 
     artist = title_el.get_text(strip=True)
     if not artist or len(artist) < 3:
+        return None
+    if artist.lower().strip() in NAV_TITLES:
         return None
 
     # Skip jam sessions
