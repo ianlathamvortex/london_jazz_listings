@@ -544,5 +544,31 @@
     "editors_pick": false,
     "hidden": false,
     "last_verified": "2026-06-09"
+  },
+  {
+    "entry_id": "ram-free-improv-group-vortex-2026-06-16",
+    "event_name": "Royal Academy of Music Free Improv Group",
+    "artist_name": "Moss Freed, Chris Williams & RAM Students",
+    "venue_name": "Vortex Jazz Club",
+    "address": "11 Gillett Square",
+    "postcode": "N16 8AZ",
+    "zone": "North",
+    "neighbourhood": "Dalston",
+    "nearest_tube": "Dalston Kingsland Overground",
+    "venue_type": "Jazz Club",
+    "date": "2026-06-16",
+    "start_time": "19:45",
+    "end_time": "23:00",
+    "frequency": "Annual",
+    "booking_required": false,
+    "booking_url": "https://www.vortexjazz.co.uk/event/royal-academy-of-music-free-improv-group-3/",
+    "free_entry_type": "Free entry",
+    "genre_tier1": "Experimental / Free",
+    "format_tags": "Standing / Gig",
+    "description": "The culmination of workshops with Royal Academy of Music students led by guitarist Moss Freed and Academy alumnus Chris Williams. Eleven students exploring free improvisation and collaborative real-time music-making. Doors 7:45pm, music 8:30pm.",
+    "source_url": "https://www.vortexjazz.co.uk/event/royal-academy-of-music-free-improv-group-3/",
+    "editors_pick": true,
+    "hidden": false,
+    "last_verified": "2026-06-09"
   }
 ]
