@@ -1,7 +1,8 @@
 """
 enricher.py — Claude API description generator with web search
-Uses real web search to find artist credentials before writing descriptions.
-Never invents facts — leaves blank if nothing specific found.
+Uses real web search to find artist credentials before writing.
+Flags all auto-generated descriptions as unverified for editorial review.
+Never invents facts — skips if nothing specific found.
 """
 import os
 import sys
@@ -12,55 +13,56 @@ from utils import load, save
 
 MODEL       = "claude-sonnet-4-6"
 MAX_TOKENS  = 300
-MAX_PER_RUN = 20  # Lower limit — quality over quantity
+MAX_PER_RUN = 20
 
 SYSTEM_PROMPT = """You write short jazz gig descriptions for a London listings website.
 
-STRICT RULES:
-1. Search the web for the artist FIRST. Find at least ONE specific real fact:
-   - A named album on a real label
-   - A specific famous collaborator they've worked with  
-   - A country of origin or training background
-   - A named award or prize
-   - A specific genre or sound they're known for
+PROCESS:
+1. Search the web for the artist name + "jazz" or "musician"
+2. Find at least ONE specific verifiable fact:
+   - Named album on a real label (e.g. "debut album 'X' on ECM")
+   - Specific famous collaborator (e.g. "played with Shabaka Hutchings")
+   - Country of origin or training (e.g. "New York-born", "Guildhall-trained")
+   - Named award or publication credit (e.g. "Mercury Prize nominated", "praised by DownBeat")
+   - Specific genre or lineage (e.g. "rooted in the Ornette Coleman tradition")
+3. Write 2 sentences max, under 55 words, using ONLY facts you found
+4. If you find nothing specific and verifiable, respond with exactly: SKIP
 
-2. Write 2 sentences max, under 55 words, using ONLY facts you actually found.
+BANNED — any of these means automatic rejection:
+- "rarely does a..."
+- "make you forget your phone"
+- "one of London's most compelling..."
+- "before the rest of the world catches on"
+- "rewards both first-timers and seasoned ears"
+- "name-dropping in five years"
+- Any sentence that could apply to ANY musician
+- Invented nationality or instrument
+- ECM aesthetic unless you found a real ECM connection
+- Never start with the artist name
+- Never say "jazz"
 
-3. BANNED phrases and approaches:
-   - "rarely does a..." / "make you forget your phone"
-   - "one of London's most..." / "most compelling young..."
-   - "before the world catches on" / "name-dropping in five years"
-   - "rewards both first-timers and seasoned ears"
-   - Any sentence that could apply to ANY jazz musician
-   - Rhetorical questions
-   - Starting with the artist's name
-
-4. If you cannot find specific facts about this artist, respond with exactly: SKIP
-
-5. Never say "jazz" — they already know it's a jazz site.
-
-6. The goal: sound like a knowledgeable friend who's actually heard this person.
-
-GOOD EXAMPLE (Camille Bertault):
+GOOD (Camille Bertault):
 "French vocalist who became a YouTube sensation with her scat improvisation over 
 Coltrane's Giant Steps. Live she's electrifying — her voice an instrument of 
 extraordinary range and wit."
+→ APPROVED: specific real fact, specific sound, nothing invented
 
-BAD EXAMPLE (Matt Anderson):
+BAD (Matt Anderson):
 "Rarely does a tenor saxophonist make you forget to check your phone."
-→ REJECTED: generic, could apply to anyone, no real facts.
-"""
+→ REJECTED: no facts, generic, could apply to anyone
+
+If unsure, SKIP. A blank description is better than a wrong one."""
 
 
 def generate_description(artist, venue, date, special=""):
     try:
         import anthropic
         client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-        
-        prompt = f"Artist to research and describe: {artist}\nVenue: {venue}, London\nDate: {date}"
+
+        prompt = f"Artist: {artist}\nVenue: {venue}, London\nDate: {date}"
         if special:
             prompt += f"\nSpecial occasion: {special}"
-        prompt += "\n\nSearch for this artist, find a specific real fact, then write the description. If you find nothing specific, respond with exactly: SKIP"
+        prompt += "\n\nSearch for this artist, find one specific real fact, then write the description. If nothing specific found, respond: SKIP"
 
         msg = client.messages.create(
             model=MODEL,
@@ -69,15 +71,16 @@ def generate_description(artist, venue, date, special=""):
             tools=[{"type": "web_search_20250305", "name": "web_search"}],
             messages=[{"role": "user", "content": prompt}]
         )
-        
-        # Extract text from response
+
         for block in msg.content:
             if hasattr(block, 'text'):
                 text = block.text.strip()
-                if text and text != "SKIP" and len(text) > 20:
+                if text.upper() == "SKIP" or not text:
+                    return ""
+                if len(text) > 20:
                     return text
         return ""
-        
+
     except KeyError:
         print("  ANTHROPIC_API_KEY not set")
         return ""
@@ -99,8 +102,14 @@ def run():
 
     for i, record in enumerate(records):
         if count >= MAX_PER_RUN:
-            print(f"  Reached {MAX_PER_RUN} limit for this run")
+            print(f"  Reached {MAX_PER_RUN} limit")
             break
+
+        # Skip if already has a verified description
+        if record.get("description", "").strip() and record.get("description_verified"):
+            continue
+
+        # Skip if already has a description (verified or manual — don't overwrite)
         if record.get("description", "").strip():
             continue
 
@@ -114,18 +123,20 @@ def run():
 
         print(f"  Researching: {artist[:45]}...")
         desc = generate_description(artist, venue, date, special)
-        
-        if desc and desc.upper() != "SKIP":
+
+        if desc:
             records[i]["description"] = desc
+            records[i]["description_verified"] = False  # Needs editorial review
+            records[i]["description_source"] = "auto"
             count += 1
             changed = True
-            print(f"  ✓ {artist[:40]}: {desc[:60]}...")
+            print(f"  ✓ {artist[:40]} [UNVERIFIED]")
         else:
-            print(f"  → Skipped (no specific facts found)")
+            print(f"  → Skipped")
 
     if changed:
         save("gigs", records)
-        print(f"\n  Generated {count} new descriptions")
+        print(f"\n  Generated {count} new descriptions (all marked unverified)")
     else:
         print("  No new descriptions generated")
 
