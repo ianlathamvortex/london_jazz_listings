@@ -195,7 +195,74 @@
         }).join('');
 
       listingsEl.innerHTML = html;
+
+      // Inject Schema.org MusicEvent structured data
+      const existing = document.getElementById('schema-events');
+      if (existing) existing.remove();
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Jazz Gigs in London",
+        "description": "Upcoming jazz concerts across London",
+        "url": "https://londonjazzlist.co.uk/gigs.html",
+        "itemListElement": filtered.slice(0, 50).map((g, i) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "item": {
+            "@type": "MusicEvent",
+            "name": g.artist_name,
+            "startDate": g.date + (g.start_time ? 'T' + normaliseTime(g.start_time) : ''),
+            "location": {
+              "@type": "MusicVenue",
+              "name": g.venue_name,
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": g.neighbourhood || "London",
+                "addressRegion": "London",
+                "addressCountry": "GB"
+              }
+            },
+            "url": g.ticket_url || "https://londonjazzlist.co.uk/gigs.html",
+            "description": g.description || "",
+            "offers": g.price_from ? {
+              "@type": "Offer",
+              "price": g.price_from.replace(/[^0-9.]/g, '') || "0",
+              "priceCurrency": "GBP",
+              "availability": "https://schema.org/InStock",
+              "url": g.ticket_url || "https://londonjazzlist.co.uk/gigs.html"
+            } : undefined,
+            "performer": {
+              "@type": "MusicGroup",
+              "name": g.artist_name
+            },
+            "organizer": {
+              "@type": "Organization",
+              "name": g.venue_name
+            }
+          }
+        }))
+      };
+      const scriptEl = document.createElement('script');
+      scriptEl.id = 'schema-events';
+      scriptEl.type = 'application/ld+json';
+      scriptEl.textContent = JSON.stringify(schema);
+      document.head.appendChild(scriptEl);
     }
+
+    function normaliseTime(t) {
+      // Convert "7.45pm" or "7:45pm" to "19:45:00"
+      if (!t) return '00:00:00';
+      const m = t.match(/(\d{1,2})[.:]?(\d{2})\s*(am|pm)?/i);
+      if (!m) return '00:00:00';
+      let h = parseInt(m[1]);
+      const min = m[2] || '00';
+      const ampm = (m[3] || '').toLowerCase();
+      if (ampm === 'pm' && h < 12) h += 12;
+      if (ampm === 'am' && h === 12) h = 0;
+      return `${String(h).padStart(2,'0')}:${min}:00`;
+    }
+
+
 
     // ── Event listeners ───────────────────────────────────────
 
