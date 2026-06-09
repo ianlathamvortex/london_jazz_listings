@@ -137,10 +137,15 @@ def _parse(soup) -> list:
             continue
 
         # Artist lines — meaningful text after a date
-        if (current_date and len(line) > 4 and
+        # Skip lines that look like descriptions rather than artist names
+        if (current_date and len(line) > 4 and len(line) < 60 and
                 not any(s in line.lower() for s in
                         ["book now", "find out more", "from £", "tickets",
-                         "ronnie scott", "late late", "main show", "upstairs"])):
+                         "ronnie scott", "late late", "main show", "upstairs",
+                         "mixing", "blending", "unique", "signature sound",
+                         "musical", "influenced", "inspired by", "known for",
+                         "one of the", "a true", "an award"]) and
+                not line[0].islower()):  # artist names start with capital
             results.append(gig(
                 artist_name=line,
                 venue_name=VENUE,

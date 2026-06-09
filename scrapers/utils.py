@@ -65,11 +65,16 @@ def _is_near_duplicate(new_gig: dict, existing: dict) -> bool:
     return False
 
 def merge_gigs(existing: list, new_gigs: list) -> tuple:
-    """Merge new gigs, deduplicating by gig_id and near-duplicate detection."""
+    """Merge new gigs, deduplicating by gig_id and near-duplicate detection.
+    Also filters out jam sessions and non-jazz events at the merge stage."""
     existing_ids = {g["gig_id"] for g in existing}
     added = 0
 
     for new_gig in new_gigs:
+        # Global jam session filter — these belong in jam_sessions.json
+        if is_jam_session(new_gig.get("artist_name", "")):
+            continue
+
         gig_id = new_gig["gig_id"]
 
         # Exact ID match — update non-editorial fields
@@ -222,3 +227,142 @@ def detect_genre(text: str) -> str:
         if any(s in text_lower for s in signals):
             return genre
     return "Contemporary Jazz"
+
+
+# ── Global jam session filter ─────────────────────────────────
+# These recurring sessions should never appear in gigs.json
+# They live in jam_sessions.json instead
+
+JAM_SESSION_PATTERNS = [
+    "jam session", "jazz jam", "open jam", "weekly jam", "monthly jam",
+    "jam with ", "midweek jam", "downstairs jam", "sunday jam",
+    "open mic", "open stage", "sit in", "sit-in",
+    "vortex jam", "stratos jam", "orii jam", "haggerston jam",
+    "living sounds open mic", "patterns weekly",
+]
+
+def is_jam_session(title: str) -> bool:
+    """Return True if the event title suggests a recurring jam session."""
+    t = title.lower()
+    return any(p in t for p in JAM_SESSION_PATTERNS)
+
+
+# ── Global jazz filter ────────────────────────────────────────
+# Applied by scrapers that cover mixed-programme venues
+
+JAZZ_INCLUDE = [
+    "jazz", "bebop", "swing", "improvisation", "improvised",
+    "quartet", "quintet", "trio", "sextet", "big band",
+    "saxophone", "trumpet", "double bass", "hammond organ",
+    "latin jazz", "afrobeat", "soul jazz", "fusion",
+    "bossa nova", "samba", "funk", "groove",
+    "tomorrow's warriors", "gary crosby", "collage presents",
+    "jazzlive", "blue note", "coltrane", "miles davis",
+]
+
+JAZZ_EXCLUDE = [
+    "comedy", "stand-up", "spoken word", "poetry reading",
+    "book launch", "lecture", "talk by", "in conversation with",
+    "yoga", "pilates", "meditation", "wellness",
+    "art class", "drawing class", "watercolour", "ceramics",
+    "film screening", "cinema", "theatre performance",
+    "opera", "classical guitar recital", "choral", "choir",
+    "musical theatre", "ballet", "contemporary dance",
+    "visual language", "finding one's voice",
+    "masterclass in", "creative writing",
+]
+
+def is_jazz_event(title: str, description: str = "") -> bool:
+    """
+    Return True if an event is jazz-related.
+    For use by scrapers covering mixed-programme venues.
+    """
+    combined = (title + " " + description).lower()
+    # Hard excludes first
+    if any(k in combined for k in JAZZ_EXCLUDE):
+        return False
+    # Must match at least one jazz keyword
+    return any(k in combined for k in JAZZ_INCLUDE)
+
+
+# ── Auto editors pick rules ───────────────────────────────────
+
+# Venues where all/most gigs are worth flagging
+PREMIUM_VENUES = {
+    "Barbican Centre",
+    "Cadogan Hall",
+    "Royal Albert Hall",
+    "Royal Festival Hall",
+    "Wigmore Hall",
+    "Lauderdale House",
+    "Jazzlive at The Crypt",
+    "Union Chapel",
+    "EartH Theatre",
+}
+
+# Keywords in descriptions that suggest international/major artist
+INTERNATIONAL_SIGNALS = [
+    " us ", "u.s.", "american", "new york", "nyc", "european tour",
+    "international", "grammy", "mercury prize", "booker prize",
+    "first uk", "rare uk", "uk debut", "world tour",
+]
+
+def should_be_editors_pick(g: dict) -> bool:
+    """
+    Return True if a gig should be auto-flagged as an editor's pick.
+    Rules:
+    - Venue is a premium concert hall
+    - Serious Promotions event (already flagged)
+    - Price > £25 at any venue
+    - Special occasion set
+    - International signals in description
+    - Vortex two-show (detected post-merge in flag_two_show_vortex)
+    """
+    if g.get("editors_pick"):
+        return True
+    venue = g.get("venue_name", "")
+    if venue in PREMIUM_VENUES:
+        return True
+    price = g.get("price_from", "").replace("£","").strip()
+    try:
+        if float(price) >= 25:
+            return True
+    except (ValueError, TypeError):
+        pass
+    if g.get("special_occasion"):
+        return True
+    desc = (g.get("description","") + " " + g.get("artist_name","")).lower()
+    if any(s in desc for s in INTERNATIONAL_SIGNALS):
+        return True
+    return False
+
+
+def flag_two_show_vortex(gigs: list) -> list:
+    """
+    Flag Vortex gigs as editors_pick if the same artist plays twice in one day.
+    Call this after all gigs are merged, before saving.
+    """
+    from collections import defaultdict
+    counts = defaultdict(int)
+    for g in gigs:
+        if g.get("venue_name") == "Vortex Jazz Club":
+            key = (g["artist_name"], g["date"])
+            counts[key] += 1
+
+    for g in gigs:
+        if g.get("venue_name") == "Vortex Jazz Club":
+            key = (g["artist_name"], g["date"])
+            if counts[key] > 1:
+                g["editors_pick"] = True
+                if not g.get("scraper_notes"):
+                    g["scraper_notes"] = "Two-show day — auto editors pick"
+
+    return gigs
+
+
+def apply_auto_picks(gigs: list) -> list:
+    """Apply all auto editors pick rules to a list of gigs."""
+    for g in gigs:
+        if not g.get("editors_pick"):
+            g["editors_pick"] = should_be_editors_pick(g)
+    return flag_two_show_vortex(gigs)
