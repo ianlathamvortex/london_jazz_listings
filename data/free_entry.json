@@ -570,5 +570,31 @@
     "editors_pick": true,
     "hidden": false,
     "last_verified": "2026-06-09"
+  },
+  {
+    "entry_id": "high-tide-festival-2026-07-26",
+    "event_name": "High Tide Festival \u2014 Jazz Stage",
+    "artist_name": "Denys Baptiste, Tony Kofi, Misha Mullov-Abbado & more",
+    "venue_name": "High Tide Festival, Orleans Gardens",
+    "address": "Orleans Gardens, Riverside",
+    "postcode": "TW1 3DG",
+    "zone": "West",
+    "neighbourhood": "Twickenham",
+    "nearest_tube": "Twickenham",
+    "venue_type": "Outdoor Festival",
+    "date": "2026-07-26",
+    "start_time": "13:00",
+    "end_time": "19:30",
+    "frequency": "Annual",
+    "booking_required": false,
+    "booking_url": "https://www.hightidetwick.com/",
+    "free_entry_type": "Free festival",
+    "genre_tier1": "Contemporary Jazz",
+    "format_tags": "Outdoor",
+    "description": "Free community festival jazz stage overlooking the Thames at Orleans Gardens, Twickenham. Denys Baptiste/Tony Kofi Quintet, Misha Mullov-Abbado Sextet, GAB Trio, Ines Loubet and Euan Stevenson Trio. 1pm\u20137:30pm, no tickets required.",
+    "source_url": "https://www.hightidetwick.com/",
+    "editors_pick": true,
+    "hidden": false,
+    "last_verified": "2026-06-09"
   }
 ]
