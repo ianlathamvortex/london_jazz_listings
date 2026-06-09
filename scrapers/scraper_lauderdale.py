@@ -22,7 +22,6 @@ BASE_URL = "https://www.lauderdalehouse.org.uk"
 PAGES = [
     f"{BASE_URL}/whats-on/jazz-house",
     f"{BASE_URL}/whats-on/open-air-summer-season",
-    f"{BASE_URL}/whats-on/music",
 ]
 
 JAZZ_KEYWORDS = [
