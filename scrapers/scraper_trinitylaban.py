@@ -29,6 +29,9 @@ JAZZ_KEYWORDS = [
 
 # Keywords that indicate NOT jazz (to filter out)
 NOT_JAZZ = [
+    "competition concert", "runswick competition", "rosalie coopman",
+    "fidelio trio", "guitar festival", "sounding the soul",
+    "new lights", "graduate school showcase",
     "symphony orchestra", "string quartet", "chamber", "opera",
     "ballet", "contemporary dance", "musical theatre", "classical guitar",
     "organ recital", "choral", "piano recital", "violin",
