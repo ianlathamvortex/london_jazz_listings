@@ -38,3 +38,5 @@ jobs:
           git add data/
           git diff --staged --quiet || git commit -m "Auto: nightly scrape $(date +'%Y-%m-%d')"
           git push
+- name: Copy data files to repo root (for Netlify)
+        run: cp data/*.json 
