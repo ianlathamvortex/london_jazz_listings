@@ -598,5 +598,29 @@
     "hidden": false,
     "last_verified": "2026-06-09",
     "source_url": "https://highamspark.london/event/jazz-jam-featuring-rob-luft/"
+  },
+  {
+    "session_id": "highams-park-jazz-club-regular",
+    "session_name": "Highams Park Jazz Club",
+    "venue_name": "Highams Park Jazz Club",
+    "address": "All Saints Church, Church Avenue",
+    "postcode": "E4 9QZ",
+    "zone": "East",
+    "neighbourhood": "Highams Park",
+    "nearest_tube": "Highams Park Overground",
+    "day_of_week": "Sunday",
+    "frequency": "Fortnightly Sundays, 5\u20138pm",
+    "start_time": "17:00",
+    "end_time": "20:00",
+    "free_or_paid": "Paid",
+    "price_notes": "Check website",
+    "booking_url": "https://highamsparkjazzclub.com/eventstickets",
+    "description": "Fortnightly Sunday sessions alternating between ticketed gigs and jam sessions with featured guests. House rhythm section of Soner Ersen (piano), Dave Manington (bass) and Eric Ford (drums) with rotating featured soloists \u2014 recent guests have included Rob Luft, Brigitte Beraha, Tim Garland, Jim Mullen and Mark Lockheart. One of East London's best-kept jazz secrets.",
+    "genre_tier1": "Contemporary Jazz",
+    "open_to_all": true,
+    "editors_pick": true,
+    "hidden": false,
+    "last_verified": "2026-06-09",
+    "source_url": "https://highamsparkjazzclub.com/session-dates"
   }
 ]
