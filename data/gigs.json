@@ -1971,7 +1971,7 @@
     "genre_tier1": "Contemporary Jazz",
     "genre_tier2": "",
     "format_tags": "Standing / Gig",
-    "description": "Catch one of the UK's most quietly commanding pianists in the intimate surroundings of Dalston's legendary basement venue. Williams has toured with Jamie Cullum and Gregory Porter, but her trio nights are where she really opens up \u2014 expect originals that hit harder than anything on a playlist.",
+    "description": "Daughter of guitarist John Williams, she's been a quietly distinctive force since winning the John Dankworth Award. Her sixth album 'On the Wing of a Dragonfly' \u2014 out May 2026, six years in the making \u2014 draws Bill Evans comparisons for its patient, spacious trio writing, with Monk-ian moments and a bop-flavoured directness that Jazzwise praised for 'lucidity, spacious approach and surprising gift for quirky hooks.'",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -1982,8 +1982,8 @@
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
     "scraper_notes": "",
-    "description_verified": false,
-    "description_source": "auto"
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "five-way-split-ft-quentin-collinsfive-way-split-brings-together-five-ladbroke-ha",
