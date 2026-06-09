@@ -9,18 +9,18 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "scrapers"))
 
 from utils import load, save
 
-MODEL      = "claude-sonnet-4-20250514"
-MAX_TOKENS = 120
+MODEL       = "claude-sonnet-4-6"
+MAX_TOKENS  = 150
 MAX_PER_RUN = 50
 
 SYSTEM_PROMPT = """You write short, punchy jazz gig descriptions for a London listings website.
 Your tone: knowledgeable but never stuffy. Like a recommendation from a well-informed friend.
 Each description must:
-- Explain WHY the gig is worth seeing (not just who's playing)
+- Explain WHY the gig is worth seeing (not just who is playing)
 - Include one credential or context that lands with a non-specialist
 - Be 2 sentences maximum, under 60 words
-- Never use the word "jazz" (they already know it's a jazz site)
-- Never start with the artist's name
+- Never use the word "jazz" (they already know it is a jazz site)
+- Never start with the artist name
 Do not add any preamble, labels or quotation marks. Just the description text."""
 
 
@@ -40,7 +40,7 @@ def generate_description(artist, venue, date, extra=""):
         )
         return msg.content[0].text.strip()
     except KeyError:
-        print("  ANTHROPIC_API_KEY not set — skipping enrichment")
+        print("  ANTHROPIC_API_KEY not set")
         return ""
     except Exception as e:
         print(f"  API error for {artist}: {e}")
@@ -50,17 +50,17 @@ def generate_description(artist, venue, date, extra=""):
 def run():
     api_key = os.environ.get("ANTHROPIC_API_KEY", "")
     if not api_key:
-        print("  ANTHROPIC_API_KEY not set — skipping enrichment")
-        print("  (Add key to GitHub secrets to enable AI descriptions)")
+        print("  ANTHROPIC_API_KEY not set - skipping enrichment")
         return
 
-    print("Enriching gigs...")
+    print(f"Enriching gigs (model: {MODEL})...")
     records = load("gigs")
     count = 0
     changed = False
 
     for i, record in enumerate(records):
         if count >= MAX_PER_RUN:
+            print(f"  Reached {MAX_PER_RUN} limit")
             break
         if record.get("description", "").strip():
             continue
@@ -70,12 +70,13 @@ def run():
         special = record.get("special_occasion", "")
         if not artist or not venue:
             continue
+        print(f"  Generating: {artist[:40]}...")
         desc = generate_description(artist, venue, date, special)
         if desc:
             records[i]["description"] = desc
             count += 1
             changed = True
-            print(f"  ✓ {artist} @ {venue}")
+            print(f"  ✓ {artist[:40]}")
 
     if changed:
         save("gigs", records)
