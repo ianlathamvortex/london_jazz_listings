@@ -147,11 +147,17 @@ function renderBrunchCard(brunch) {
 
 function renderFreeItem(item) {
   const dateStr = item.date ? formatDateShort(item.date) : (item.frequency || 'Recurring');
+  const timeStr = item.start_time ? ` · ${esc(item.start_time)}` : '';
+  const endStr  = item.end_time   ? `–${esc(item.end_time)}`   : '';
+  const link    = item.booking_url || item.source_url || '';
+  const nameHtml = link
+    ? `<a href="${esc(link)}" target="_blank" rel="noopener" class="free-name-link">${esc(item.event_name || item.artist_name || '')}</a>`
+    : `<span>${esc(item.event_name || item.artist_name || '')}</span>`;
   return `
     <div class="free-item">
-      <div class="free-date">${esc(dateStr)}</div>
+      <div class="free-date">${esc(dateStr)}${timeStr}${endStr}</div>
       <div>
-        <div class="free-name">${esc(item.event_name || item.artist_name || '')}</div>
+        <div class="free-name">${nameHtml}</div>
         <div class="free-venue">${esc(item.venue_name || '')}${item.neighbourhood ? ` · ${esc(item.neighbourhood)}` : ''}</div>
         ${item.description ? `<div class="free-desc">${esc(item.description)}</div>` : ''}
       </div>
