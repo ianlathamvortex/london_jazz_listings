@@ -574,5 +574,29 @@
     "hidden": false,
     "last_verified": "2026-06-09",
     "source_url": "https://ukjazznews.com"
+  },
+  {
+    "session_id": "highams-park-jazz-jam-rob-luft-2026-06-21",
+    "session_name": "Jazz Jam featuring Rob Luft",
+    "venue_name": "Highams Park Jazz Club",
+    "address": "All Saints Church, Church Avenue",
+    "postcode": "E4 9QZ",
+    "zone": "East",
+    "neighbourhood": "Highams Park",
+    "nearest_tube": "Highams Park Overground",
+    "day_of_week": "Sunday",
+    "frequency": "One-off (21 June 2026)",
+    "start_time": "17:00",
+    "end_time": "20:00",
+    "free_or_paid": "",
+    "price_notes": "",
+    "booking_url": "https://highamspark.london/event/jazz-jam-featuring-rob-luft/",
+    "description": "Special one-off jazz jam at Highams Park Jazz Club featuring guitarist Rob Luft \u2014 one of the most gifted young guitarists on the UK scene, praised by The Guardian and BBC Radio 3. Open session, 5\u20138pm.",
+    "genre_tier1": "Contemporary Jazz",
+    "open_to_all": true,
+    "editors_pick": false,
+    "hidden": false,
+    "last_verified": "2026-06-09",
+    "source_url": "https://highamspark.london/event/jazz-jam-featuring-rob-luft/"
   }
 ]
