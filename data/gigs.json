@@ -295,7 +295,8 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026"
+    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
+    "band_format": "Guitar Quintet"
   },
   {
     "gig_id": "sarah-moule-simon-wallace-songs-for-scarlet-women-george-iv-2026-06-11",
@@ -491,7 +492,8 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": "auto"
+    "description_source": "auto",
+    "band_format": "Piano Trio"
   },
   {
     "gig_id": "kaiyo-with-tori-freestone-karamel-2026-06-12",
@@ -553,7 +555,8 @@
     "verified": "Yes",
     "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
     "description_verified": true,
-    "description_source": "manual"
+    "description_source": "manual",
+    "band_format": "Bass Quintet"
   },
   {
     "gig_id": "collette-cooper-crazy-coqs-brasserie-zedel-2026-06-12",
@@ -585,7 +588,8 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026"
+    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
+    "band_format": "Vocal Quartet"
   },
   {
     "gig_id": "jonathan-gee-pizzaexpress-jazz-club-2026-06-12",
@@ -816,7 +820,7 @@
     "special_occasion": "Meltdown Festival",
     "editors_pick": true,
     "hidden": false,
-    "band_format": "Solo Sax"
+    "band_format": "Tenor Sax Group"
   },
   {
     "gig_id": "kamasi-washington-fearless-movement-royal-festival-hall-2026-06-14",
@@ -929,7 +933,8 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026"
+    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
+    "band_format": "Vocal Quartet"
   },
   {
     "gig_id": "sam-glaser-septet-east-side-jazz-club-2026-06-16",
@@ -995,7 +1000,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
-    "band_format": "Quartet"
+    "band_format": "Vocal Quartet"
   },
   {
     "gig_id": "raffy-bushman-new-life-album-launch-vortex-jazz-club-2026-06-17",
@@ -1090,7 +1095,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
-    "band_format": "Solo Sax"
+    "band_format": "Sax Quartet"
   },
   {
     "gig_id": "julian-nicholas-emil-viklicky-and-imogen-ryall-606-club-2026-06-17",
@@ -1143,7 +1148,8 @@
     "description_source": "manual",
     "special_occasion": "Meltdown Festival",
     "editors_pick": true,
-    "hidden": false
+    "hidden": false,
+    "band_format": "Vibraphone/Keys Group"
   },
   {
     "gig_id": "outhouse-vortex-jazz-club-2026-06-18",
@@ -1176,7 +1182,8 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": "auto"
+    "description_source": "auto",
+    "band_format": "Quintet"
   },
   {
     "gig_id": "sun-mi-hong-s-noctilume-feat-mette-rasmussen-vortex-jazz-club-2026-06-18",
@@ -1367,7 +1374,8 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": "auto"
+    "description_source": "auto",
+    "band_format": "Guitar Trio"
   },
   {
     "gig_id": "tony-kofi-quartet-world-heart-beat-2026-06-19",
@@ -1533,7 +1541,8 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026"
+    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
+    "band_format": "Vocal Quartet"
   },
   {
     "gig_id": "yussef-dayes-royal-festival-hall-2026-06-20",
@@ -1553,7 +1562,8 @@
     "description_source": "manual",
     "special_occasion": "Meltdown Festival",
     "editors_pick": true,
-    "hidden": false
+    "hidden": false,
+    "band_format": "Drums Group"
   },
   {
     "gig_id": "mopomoso-international-free-improvised-music-june-2026-vortex-jazz-club-2026-06-",
@@ -1586,7 +1596,8 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": "auto"
+    "description_source": "auto",
+    "band_format": "Ensemble"
   },
   {
     "gig_id": "sarah-l-king-love-letters-george-iv-2026-06-21",
@@ -1651,7 +1662,8 @@
     "verified": "Yes",
     "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
     "description_verified": false,
-    "description_source": "auto"
+    "description_source": "auto",
+    "band_format": "Big Band"
   },
   {
     "gig_id": "eloise-carter-quartet-crazy-coqs-brasserie-zedel-2026-06-22",
@@ -1878,7 +1890,8 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026"
+    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
+    "band_format": "Vocal Quartet"
   },
   {
     "gig_id": "whirlpool-jonah-phillips-vortex-jazz-club-2026-06-25",
@@ -1979,7 +1992,8 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": true,
-    "description_source": "manual"
+    "description_source": "manual",
+    "band_format": "Guitar Quartet"
   },
   {
     "gig_id": "51st-state-band-51st-state-big-band-world-heart-beat-2026-06-25",
@@ -2045,7 +2059,8 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026"
+    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
+    "band_format": "Sax Quartet"
   },
   {
     "gig_id": "dave-o-higgins-judith-o-higgins-606-club-2026-06-25",
@@ -2274,7 +2289,8 @@
     "verified": "Yes",
     "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
     "description_verified": false,
-    "description_source": "auto"
+    "description_source": "auto",
+    "band_format": "Electric Group"
   },
   {
     "gig_id": "ed-jones-quartet-vortex-jazz-club-2026-06-27",
@@ -2595,7 +2611,8 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "Cadogan Hall jazz programme"
+    "scraper_notes": "Cadogan Hall jazz programme",
+    "band_format": "Piano Trio"
   },
   {
     "gig_id": "lex-korten-group-vortex-jazz-club-2026-07-01",
@@ -3085,7 +3102,8 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": "auto"
+    "description_source": "auto",
+    "band_format": "Vocal Duo"
   },
   {
     "gig_id": "anatole-muster-vortex-jazz-club-2026-07-14",
@@ -3344,7 +3362,8 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": true,
-    "description_source": "manual"
+    "description_source": "manual",
+    "band_format": "Vocal Quartet"
   },
   {
     "gig_id": "julian-joseph-s-60th-birthday-concert-world-heart-beat-2026-07-17",
@@ -3445,7 +3464,8 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": true,
-    "description_source": "manual"
+    "description_source": "manual",
+    "band_format": "Guitar Quartet"
   },
   {
     "gig_id": "pat-metheny-side-eye-iii-barbican-centre-2026-07-19",
@@ -3647,7 +3667,8 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": "auto"
+    "description_source": "auto",
+    "band_format": "Drums Group"
   },
   {
     "gig_id": "rana-farhan-persian-soul-world-heart-beat-2026-07-25",
@@ -3782,7 +3803,8 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": "auto"
+    "description_source": "auto",
+    "band_format": "Big Band"
   },
   {
     "gig_id": "finn-carter-with-yves-fernandez-and-richard-spaven-vortex-jazz-club-2026-08-25",
@@ -3871,7 +3893,8 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "Cadogan Hall jazz programme"
+    "scraper_notes": "Cadogan Hall jazz programme",
+    "band_format": "Vocal Group"
   },
   {
     "gig_id": "urszula-dudziak-cadogan-hall-2026-09-12",
@@ -3959,7 +3982,8 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "Cadogan Hall jazz programme"
+    "scraper_notes": "Cadogan Hall jazz programme",
+    "band_format": "Electric Trio"
   },
   {
     "gig_id": "leszek-mo-d-er-plays-komeda-cadogan-hall-2026-09-26",
@@ -4169,7 +4193,8 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "Cadogan Hall jazz programme"
+    "scraper_notes": "Cadogan Hall jazz programme",
+    "band_format": "Vocal Quartet"
   },
   {
     "gig_id": "luiza-zan-muse-quartet-world-heart-beat-2026-11-18",
