@@ -2610,14 +2610,14 @@
     "description": "Clark Tracey leads original band members Simon Allen and Andrew Cleyndert \u2014 with Gareth Williams \u2014 in celebrating the 50-year legacy of his father Stan Tracey, the 'godfather of British jazz'.",
     "description_verified": true,
     "description_source": "manual",
-    "special_occasion": "Tribute concert",
+    "special_occasion": "",
     "editors_pick": false,
-    "hidden": true,
+    "hidden": false,
     "source_url": "https://cadoganhall.com/whats-on/genres/jazz-blues/",
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "Cadogan Hall jazz programme | hidden: editorial decision",
+    "scraper_notes": "no promotion above standard Culford Room",
     "band_format": "Piano Trio"
   },
   {
