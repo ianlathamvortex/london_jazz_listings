@@ -90,7 +90,7 @@ function uniqueValues(arr, field) {
 const PREMIUM_VENUES = new Set([
   "Barbican Centre", "Cadogan Hall", "Royal Albert Hall",
   "Royal Festival Hall", "Wigmore Hall", "Union Chapel",
-  "EartH Theatre", "Ronnie Scott's",
+  "EartH Theatre", "Ronnie Scott's", "Ladbroke Hall",
 ]);
 
 const INTERNATIONAL_SIGNALS = [
@@ -139,7 +139,7 @@ const VENUE_CAPACITY = {
   "Jazzlive at The Crypt": 100,
   // Small venues <100 — no capacity boost (already scored by venue_tier)
   "Vortex Jazz Club":       90,
-  "Ladbroke Hall":          80,
+  "Ladbroke Hall":          220,  // premium table seating + dinner service, intimate theatre
   "Karamel":                80,
   "PizzaExpress Jazz Club": 120,
   "PizzaExpress The Pheasantry": 100,
