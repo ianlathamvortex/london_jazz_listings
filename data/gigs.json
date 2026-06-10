@@ -1927,7 +1927,7 @@
     "scraper_notes": "",
     "description_verified": true,
     "description_source": "manual",
-    "band_format": "Sax Quartet"
+    "band_format": "Drums Group"
   },
   {
     "gig_id": "jim-rattigan-quintet-vortex-jazz-club-2026-06-25",
@@ -2010,13 +2010,13 @@
     "stage": "Embassy Gardens",
     "zone": "South West",
     "neighbourhood": "Nine Elms / Battersea",
-    "ticket_url": "https://worldheartbeat.ticketsolve.com/shows/1173678479/events",
+    "ticket_url": "https://worldheartbeat.ticketsolve.com/ticketbooth/shows/1173678479",
     "price_from": "",
     "price_full_text": "",
     "genre_tier1": "Big Band",
     "genre_tier2": "",
     "format_tags": "Concert Hall",
-    "description": "Two powerhouse ensembles unite for a rare double-header at one of South London's most vibrant music venues. Expect soulful small-group interplay followed by the full-throttle swagger of a big band blowing the roof off Embassy Gardens.",
+    "description": "Youth big band.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -2027,8 +2027,8 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
-    "description_verified": false,
-    "description_source": "auto",
+    "description_verified": true,
+    "description_source": "manual",
     "band_format": "Big Band"
   },
   {
