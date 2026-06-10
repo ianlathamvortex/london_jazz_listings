@@ -61,11 +61,21 @@ VENUES = {
         "tier":   "1",
     },
     "grow_hackney": {
-        "name":   "Grow Hackney",
+        "name":   "Grow",
         "url":    "https://www.growhackney.co.uk/jazz",
         "zone":   "East", "hood": "Hackney Wick",
         "format": "Standing / Gig", "genre": "Contemporary Jazz",
         "tier":   "1",
+        "needs_playwright": True,  # Squarespace JS-rendered — plain fetch returns empty page
+    },
+    "grow_canalside": {
+        "name":   "Grow",
+        "url":    "https://www.growhackney.co.uk/canalside-sessions",
+        "zone":   "East", "hood": "Hackney Wick",
+        "format": "Standing / Gig", "genre": "Afro-Latin",
+        "tier":   "1",
+        "free":   True,   # Canalside Sessions are free entry → free_entry.json
+        "needs_playwright": True,
     },
     "jazz_cafe_posk": {
         "name":   "Jazz Café POSK",
