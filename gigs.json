@@ -118,12 +118,12 @@
     "ticket_url": "https://www.eventbrite.co.uk/e/the-clore-the-muddy-puddle-tickets-1986083281559",
     "price_from": "",
     "price_full_text": "",
-    "genre_tier1": "Contemporary Jazz",
+    "genre_tier1": "Soul & Groove",
     "genre_tier2": "",
     "format_tags": "Jazz Club",
-    "description": "",
-    "description_verified": false,
-    "description_source": "",
+    "description": "Tomorrow's Warriors quartet led by drummer Yuma Angius-Thomas, Young Drummer of the Year 2024 finalist. Originals and arrangements drawing on Snarky Puppy, Brecker and Cory Wong.",
+    "description_verified": true,
+    "description_source": "manual",
     "special_occasion": "",
     "editors_pick": false,
     "hidden": false,
@@ -132,7 +132,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
-    "band_format": "Quartet"
+    "band_format": "Sax Quartet"
   },
   {
     "gig_id": "paul-g-smyth-at-50-vortex-jazz-club-2026-06-11",
