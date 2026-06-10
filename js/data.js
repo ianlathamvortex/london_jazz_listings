@@ -99,7 +99,7 @@ const INTERNATIONAL_SIGNALS = [
   "world tour", "mercury prize",
 ];
 
-function // ── Venue capacity table ─────────────────────────────────────────────
+// ── Venue capacity table ─────────────────────────────────────────────
 // Capacity tiers: 500+ → +3, 200+ → +2, 100+ → +1, <100 → 0
 // Sub-rooms (Culford Room, Elgar Room etc) score 0 regardless of parent
 const VENUE_CAPACITY = {
@@ -152,7 +152,7 @@ const VENUE_CAPACITY = {
   "MaMaSaint":               60,
 };
 
-gigScore(g) {
+function gigScore(g) {
   let score = 0;
 
   if (g.editors_pick === true || g.editors_pick === "TRUE") score += 20;
