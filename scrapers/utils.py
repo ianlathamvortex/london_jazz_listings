@@ -268,7 +268,7 @@ GENRE_SIGNALS = {
 # When a scraper can only provide a source URL (e.g. ukjazznews.com),
 # merge_gigs will substitute the venue's own website instead.
 VENUE_TICKET_FALLBACKS = {
-    "Bull & Gate":         "https://bullandgatehighgate.co.uk",
+    "Bull & Gate":         "",
     "Hampstead Jazz Club": "https://www.hampsteadjazzclub.co.uk",
     "Oliver's Jazz Bar":   "https://oliversjazzbar.co.uk",
 }
