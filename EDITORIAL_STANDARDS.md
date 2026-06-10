@@ -221,3 +221,28 @@ venue tier or price:
 
 *Last updated: June 2026*
 *Editor: Ian Latham*
+
+---
+
+## Listener Accessibility Notes
+
+These are editorial judgements the enricher cannot make — they require actually
+hearing the music or understanding how audiences experience it.
+
+**Harmony instruments matter for accessibility.** Bands without a harmony instrument
+(piano, guitar, vibraphone) — i.e. sax/trumpet + bass + drums only — are harder
+for general audiences to follow. Expert jazz musicians can hear implied harmony
+in their imagination. Most listeners cannot. This is not a quality judgement; it's
+an accessibility one. Factor it into how warmly you describe the gig.
+
+**Experimental and free improv gigs** serve a self-selecting audience of roughly
+10 people who already know they want to go. The description should be dry and
+informational, not welcoming. They don't need encouragement. Everyone else
+needs a gentle signal that this is not for them.
+
+**Comeback acts** with a long gap are genuinely unknown quantities — the 16-year-ago
+version of the band is not the current version. Describe them as such rather than
+recycling old credentials.
+
+**"Same 10 people already waiting outside"** — the free improv audience. They are
+loyal, knowledgeable and self-sufficient. Write for them, not for general readers.
