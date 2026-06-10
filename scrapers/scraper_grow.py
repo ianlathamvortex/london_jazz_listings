@@ -92,10 +92,11 @@ def _parse_time(text: str) -> str:
 
 def _scrape_page(url: str, is_free: bool = False) -> list:
     """Scrape a single Grow event page. Returns list of gig dicts."""
+    # Wait for any event block to appear — Squarespace uses .eventlist-event
     soup = fetch_browser(
         url,
-        wait_for=", ".join(SS_SELECTORS[:3]),
-        timeout=35000
+        wait_for=".eventlist-event, .summary-item, article[class*='event'], div[class*='event-item']",
+        timeout=40000,
     )
     if not soup:
         print(f"  No response from {url}")
