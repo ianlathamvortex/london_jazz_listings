@@ -142,7 +142,7 @@ def _parse_article(article, date_str: str, source_url: str) -> dict | None:
         stage=stage,
         zone=ZONE,
         neighbourhood=HOOD,
-        format_tags="Standing / Gig",
+        format_tags="Jazz Club",
         genre_tier1="Contemporary Jazz",
         special_occasion=special,
     )
