@@ -43,6 +43,7 @@ BANNED — any of these means automatic rejection:
 - ECM aesthetic unless you found a real ECM connection
 - Never start with the artist name
 - Never say "jazz"
+- "rare chance to catch", "rare chance to hear", "rare opportunity" — banned unless the artist genuinely plays London once a year or less (e.g. international star, one-off reunion). A London-based musician who gigs regularly is never a "rare chance".
 
 GOOD (Camille Bertault):
 "French vocalist who became a YouTube sensation with her scat improvisation over 
