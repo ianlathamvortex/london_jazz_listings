@@ -246,3 +246,34 @@ recycling old credentials.
 
 **"Same 10 people already waiting outside"** — the free improv audience. They are
 loyal, knowledgeable and self-sufficient. Write for them, not for general readers.
+
+---
+
+## Naming Musicians in Descriptions
+
+**Only name sidemen if the reader will recognise them.**
+
+A name in a description is a signal to the reader: *this person means something*.
+Listing unknown names is noise — it looks like credential-padding and adds no
+information.
+
+**Name a musician if:**
+- They are a well-known bandleader in their own right
+  (e.g. "with John Edwards on bass" — Edwards is a known figure in free improv)
+- They have a specific credential the reader will recognise
+  (e.g. "drummer Jay Davis, also of Mark Lockheart's Shapeshifter")
+- Their presence is the actual reason to go
+  (e.g. a famous guest joining a lesser-known leader)
+
+**Don't name musicians if:**
+- They are working sidemen without independent recognition
+- The names are lifted from a press release to pad the description
+- The reader would have no way to evaluate the name
+
+**Don't repeat what's already in the title.** If the artist name is in the title,
+don't restate it in the description. If the venue is shown separately, don't
+mention it in the blurb.
+
+**Lunchtime gigs** — a distinct format worth noting. Different audience, different
+proposition from an evening show. Tag with `format_tags: Lunchtime`. If enough
+accumulate, may warrant a dedicated section alongside brunches.
