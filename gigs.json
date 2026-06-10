@@ -86,7 +86,7 @@
     "genre_tier1": "Post-Bop",
     "genre_tier2": "",
     "format_tags": "Standing / Gig",
-    "description": "Tenor saxophonist of rare authority, Anderson leads his quartet through original compositions that sit comfortably in the tradition of Rollins and late Coltrane without sounding derivative.",
+    "description": "Tenth anniversary gig from a quartet that has held together long enough to matter. *Live at Leeds Jazz Festival* got four stars from Jazzwise. Tenor sax-led, post-bop originals.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -97,8 +97,8 @@
     "last_updated": "2026-06-09 12:24",
     "verified": "Yes",
     "scraper_notes": "",
-    "description_verified": false,
-    "description_source": "auto",
+    "description_verified": true,
+    "description_source": "manual",
     "band_format": "Sax Quartet"
   },
   {
