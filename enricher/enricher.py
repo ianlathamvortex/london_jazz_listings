@@ -35,6 +35,9 @@ BANNED — any of these means automatic rejection:
 - "before the rest of the world catches on"
 - "rewards both first-timers and seasoned ears"
 - "name-dropping in five years"
+- "rare authority" — reserved only for confirmed masters (e.g. Kamasi Washington, Iain Ballamy). Do not use for anyone else.
+- "rare talent", "rare gift", "rare ability" — same rule
+- "captivating presence", "compelling performer", "extraordinary talent" — banned entirely, generic
 - Any sentence that could apply to ANY musician
 - Invented nationality or instrument
 - ECM aesthetic unless you found a real ECM connection
