@@ -1646,13 +1646,13 @@
     "stage": "Embassy Gardens",
     "zone": "South West",
     "neighbourhood": "Nine Elms / Battersea",
-    "ticket_url": "https://worldheartbeat.ticketsolve.com/shows/1173680741/events",
+    "ticket_url": "https://worldheartbeat.ticketsolve.com/ticketbooth/shows/1173680741",
     "price_from": "",
     "price_full_text": "",
     "genre_tier1": "Soul & Groove",
     "genre_tier2": "",
     "format_tags": "Concert Hall",
-    "description": "A blazing celebration of Caribbean heritage and the Windrush generation's enduring legacy, uniting community and culture at World Heart Beat's vibrant Nine Elms home. Expect soulful rhythms, warm voices, and a powerful tribute to the flame that never went out.",
+    "description": "Windrush Day celebration led by Ayo Vincent.",
     "special_occasion": "Windrush Day celebration",
     "editors_pick": false,
     "editors_note": "",
@@ -1663,9 +1663,9 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
-    "description_verified": false,
-    "description_source": "auto",
-    "band_format": "Big Band"
+    "description_verified": true,
+    "description_source": "manual",
+    "band_format": "Ensemble"
   },
   {
     "gig_id": "eloise-carter-quartet-crazy-coqs-brasserie-zedel-2026-06-22",
@@ -1717,10 +1717,10 @@
     "ticket_url": "",
     "price_from": "",
     "price_full_text": "",
-    "genre_tier1": "Mainstream / Swing",
+    "genre_tier1": "Post-Bop",
     "genre_tier2": "",
     "format_tags": "Jazz Club",
-    "description": "MOJO called it 'tumbling with ideas, impulsive improvisations and swinging, left-field energy'. Playing from *Letters From Afar*, which sold out its Ronnie's launch earlier this year. BBC describe him as 'leading the charge of new jazz music in the UK'.",
+    "description": "Royal Academy sax graduate.",
     "description_verified": true,
     "description_source": "manual",
     "special_occasion": "",
@@ -1731,7 +1731,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
-    "band_format": "Quartet"
+    "band_format": "Sax Quartet"
   },
   {
     "gig_id": "evelyn-axton-with-strings-vortex-jazz-club-2026-06-23",
