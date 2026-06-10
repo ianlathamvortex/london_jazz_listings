@@ -511,7 +511,7 @@
     "genre_tier1": "Brazilian / MPB",
     "genre_tier2": "",
     "format_tags": "Concert Hall",
-    "description": "Gypsy swing doesn't get more transportive than this \u2014 Djangada's Hot Club-influenced sound conjures smoky Parisian caf\u00e9s with a rawness that studio recordings never quite capture. Sam Watts' virtuosic guitar work has drawn comparisons to Django Reinhardt himself, and hearing it live in the intimate surrounds of Ladbroke Hall is a genuine privilege.",
+    "description": "Hot Club-influenced sound, Sam Watts on guitar.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -825,7 +825,7 @@
     "price_full_text": "",
     "genre_tier1": "Contemporary Jazz",
     "format_tags": "Jazz Club",
-    "description": "Saxophonist and bandleader who has played alongside Cory Wong, Ed Sheeran, John Legend, Mariah Carey and Joss Stone.",
+    "description": "Saxophonist who has played alongside Cory Wong, Ed Sheeran, John Legend, Mariah Carey and Joss Stone.",
     "description_verified": true,
     "description_source": "manual",
     "special_occasion": "",
@@ -836,7 +836,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "Ronnie's hardcoded from website",
-    "band_format": "Solo Sax"
+    "band_format": "Sax Group"
   },
   {
     "gig_id": "phebe-edwards-ronnies-2026-06-13",
@@ -1562,7 +1562,7 @@
     "genre_tier1": "Post-Bop",
     "genre_tier2": "",
     "format_tags": "Concert Hall",
-    "description": "Few guitarists in the London scene blend West African rhythms with bebop vocabulary as naturally as Karl Onibuje, making every gig feel like a genuine musical conversation across continents. Ladbroke Hall's intimate setting means you'll hear every nuance of his intricate fretwork up close.",
+    "description": "West African rhythms meet bebop vocabulary.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -2956,7 +2956,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "Ronnie's hardcoded from website",
-    "band_format": "Solo Piano"
+    "band_format": "Vocal-Led Trio"
   },
   {
     "gig_id": "clark-tracey-s-tribute-to-stan-tracey-cadogan-hall-2026-06-30",
@@ -3227,7 +3227,7 @@
     "genre_tier1": "Vocal & Standards",
     "genre_tier2": "",
     "format_tags": "Concert Hall",
-    "description": "Rooted in the vibrant tradition of Betty Carter \u2014 the fearless vocalist who once mentored a young Wynton Marsalis \u2014 this is a night of daring, conversational singing where no two phrases land quite the same way twice. Catch Lucy-Anne Daniels at Ladbroke Hall before word properly gets out.",
+    "description": "Betty Carter-inspired programme \u2014 daring, conversational singing.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -3500,7 +3500,7 @@
     "genre_tier1": "Vocal & Standards",
     "genre_tier2": "",
     "format_tags": "Concert Hall",
-    "description": "Bangalore-born vocalist Varijashree Venugopal blends South Indian classical technique with fearless improvisation in a combination that stops rooms cold. Catch this rare London appearance in the intimate setting of Ladbroke Hall \u2014 dinner included, so arrive hungry in every sense.",
+    "description": "Bangalore-born vocalist Varijashree Venugopal \u2014 South Indian classical technique meets jazz improvisation.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -3852,7 +3852,7 @@
     "genre_tier1": "Post-Bop",
     "genre_tier2": "",
     "format_tags": "Concert Hall",
-    "description": "Colombian-born pianist Damian Nueva brings a rare fluency between Latin rhythms and post-bop sophistication that makes his music feel genuinely alive rather than stylistically boxed-in. Catch his quintet at the intimate Ladbroke Hall before this fast-rising voice becomes a much harder ticket to get.",
+    "description": "Colombian-born pianist \u2014 fluent between Latin rhythms and post-bop.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -4223,7 +4223,7 @@
     "ticket_url": "https://worldheartbeat.ticketsolve.com/shows/1173673519/events",
     "price_from": "",
     "price_full_text": "",
-    "genre_tier1": "Vocal & Standards",
+    "genre_tier1": "Sacred / Spiritual",
     "genre_tier2": "",
     "format_tags": "Concert Hall",
     "description": "Sufi poetry through blues-soaked grooves \u2014 Persian soul music.",
@@ -4260,7 +4260,7 @@
     "genre_tier1": "Contemporary Jazz",
     "genre_tier2": "",
     "format_tags": "Concert Hall",
-    "description": "Sharp, searching saxophone lines meet an iron-tight rhythm section as this rising London quartet road-tests material that's already turning heads on the circuit. Johnson's been picking up serious buzz since his stint with Zara McFarlane's band \u2014 catch him here before the venues get bigger.",
+    "description": "Rising London quartet \u2014 Johnson worked with Zara McFarlane.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -4273,7 +4273,7 @@
     "scraper_notes": "",
     "description_verified": false,
     "description_source": "auto",
-    "band_format": "Quartet"
+    "band_format": "Sax Quartet"
   },
   {
     "gig_id": "leon-foster-thomas-group-vortex-jazz-club-2026-08-08",
