@@ -226,6 +226,7 @@ def gig(
         "genre_tier1":      genre_tier1,
         "genre_tier2":      genre_tier2,
         "format_tags":      format_tags,
+        "band_format":      detect_band_format(artist_name, description),
         "description":      description,
         "special_occasion": special_occasion,
         "editors_pick":     False,
@@ -281,6 +282,89 @@ def detect_genre(text: str) -> str:
         if any(s in text_lower for s in signals):
             return genre
     return "Contemporary Jazz"
+
+
+def detect_band_format(artist_name: str, description: str) -> str:
+    """
+    Detect a human-readable band format tag.
+    Returns strings like "Piano Trio", "Alto Sax Quartet", "Electric Quintet",
+    "Solo Piano", "Vocal/Piano Duo", "Big Band", or "" if uncertain.
+    Electric prefix applied when electronics/synth/keys/electric bass detected.
+    """
+    name = artist_name.lower()
+    desc = (description or "").lower()
+    combined = name + " " + desc
+
+    # Electric modifier
+    is_electric = bool(re.search(
+        r'\b(electronic[s]?|synth(?:esizer)?s?|modular|laptop|electric bass|e-bass|electric guitar|keyboard[s]?)\b',
+        combined
+    ))
+    if re.search(r'\bkeys\b', desc) and not re.search(r'\bkeys to\b', desc):
+        is_electric = True
+    electric_prefix = "Electric " if is_electric else ""
+
+    # Ensemble size — from name first, then description
+    size_map = [
+        (r'\bsolo\b', "Solo"), (r'\bduo\b', "Duo"), (r'\btrio\b', "Trio"),
+        (r'\bquartet\b', "Quartet"), (r'\bquintet\b', "Quintet"),
+        (r'\bsextet\b', "Sextet"), (r'\bseptet\b', "Septet"),
+        (r'\boctet\b', "Octet"), (r'\btentet\b', "Tentet"),
+        (r'\bbig band\b', "Big Band"), (r'\borchestra\b', "Orchestra"),
+    ]
+    size_label = ""
+    for pat, label in size_map:
+        if re.search(pat, name) or re.search(pat, desc):
+            size_label = label
+            break
+
+    if size_label in ("Big Band", "Orchestra"):
+        return size_label
+
+    # Lead melodic instrument — description takes priority over name
+    melodic_patterns = [
+        (r'\bfrench horn\b',                              "French Horn"),
+        (r'\bcellist\b|\bcello\b',                      "Cello"),
+        (r'\bflautist\b|\bflute\b',                     "Flute"),
+        (r'\bvibraphon\w+\b',                            "Vibraphone"),
+        (r'\bharpist\b|\bharp\b',                       "Harp"),
+        (r'\btrombonist\b|\btrombone\b',                "Trombone"),
+        (r'\btrumpeter\b|\btrumpet\b',                  "Trumpet"),
+        (r'\bguitarist\b|\bguitar\b',                   "Guitar"),
+        (r'\btenor sax(?:ophon)?\b|\btenor man\b',      "Tenor Sax"),
+        (r'\balto sax(?:ophon)?\b',                       "Alto Sax"),
+        (r'\bsoprano sax(?:ophon)?\b',                    "Soprano Sax"),
+        (r'\bsaxophonist\b',                              "Sax"),
+        (r'\bpianist\b|\bpiano\b',                      "Piano"),
+        (r'\bvocalist\b|\bvocal\b|\bsinger\b|\bsings\b', "Vocal"),
+    ]
+    inst_label = ""
+    for pat, label in melodic_patterns:
+        if re.search(pat, desc):
+            inst_label = label
+            break
+    if not inst_label:
+        name_insts = [
+            (r'\bpiano\b', "Piano"), (r'\bguitar\b', "Guitar"),
+            (r'\bcello\b', "Cello"), (r'\bflute?\b', "Flute"),
+            (r'\btrumpet\b', "Trumpet"), (r'\btrombone\b', "Trombone"),
+            (r'\bharp\b', "Harp"), (r'\bvibraphone\b', "Vibraphone"),
+            (r'\bvocal\b|\bsinger\b|\bsings\b', "Vocal"),
+        ]
+        for pat, label in name_insts:
+            if re.search(pat, name):
+                inst_label = label
+                break
+
+    if size_label and inst_label:
+        if size_label == "Solo":
+            return electric_prefix + "Solo " + inst_label
+        return electric_prefix + inst_label + " " + size_label
+    elif inst_label and not size_label:
+        return electric_prefix + "Solo " + inst_label
+    elif size_label:
+        return electric_prefix + size_label
+    return ""
 
 
 # ── Global jam session filter ─────────────────────────────────
