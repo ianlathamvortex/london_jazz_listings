@@ -106,11 +106,15 @@ function renderJamCard(jam) {
   const isEditorsPick = jam.editors_pick === true || jam.editors_pick === 'TRUE';
   const price = jam.price_notes || (jam.free_or_paid === 'Free' ? 'Free entry' : jam.free_or_paid) || '';
   const sitIn = jam.open_to_sit_in ? 'Open sit-in' : '';
+  const websiteUrl = jam.website || '';
+  const nameHtml = websiteUrl
+    ? `<a href="${esc(websiteUrl)}" target="_blank" rel="noopener noreferrer" class="jam-name-link">${esc(jam.session_name)}</a>`
+    : esc(jam.session_name);
 
   return `
     <div class="jam-card ${isEditorsPick ? 'jam-editors-pick' : ''}">
       <div class="jam-day">${esc(jam.day_of_week || '')} · ${esc(jam.start_time || '')}${jam.end_time ? '–' + esc(jam.end_time) : ''}</div>
-      <div class="jam-name">${esc(jam.session_name)}</div>
+      <div class="jam-name">${nameHtml}</div>
       <div class="jam-venue">${esc(jam.venue_name)}${jam.neighbourhood ? ` · ${esc(jam.neighbourhood)}` : ''}</div>
       <div class="jam-details">
         ${jam.host_musician ? `<span>Host: ${esc(jam.host_musician)}</span>` : ''}
