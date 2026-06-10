@@ -1914,7 +1914,7 @@
     "genre_tier1": "Soul & Groove",
     "genre_tier2": "",
     "format_tags": "Standing / Gig",
-    "description": "Fresh off a run of dates supporting Shabaka Hutchings, saxophonist Jonah Phillips brings his shape-shifting quartet Whirlpool to one of London's most beloved intimate stages. Expect dense, exploratory textures that somehow never lose the groove \u2014 the kind of set that leaves you recalibrating your ears on the night bus home.",
+    "description": "Series promoting recent jazz school graduates.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -1925,8 +1925,8 @@
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
     "scraper_notes": "",
-    "description_verified": false,
-    "description_source": "auto",
+    "description_verified": true,
+    "description_source": "manual",
     "band_format": "Sax Quartet"
   },
   {
