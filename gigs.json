@@ -2022,17 +2022,20 @@
     "genre_tier1": "Contemporary Jazz",
     "genre_tier2": "",
     "format_tags": "Jazz Club",
-    "band_format": "Trio",
-    "description": "",
-    "description_verified": false,
-    "description_source": "ukjazznews",
+    "band_format": "Piano Trio",
+    "description": "Cardiff-trained pianist, Jazzwise four stars and Editor's Choice for debut album *Home* (Ubuntu Music). Bill Evans school \u2014 meditative originals, minimal and well-crafted.",
+    "description_verified": true,
+    "description_source": "manual",
     "special_occasion": "",
     "editors_pick": false,
     "hidden": false,
     "source_url": "https://ukjazznews.com",
     "date_scraped": "2026-06-10",
     "last_updated": "2026-06-10",
-    "scraper_notes": "Added from UKJazzNews newsletter Jun 2026"
+    "scraper_notes": "Added from UKJazzNews newsletter Jun 2026",
+    "reference_urls": [
+      "https://edgripper.wordpress.com/"
+    ]
   },
   {
     "gig_id": "fergus-mccreadie-solo-vortex-jazz-club-2026-06-24",
