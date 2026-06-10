@@ -285,7 +285,7 @@
     "genre_tier1": "Contemporary Jazz",
     "genre_tier2": "",
     "format_tags": "Jazz Club",
-    "description": "Album launch for Rob Cope's Joyride at Crazy Coqs.",
+    "description": "RAM graduate with Liam Noble (piano), Laurence Cottle (bass), and Paul Clarvis (drums).",
     "description_verified": true,
     "description_source": "manual",
     "special_occasion": "Album launch",
@@ -296,7 +296,10 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
-    "band_format": "Guitar Quintet"
+    "band_format": "Guitar Quintet",
+    "reference_urls": [
+      "https://www.robcopemusic.com/about/"
+    ]
   },
   {
     "gig_id": "sarah-moule-simon-wallace-songs-for-scarlet-women-george-iv-2026-06-11",
