@@ -43,6 +43,9 @@ BANNED — any of these means automatic rejection:
 - Invented nationality or instrument
 - ECM aesthetic unless you found a real ECM connection
 - Never start with the artist name
+- Never mention the artist name anywhere in the description — it is already in the title. This includes possessives ("X's quartet") and pronouns that only make sense if you've stated the name.
+- Never mention the venue in the description — it is shown separately on the listing
+- Never state "album launch" or "launching their new album" in the description — this is tagged separately and is not a reliable quality signal
 - Never say "jazz"
 - "rare chance to catch", "rare chance to hear", "rare opportunity" — banned unless the artist genuinely plays London once a year or less (e.g. international star, one-off reunion). A London-based musician who gigs regularly is never a "rare chance".
 
