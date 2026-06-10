@@ -1401,9 +1401,9 @@
     "genre_tier1": "Post-Bop",
     "genre_tier2": "",
     "format_tags": "Concert Hall",
-    "description": "British-Ghanaian alto saxophonist who cut his teeth in the Jazz Warriors alongside Gary Crosby, then played with Donald Byrd, Abdullah Ibrahim, Andrew Hill Big Band and Ornette Coleman. Hard-bop fluency with a deep grounding in Monk \u2014 he co-founded the Monk Liberation Front with Jonathan Gee.",
+    "description": "Fell from a roof at 16 and had a near-death vision of himself playing saxophone. Two BBC Jazz Awards later, here he is.",
     "special_occasion": "",
-    "editors_pick": true,
+    "editors_pick": false,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -1414,7 +1414,12 @@
     "scraper_notes": "World Heart Beat Jazz in the Gardens 2026",
     "description_verified": true,
     "description_source": "manual",
-    "band_format": "Sax Quartet"
+    "band_format": "Sax Quartet",
+    "reference_urls": [
+      "https://www.bbc.com/news/stories-58465559",
+      "https://en.wikipedia.org/wiki/Tony_Kofi",
+      "https://worldheartbeat.org/people/tony-kofi/"
+    ]
   },
   {
     "gig_id": "karen-sharp-and-paul-edis-mamasaint-2026-06-19",
