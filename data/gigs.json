@@ -153,7 +153,7 @@
     "genre_tier1": "Experimental / Free",
     "genre_tier2": "",
     "format_tags": "Standing / Gig",
-    "description": "Half a century in and Smyth's piano playing has never sounded more fearlessly alive \u2014 this milestone solo set promises the kind of raw, unscripted invention that keeps the Vortex's reputation intact. If you've ever wondered what it sounds like when a musician genuinely has nothing left to prove, here's your chance to find out.",
+    "description": "Irish pianist whose collaborators span the British free improv lineage from Peter Br\u00f6tzmann and Evan Parker to Derek Bailey. Celebrating his 50th with a piano trio plus strings \u2014 rhythm section are hardcore free improvisers \u2014 this is unscripted, high-stakes music from someone with serious dues paid.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -164,9 +164,9 @@
     "last_updated": "2026-06-09 12:24",
     "verified": "Yes",
     "scraper_notes": "",
-    "description_verified": false,
-    "description_source": "auto",
-    "band_format": "Solo Piano"
+    "description_verified": true,
+    "description_source": "manual",
+    "band_format": "Piano Trio"
   },
   {
     "gig_id": "billy-cobham-with-the-guy-barker-big-band-ronnie-scott-s-2026-06-11",
