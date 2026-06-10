@@ -123,6 +123,7 @@
       const t = today();
       allGigs = gigs
         .filter(g => g.date >= t)
+        .filter(g => !g.hidden)  // respect hidden flag
         .filter(g => (g.price_from || '').toLowerCase() !== 'free')  // free entry belongs on the free page
         .sort((a, b) => {
           if (a.date !== b.date) return a.date.localeCompare(b.date);
