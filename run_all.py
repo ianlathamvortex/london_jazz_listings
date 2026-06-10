@@ -41,6 +41,7 @@ SCRAPERS = [
     ("King's Place",         "scraper_kingsplace"),
     ("Halibuts",              "scraper_halibuts"),
     ("Grow Hackney",          "scraper_grow"),
+    ("EFG London Jazz Festival", "scraper_efg"),
 ]
 
 results = {}
