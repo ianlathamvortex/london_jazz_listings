@@ -693,23 +693,128 @@ ul { list-style: none; }
 }
 
 /* ── Responsive ──────────────────────────────────────────────── */
+/* ── Mobile (≤640px) ─────────────────────────────────────── */
 @media (max-width: 640px) {
+
+  /* Container — tighter padding on small screens */
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* Header — slightly more compact */
+  .site-header {
+    padding: 1rem 0 0;
+  }
+  .site-title a {
+    font-size: 1.3rem;
+  }
+  .site-tagline {
+    font-size: 0.7rem;
+  }
+  .header-date {
+    font-size: 0.65rem;
+  }
+
+  /* Nav — scrollable, touch-friendly */
+  .site-nav a {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  /* Filters — stack and wrap cleanly */
+  .filters {
+    gap: 0.4rem;
+    padding: 1rem 0;
+  }
+  .filter-btn, .date-btn {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.65rem;
+  }
+  .filter-select {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+  }
+  .filter-label {
+    font-size: 0.7rem;
+    width: 100%;
+  }
+
+  /* Result count */
+  .result-count {
+    font-size: 0.75rem;
+    padding: 0.6rem 0;
+  }
+
+  /* Date group heading */
+  .date-group-day {
+    font-size: 1rem;
+  }
+  .date-group-meta {
+    font-size: 0.72rem;
+  }
+
+  /* Gig card — stack vertically */
   .gig-card {
     grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1rem 0;
   }
+  .gig-artist {
+    font-size: 1rem;
+  }
+  .gig-venue {
+    font-size: 0.78rem;
+  }
+  .gig-description {
+    font-size: 0.82rem;
+  }
+  .tag {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.45rem;
+  }
+
+  /* Aside — row layout with book button on the right */
   .gig-aside {
     grid-column: 1;
+    display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 0.5rem 1rem;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
     text-align: left;
   }
+  .gig-time {
+    font-size: 0.78rem;
+  }
+  .gig-price {
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .gig-ticket-link {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.85rem;
+    min-height: 36px;           /* comfortable tap target */
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    margin-left: auto;
+  }
+
+  /* Editors pick star label */
+  .editors-pick::before {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+  }
+
+  /* Free entry items */
   .free-item {
     grid-template-columns: 1fr;
     gap: 0.4rem;
   }
+
+  /* Home page grid */
   .home-sections {
     grid-template-columns: 1fr 1fr;
   }
@@ -719,17 +824,30 @@ ul { list-style: none; }
   .home-section-link:nth-child(even) {
     border-right: none;
   }
-  .filters {
-    gap: 0.5rem;
+
+  /* Page hero */
+  .page-hero h1 {
+    font-size: 1.6rem;
+  }
+  .page-hero .subtitle {
+    font-size: 0.85rem;
   }
 }
 
-@media (max-width: 400px) {
+/* ── Very small screens (≤380px, older iPhones) ──────────── */
+@media (max-width: 380px) {
   .home-sections {
     grid-template-columns: 1fr;
   }
   .home-section-link {
     border-right: none;
+  }
+  .gig-artist {
+    font-size: 0.95rem;
+  }
+  .site-nav a {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.7rem;
   }
 }
 
