@@ -1440,8 +1440,8 @@
     "price_full_text": "",
     "genre_tier1": "Post-Bop",
     "genre_tier2": "",
-    "format_tags": "Jazz Club",
-    "description": "Lunchtime jazz at MaMaSaint, 210 Trinity Road SW17. Karen Sharp (saxophone) and Paul Edis (piano). 12:30pm.",
+    "format_tags": "Lunchtime",
+    "description": "Lunchtime jazz duo.",
     "description_verified": true,
     "description_source": "manual",
     "special_occasion": "",
@@ -1452,7 +1452,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
-    "band_format": "Solo Piano"
+    "band_format": "Sax Duo"
   },
   {
     "gig_id": "groove-warriors-bull-s-head-barnes-2026-06-19",
