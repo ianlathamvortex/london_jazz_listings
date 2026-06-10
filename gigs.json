@@ -1112,13 +1112,13 @@
     "zone": "South West",
     "neighbourhood": "Chelsea / Lots Road",
     "nearest_tube": "Fulham Broadway",
-    "ticket_url": "https://www.606club.co.uk",
-    "price_from": "",
+    "ticket_url": "https://www.606club.co.uk/events/view/julian-nicholas-emil-viklicky-quintet-ft-imogen-ryall/",
+    "price_from": "\u00a318",
     "price_full_text": "",
-    "genre_tier1": "Vocal & Standards",
+    "genre_tier1": "Mainstream / Swing",
     "genre_tier2": "",
     "format_tags": "Jazz Club",
-    "description": "Czech piano master Emil Viklick\u00fd \u2014 whose quartet toured with Wynton Marsalis \u2014 joins British soprano saxophonist Julian Nicholas and vocalist Imogen Ryall for a rare London meeting.",
+    "description": "Loose Tubes prodigy Julian Nicholas and Czech pianist Emil Viklick\u00fd celebrating 35 years of collaboration, with vocalist Imogen Ryall (APPJAG 2024 Best Vocalist nominee) and rhythm section Winston Clifford and Dave Whitford.",
     "description_verified": true,
     "description_source": "manual",
     "special_occasion": "",
@@ -1129,7 +1129,11 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
-    "band_format": "Sax Quartet"
+    "band_format": "Vocal-Led Quintet",
+    "reference_urls": [
+      "https://www.606club.co.uk/events/view/julian-nicholas-emil-viklicky-quintet-ft-imogen-ryall/",
+      "https://en.wikipedia.org/wiki/Emil_Viklick%C3%BD"
+    ]
   },
   {
     "gig_id": "mulatu-astatke-royal-festival-hall-2026-06-17",
