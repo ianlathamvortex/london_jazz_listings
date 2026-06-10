@@ -60,14 +60,15 @@ VENUES = {
         "format": "Standing / Gig", "genre": "Experimental / Free",
         "tier":   "1",
     },
-    "grow_hackney": {
-        "name":   "Grow",
-        "url":    "https://www.growhackney.co.uk/jazz",
-        "zone":   "East", "hood": "Hackney Wick",
-        "format": "Standing / Gig", "genre": "Contemporary Jazz",
-        "tier":   "1",
-        "needs_playwright": True,  # Squarespace JS-rendered — plain fetch returns empty page
-    },
+    # Moved to scraper_grow.py — Playwright required
+    # "grow_hackney": {
+    #         "name":   "Grow",
+    #         "url":    "https://www.growhackney.co.uk/jazz",
+    #         "zone":   "East", "hood": "Hackney Wick",
+    #         "format": "Standing / Gig", "genre": "Contemporary Jazz",
+    #         "tier":   "1",
+    #         "needs_playwright": True,  # Squarespace JS-rendered — plain fetch returns empty page
+    #     },
     "grow_canalside": {
         "name":   "Grow",
         "url":    "https://www.growhackney.co.uk/canalside-sessions",
