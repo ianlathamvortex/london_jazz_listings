@@ -1470,12 +1470,12 @@
     "description_source": "manual",
     "special_occasion": "",
     "editors_pick": false,
-    "hidden": false,
+    "hidden": true,
     "source_url": "https://ukjazznews.com",
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
+    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026 | hidden: amateur band, not suitable for listings",
     "band_format": "Solo Vocal"
   },
   {
