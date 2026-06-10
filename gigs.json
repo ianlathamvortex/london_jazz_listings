@@ -2149,14 +2149,14 @@
     "description_verified": true,
     "description_source": "manual",
     "special_occasion": "",
-    "editors_pick": true,
+    "editors_pick": false,
     "hidden": false,
     "source_url": "https://cadoganhall.com/whats-on/genres/jazz-blues/",
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "Cadogan Hall jazz programme",
-    "band_format": "Solo Sax"
+    "band_format": "Sax Group"
   },
   {
     "gig_id": "keefe-roberts-brice-holub-vortex-jazz-club-2026-06-26",
