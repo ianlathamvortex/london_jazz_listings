@@ -130,6 +130,12 @@ def merge_gigs(existing: list, new_gigs: list) -> tuple:
                 break
 
         if not is_dup:
+            # Clean up ukjazznews ticket URLs — substitute venue fallback if available
+            ticket = new_gig.get("ticket_url", "")
+            if ticket and UKJAZZNEWS_DOMAIN in ticket:
+                venue = new_gig.get("venue_name", "")
+                fallback = VENUE_TICKET_FALLBACKS.get(venue, "")
+                new_gig["ticket_url"] = fallback  # blank is better than a source URL
             existing.append(new_gig)
             existing_ids.add(gig_id)
             added += 1
