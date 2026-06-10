@@ -245,14 +245,18 @@ def gig(
 
 GENRE_SIGNALS = {
     # Priority order matters — first match wins
-    "Big Band":             ["big band", "orchestra", "count basie", "ellington", "benny goodman", "guy barker big band"],
+    "Jazz-Rock":            ["jazz-rock", "jazz rock", "rock fusion", "mahavishnu", "weather report", "miles electric", "electric miles", "cobham", "acoustic ladyland"],
+    "Big Band":             ["big band", "count basie", "ellington", "benny goodman", "guy barker big band"],
     "Vocal & Standards":    ["vocal", "singer", "vocalist", "cabaret", "crooner", "sinatra", "billie holiday", "ella fitzgerald", "nat king cole", "chet baker"],
     "Post-Bop":             ["post-bop", "post bop", "coltrane", "miles davis", "bill evans", "wayne shorter", "hard bop", "bebop", "blue note", "bireli lagrene"],
-    "Latin":                ["latin", "salsa", "cuban", "afro-cuban", "mambo", "cha cha", "rumba", "timba"],
+    "Modal Jazz":           ["modal jazz", "modal", "so what", "impressions", "a love supreme", "mccoy tyner", "pharoah sanders", "alice coltrane"],
+    "Latin":                ["latin", "salsa", "cuban", "mambo", "cha cha", "rumba", "timba"],
+    "Afro-Latin":           ["afro-latin", "afro latin", "afro-cuban", "afro cuban", "afrobeat latin", "candomble", "yoruba"],
     "Brazilian / MPB":      ["brazil", "bossa nova", "samba", "mpb", "baiao", "caetano", "jobim", "gilberto", "brazilian"],
     "Soul & Groove":        ["soul", "groove", "r&b", "funk", "motown", "incognito", "rhythm and blues"],
+    "Chamber Jazz":         ["string quartet", "string trio", "chamber", "cello", "violin", "viola", "classical crossover"],
     "Experimental / Free":  ["free improv", "avant-garde", "experimental", "free jazz", "improvised music", "electroacoustic"],
-    "Fusion":               ["fusion", "mahavishnu", "weather report", "miles electric", "electric miles"],
+    "Fusion":               ["fusion"],
     "Trad / Dixieland":     ["dixieland", "trad jazz", "new orleans", "traditional jazz", "ragtime"],
     "Mainstream / Swing":   ["swing", "mainstream", "standards"],
     "African Jazz":         ["afrobeat", "west african", "south african", "ethiopian", "ethio", "highlife"],
