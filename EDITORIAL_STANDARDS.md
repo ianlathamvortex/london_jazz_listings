@@ -94,6 +94,10 @@ Any of these in a generated description means rewrite or skip:
 - `"rare chance to catch/hear"` — only legitimate for artists who genuinely play
   London once a year or less (international star on a one-off visit). A London-based
   musician who gigs monthly is never a "rare chance". Just wait til next month.
+- `"virtuoso"` — reserved for musicians who genuinely redefine what is possible
+  on their instrument (Art Tatum, Jacob Collier). Everyone has to be technically
+  accomplished to be in the game now. A wedding and corporate events musician
+  listing themselves as a virtuoso on their own website is not a virtuoso.
 - `"boundary-pushing"` — overused, meaningless
 - `"cinematic textures"` — enricher cliché
 - Never start with the artist name
