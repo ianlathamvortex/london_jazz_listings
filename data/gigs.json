@@ -137,7 +137,7 @@
   {
     "gig_id": "paul-g-smyth-at-50-vortex-jazz-club-2026-06-11",
     "date": "2026-06-11",
-    "start_time": "7.45 ",
+    "start_time": "7.45pm",
     "doors_time": "",
     "artist_name": "Paul G. Smyth at 50",
     "event_title": "",
@@ -147,15 +147,15 @@
     "stage": "",
     "zone": "North",
     "neighbourhood": "Dalston",
-    "ticket_url": "https://www.vortexjazz.co.uk/event/paul-g-smyth-at-50/",
+    "ticket_url": "https://www.universe.com/events/paul-g-smyth-at-50-tickets-93GQFC",
     "price_from": "\u00a315",
     "price_full_text": "",
     "genre_tier1": "Experimental / Free",
     "genre_tier2": "",
     "format_tags": "Standing / Gig",
-    "description": "Irish pianist whose collaborators span the British free improv lineage from Peter Br\u00f6tzmann and Evan Parker to Derek Bailey. Celebrating his 50th with a piano trio plus strings \u2014 rhythm section are hardcore free improvisers \u2014 this is unscripted, high-stakes music from someone with serious dues paid.",
+    "description": "Three sets from one of Ireland's most singular improvising pianists, across different configurations: a new trio with violist Benedict Taylor and guitarist Daniel Thompson; a duo with harpist \u00c1ine O'Dwyer; and his long-standing trio with bassist John Edwards and drummer Mark Sanders \u2014 both hardcore European free improvisers with credits alongside Br\u00f6tzmann, Evan Parker and Derek Bailey. The Free Jazz Collective called Smyth 'one of the great contemporary pianists'.",
     "special_occasion": "",
-    "editors_pick": false,
+    "editors_pick": true,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -166,7 +166,7 @@
     "scraper_notes": "",
     "description_verified": true,
     "description_source": "manual",
-    "band_format": "Piano Trio"
+    "band_format": "Sextet"
   },
   {
     "gig_id": "billy-cobham-with-the-guy-barker-big-band-ronnie-scott-s-2026-06-11",
