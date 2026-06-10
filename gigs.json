@@ -608,10 +608,10 @@
     "ticket_url": "https://www.pizzaexpresslive.com",
     "price_from": "",
     "price_full_text": "",
-    "genre_tier1": "Contemporary Jazz",
+    "genre_tier1": "Post-Bop",
     "genre_tier2": "",
     "format_tags": "Jazz Club",
-    "description": "Solo pianist at Pizza Express's Piano Lounge beneath their St Martin's Lane restaurant.",
+    "description": "One of London's most deeply schooled bebop pianists \u2014 fluent in the tradition from Monk and Powell through to Bill Evans and Herbie Hancock. Regular at the Soho venue that has always been his natural home.",
     "description_verified": true,
     "description_source": "manual",
     "special_occasion": "",
@@ -622,7 +622,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
-    "band_format": "Solo Piano"
+    "band_format": "Piano Trio"
   },
   {
     "gig_id": "shabaka-hutchings-queen-elizabeth-hall-2026-06-12",
