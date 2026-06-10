@@ -329,7 +329,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
-    "band_format": "Solo Piano"
+    "band_format": "Vocal/Piano Duo"
   },
   {
     "gig_id": "kate-williams-trio-cadogan-hall-2026-06-11",
@@ -425,7 +425,7 @@
     "scraper_notes": "",
     "description_verified": false,
     "description_source": "auto",
-    "band_format": "Solo Guitar"
+    "band_format": "Guitar Trio"
   },
   {
     "gig_id": "natalie-duncan-ronnie-scott-s-2026-06-12",
@@ -459,7 +459,7 @@
     "scraper_notes": "",
     "description_verified": false,
     "description_source": "auto",
-    "band_format": "Solo Piano"
+    "band_format": "Piano/Vocal Solo"
   },
   {
     "gig_id": "moyses-dos-santos-ronnie-scott-s-2026-06-12",
@@ -643,7 +643,7 @@
     "special_occasion": "Meltdown Festival",
     "editors_pick": true,
     "hidden": false,
-    "band_format": "Solo Flute"
+    "band_format": "Flute Group"
   },
   {
     "gig_id": "zoe-francis-jim-mullen-ross-stanley-vortex-jazz-club-2026-06-13",
@@ -840,7 +840,8 @@
     "description_source": "manual",
     "special_occasion": "Meltdown Festival",
     "editors_pick": true,
-    "hidden": false
+    "hidden": false,
+    "band_format": "Tenor Sax Group"
   },
   {
     "gig_id": "ben-sidran-quartet-ronnies-2026-06-15",
@@ -868,7 +869,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "Ronnie's hardcoded from website",
-    "band_format": "Piano Quartet"
+    "band_format": "Piano/Vocal Quartet"
   },
   {
     "gig_id": "dave-storey-trio-bull-gate-2026-06-15",
@@ -1062,7 +1063,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "Ronnie's hardcoded from website",
-    "band_format": "Solo Sax"
+    "band_format": "Alto Sax Quartet"
   },
   {
     "gig_id": "tony-woods-project-drayton-court-hotel-2026-06-17",
@@ -1629,7 +1630,8 @@
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026"
+    "scraper_notes": "UK Jazz News newsletter 9 Jun 2026",
+    "band_format": "Vocal Quartet"
   },
   {
     "gig_id": "windrush-day-2026-carrying-the-flame-world-heart-beat-2026-06-22",
@@ -2973,7 +2975,7 @@
     "scraper_notes": "",
     "description_verified": true,
     "description_source": "manual",
-    "band_format": "Solo Trumpet"
+    "band_format": "Trumpet/Sax Quintet"
   },
   {
     "gig_id": "zoe-rahman-trio-album-launch-2-shows-vortex-jazz-club-2026-07-10",
@@ -3069,7 +3071,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "Cadogan Hall jazz programme",
-    "band_format": "Orchestra"
+    "band_format": "Big Band"
   },
   {
     "gig_id": "de-beauvoir-jazz-festival-lucy-anne-daniels-liselotte-stblom-vortex-jazz-club-20",
@@ -3261,7 +3263,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "Cadogan Hall jazz programme",
-    "band_format": "Solo Harp"
+    "band_format": "Harp Trio"
   },
   {
     "gig_id": "phillip-golub-alex-hitchcock-andrew-lisle-vortex-jazz-club-2026-07-17",
@@ -3498,7 +3500,8 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": true,
-    "description_source": "manual"
+    "description_source": "manual",
+    "band_format": "Guitar Quartet"
   },
   {
     "gig_id": "sam-eastmond-the-composers-workshop-big-band-vortex-jazz-club-2026-07-21",
@@ -3634,7 +3637,7 @@
     "scraper_notes": "",
     "description_verified": false,
     "description_source": "auto",
-    "band_format": "Solo Trumpet"
+    "band_format": "Trumpet Quintet"
   },
   {
     "gig_id": "myele-manzana-vortex-jazz-club-2026-07-25",
@@ -4039,7 +4042,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "Cadogan Hall jazz programme",
-    "band_format": "Orchestra"
+    "band_format": "Big Band"
   },
   {
     "gig_id": "jason-moran-wigmore-hall-2026-09-30",
@@ -4256,7 +4259,7 @@
     "last_updated": "2026-06-09",
     "verified": "Yes",
     "scraper_notes": "Cadogan Hall jazz programme",
-    "band_format": "Trio"
+    "band_format": "Sax Trio"
   },
   {
     "gig_id": "amira-kheir-world-heart-beat-2026-11-19",
