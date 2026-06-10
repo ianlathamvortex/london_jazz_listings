@@ -63,6 +63,15 @@ except Exception as e:
     print(f"  ERROR: {e}")
     results["Enricher"] = f"✗ FAILED: {e}"
 
+print(f"\n── Link Validator ──")
+try:
+    import link_validator
+    lv_result = link_validator.run()
+    results["Link Validator"] = f"✓ OK ({lv_result.get('dead', 0)} dead links)"
+except Exception as e:
+    print(f"  ERROR: {e}")
+    results["Link Validator"] = f"✗ FAILED: {e}"
+
 print(f"\n{'='*60}")
 print("SUMMARY")
 print(f"{'='*60}")
