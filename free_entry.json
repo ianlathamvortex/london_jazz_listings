@@ -596,5 +596,24 @@
     "editors_pick": true,
     "hidden": false,
     "last_verified": "2026-06-09"
+  },
+  {
+    "event_id": "grow-canalside-emile-hinton-2026-06-21",
+    "event_name": "Canalside Sessions: Emile Hinton Trio Cad\u00eancia",
+    "venue_name": "Grow",
+    "address": "98c Wallis Road",
+    "postcode": "E9 5LN",
+    "zone": "East",
+    "neighbourhood": "Hackney Wick",
+    "date": "2026-06-21",
+    "start_time": "1pm",
+    "end_time": "4pm",
+    "frequency": "One-off (series runs weekly)",
+    "price_from": "Free",
+    "description": "Free canalside jazz. Weekly Sunday series curated by conguero Williams Cumberbache \u2014 Afro-Latin grooves beside the canal at Hackney Wick.",
+    "booking_url": "https://www.growhackney.co.uk/events-calendar/canalside-sessions-21-06-202621",
+    "source_url": "https://www.growhackney.co.uk/canalside-sessions",
+    "hidden": false,
+    "last_verified": "2026-06-10"
   }
 ]
