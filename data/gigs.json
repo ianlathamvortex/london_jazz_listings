@@ -1506,7 +1506,7 @@
     "genre_tier1": "Soul & Groove",
     "genre_tier2": "",
     "format_tags": "Standing / Gig",
-    "description": "Dreamy, shape-shifting music that sits somewhere between late-night soul and cosmic improvisation \u2014 this is the kind of set that makes the Vortex feel like the only room in London. Grey's debut album turned serious heads in 2024, and catching him in a room this intimate won't be an option forever.",
+    "description": "Quartet led by Royal Birmingham Conservatoire graduate.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -1517,9 +1517,12 @@
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
     "scraper_notes": "",
-    "description_verified": false,
-    "description_source": "auto",
-    "band_format": "Electric Quartet"
+    "description_verified": true,
+    "description_source": "manual",
+    "band_format": "Electric Quartet",
+    "reference_urls": [
+      "https://davidaustingrey.com/"
+    ]
   },
   {
     "gig_id": "esther-bennett-s-malaga-connection-jazz-caf-posk-2026-06-20",
