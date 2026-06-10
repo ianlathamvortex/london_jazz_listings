@@ -99,7 +99,51 @@ const INTERNATIONAL_SIGNALS = [
   "world tour", "mercury prize",
 ];
 
-function gigScore(g) {
+function // ── Venue capacity table ─────────────────────────────────────────────
+// Capacity tiers: 500+ → +3, 200+ → +2, 100+ → +1, <100 → 0
+// Sub-rooms (Culford Room, Elgar Room etc) score 0 regardless of parent
+const VENUE_CAPACITY = {
+  // Major concert halls 500+
+  "Barbican":             1900,
+  "Barbican Centre":      1900,
+  "Royal Albert Hall":    5272,
+  "Royal Festival Hall":  2900,
+  "Queen Elizabeth Hall":  900,
+  "Cadogan Hall":          900,
+  "Wigmore Hall":          540,
+  "Union Chapel":          700,
+  "EartH Theatre":         550,
+  // Mid-size 200–499
+  "King's Place":          420,
+  "Ronnie Scott's":        240,
+  "Lauderdale House":      200,
+  "Jazz Cafe":             440,
+  "KOKO":                  1500,
+  // Established jazz venues 100–199
+  "606 Jazz Club":         180,
+  "World Heart Beat":      120,
+  "Toulouse Lautrec":      150,
+  "East Side Jazz Club":   120,
+  "Bull's Head Barnes":    150,
+  "Highams Park Jazz":     120,
+  "Jazzlive at The Crypt": 100,
+  // Small venues <100 — no capacity boost (already scored by venue_tier)
+  "Vortex Jazz Club":       90,
+  "Ladbroke Hall":          80,
+  "Karamel":                80,
+  "PizzaExpress Jazz Club": 120,
+  "PizzaExpress The Pheasantry": 100,
+  "Jazz Café POSK":         100,
+  "Café OTO":                80,
+  "Morocco Bound":           60,
+  "George IV":               80,
+  "Drayton Court Hotel":     80,
+  "Bull & Gate":             80,
+  "The Cockpit Theatre":    170,
+  "MaMaSaint":               60,
+};
+
+gigScore(g) {
   let score = 0;
 
   if (g.editors_pick === true || g.editors_pick === "TRUE") score += 20;
@@ -128,6 +172,15 @@ function gigScore(g) {
 
   if (g.venue_name === "Ronnie Scott's" && g.stage === 'Main Stage') score += 4;
   if (g.venue_name === 'Vortex Jazz Club') score += 2;
+
+  // Venue capacity boost — larger venues signal more significant booking
+  // Sub-rooms score 0 regardless of parent capacity
+  if (!subRooms.has(g.stage || '')) {
+    const cap = VENUE_CAPACITY[g.venue_name] || 0;
+    if      (cap >= 500) score += 3;
+    else if (cap >= 200) score += 2;
+    else if (cap >= 100) score += 1;
+  }
 
   return score;
 }
