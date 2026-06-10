@@ -68,6 +68,7 @@ function renderGigCard(gig) {
 
   if (gig.special_occasion) tags.push(`<span class="tag tag-special">${esc(gig.special_occasion)}</span>`);
   if (gig.genre_tier1) tags.push(`<span class="tag">${esc(gig.genre_tier1)}</span>`);
+  if (gig.band_format) tags.push(`<span class="tag tag-format">${esc(gig.band_format)}</span>`);
   if (gig.format_tags) tags.push(`<span class="tag">${esc(gig.format_tags)}</span>`);
   if (gig.price_from === 'Free' || gig.price_from?.toLowerCase() === 'free') tags.push(`<span class="tag tag-free">Free</span>`);
 
