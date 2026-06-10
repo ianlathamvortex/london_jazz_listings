@@ -2612,12 +2612,12 @@
     "description_source": "manual",
     "special_occasion": "Tribute concert",
     "editors_pick": false,
-    "hidden": false,
+    "hidden": true,
     "source_url": "https://cadoganhall.com/whats-on/genres/jazz-blues/",
     "date_scraped": "2026-06-09",
     "last_updated": "2026-06-09",
     "verified": "Yes",
-    "scraper_notes": "Cadogan Hall jazz programme",
+    "scraper_notes": "Cadogan Hall jazz programme | hidden: editorial decision",
     "band_format": "Piano Trio"
   },
   {
