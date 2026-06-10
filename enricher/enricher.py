@@ -38,6 +38,7 @@ BANNED — any of these means automatic rejection:
 - "rare authority" — reserved only for confirmed masters (e.g. Kamasi Washington, Iain Ballamy). Do not use for anyone else.
 - "rare talent", "rare gift", "rare ability" — same rule
 - "captivating presence", "compelling performer", "extraordinary talent" — banned entirely, generic
+- "virtuoso" — reserved for musicians who genuinely redefine what is possible (Art Tatum, Jacob Collier level). Never use for a working jazz musician regardless of their own bio or press material.
 - Any sentence that could apply to ANY musician
 - Invented nationality or instrument
 - ECM aesthetic unless you found a real ECM connection
