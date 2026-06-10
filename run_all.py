@@ -39,6 +39,7 @@ SCRAPERS = [
     ("Cadogan Hall",       "scraper_cadogan"),
     ("Café OTO",             "scraper_cafeoto"),
     ("King's Place",         "scraper_kingsplace"),
+    ("Halibuts",              "scraper_halibuts"),
 ]
 
 results = {}
