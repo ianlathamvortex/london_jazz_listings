@@ -106,7 +106,10 @@ function gigScore(g) {
   if (g.special_occasion) score += 8;
   // venue_tier "1" = premier (Vortex, Ronnie's, Barbican etc) = boost
   // venue_tier "2" = good but not top tier (Karamel etc) = no boost
-  if (PREMIUM_VENUES.has(g.venue_name)) score += 6;
+  // PREMIUM_VENUES boost only for main hall — not sub-rooms (Culford Room, Elgar Room etc)
+  const subRooms = new Set(['Culford Room', 'Elgar Room', 'Upstairs at Ronnie\'s',
+                             'Linbury Studio', 'Purcell Room']);
+  if (PREMIUM_VENUES.has(g.venue_name) && !subRooms.has(g.stage || '')) score += 6;
   if (g.venue_tier === "2") score -= 2;  // demote second-tier venues
   if (g.venue_tier === "3") score -= 5;  // demote third-tier venues (e.g. Karamel)
 
