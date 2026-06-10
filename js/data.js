@@ -108,6 +108,7 @@ function gigScore(g) {
   // venue_tier "2" = good but not top tier (Karamel etc) = no boost
   if (PREMIUM_VENUES.has(g.venue_name)) score += 6;
   if (g.venue_tier === "2") score -= 2;  // demote second-tier venues
+  if (g.venue_tier === "3") score -= 5;  // demote third-tier venues (e.g. Karamel)
 
   const price = parseFloat((g.price_from || '').replace(/[^0-9.]/g, ''));
   if (!isNaN(price)) {
