@@ -351,6 +351,14 @@ ul { list-style: none; }
   border-color: var(--text);
   color: var(--text);
 }
+.tag-format {
+  border-color: var(--border);
+  color: var(--text-mid);
+  font-style: italic;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-size: 0.65rem;
+}
 
 .gig-time {
   font-size: 0.85rem;
