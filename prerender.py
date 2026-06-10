@@ -196,17 +196,22 @@ def prerender_gigs_html():
     with open(ROOT / "gigs.html") as f:
         html = f.read()
 
-    # Replace content inside <div class="listings" id="listings">...</div>
-    new_html = re.sub(
-        r'(<div class="listings" id="listings">).*?(</div>\s*\n\s*</div>\s*\n\s*</main>)',
-        lambda m: m.group(1) + "\n" + listings_html + "\n            " + m.group(2),
-        html,
-        flags=re.DOTALL,
-    )
+    # Use explicit open/close markers — more robust than regex on nested divs
+    OPEN  = '<div class="listings" id="listings">'
+    CLOSE = '\n    </div>\n  </main>'   # closing #listings div + </main>
 
-    if new_html == html:
-        print("  WARNING: listings replacement pattern not matched")
+    idx_open = html.find(OPEN)
+    idx_close = html.rfind(CLOSE)    # rfind = last occurrence, avoids nested div ambiguity
+
+    if idx_open == -1 or idx_close == -1:
+        print("  WARNING: listings markers not found in gigs.html")
         return False
+
+    new_html = (
+        html[:idx_open + len(OPEN)] +
+        "\n" + listings_html +
+        html[idx_close:]
+    )
 
     with open(ROOT / "gigs.html", "w") as f:
         f.write(new_html)
