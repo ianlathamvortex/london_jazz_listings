@@ -1948,7 +1948,7 @@
     "genre_tier1": "Contemporary Jazz",
     "genre_tier2": "",
     "format_tags": "Standing / Gig",
-    "description": "Rare chance to hear the French horn\u2014an instrument almost never seen in small-group settings\u2014front and centre in a band context. Rattigan is the UK's leading voice on the horn and brings a warm, distinctive sound that genuinely changes what a quintet can feel like.",
+    "description": "The French horn almost never fronts a small jazz group \u2014 Rattigan makes a compelling case that it should. Quintet format with rhythm section.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -1959,8 +1959,8 @@
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
     "scraper_notes": "",
-    "description_verified": false,
-    "description_source": "auto",
+    "description_verified": true,
+    "description_source": "manual",
     "band_format": "French Horn Quintet"
   },
   {
@@ -3522,7 +3522,7 @@
     "genre_tier1": "Big Band",
     "genre_tier2": "",
     "format_tags": "Standing / Gig",
-    "description": "Rare chance to hear a full big band stretch out under the direction of one of London's most thoughtful arrangers, Sam Eastmond, whose orchestral writing blurs the line between composition and improvisation. The Vortex's intimate room means you'll feel every brass punch and quiet texture up close \u2014 this is ensemble music at its most alive.",
+    "description": "Full big band under Sam Eastmond's direction \u2014 a format the Vortex rarely hosts.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -3533,8 +3533,8 @@
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
     "scraper_notes": "",
-    "description_verified": false,
-    "description_source": "auto",
+    "description_verified": true,
+    "description_source": "manual",
     "band_format": "Big Band"
   },
   {
@@ -3624,7 +3624,7 @@
     "genre_tier1": "Contemporary Jazz",
     "genre_tier2": "",
     "format_tags": "Concert Hall",
-    "description": "Rare chance to catch five distinct voices sharing one stage, with trumpeter Quentin Collins \u2014 a longtime Courtney Pine collaborator \u2014 bringing his warm, unhurried cool to the mix. The format practically guarantees surprises, as no single bandleader means nobody's playing it safe.",
+    "description": "Quentin Collins (trumpet) leads a one-off five-way collective \u2014 four other London voices, no fixed leader.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -3635,8 +3635,8 @@
     "last_updated": "2026-06-09 12:55",
     "verified": "Yes",
     "scraper_notes": "",
-    "description_verified": false,
-    "description_source": "auto",
+    "description_verified": true,
+    "description_source": "manual",
     "band_format": "Quintet"
   },
   {
