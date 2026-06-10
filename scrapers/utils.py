@@ -237,24 +237,39 @@ def gig(
 # ── Genre detection ───────────────────────────────────────────
 
 GENRE_SIGNALS = {
-    "Big Band":             ["big band", "orchestra", "swing", "count basie", "ellington", "benny goodman", "guy barker big band"],
-    "Vocal & Standards":    ["vocal", "singer", "vocalist", "standards", "songbook", "cabaret", "crooner", "sinatra", "billie holiday", "ella fitzgerald"],
+    # Priority order matters — first match wins
+    "Big Band":             ["big band", "orchestra", "count basie", "ellington", "benny goodman", "guy barker big band"],
+    "Vocal & Standards":    ["vocal", "singer", "vocalist", "cabaret", "crooner", "sinatra", "billie holiday", "ella fitzgerald", "nat king cole", "chet baker"],
+    "Post-Bop":             ["post-bop", "post bop", "coltrane", "miles davis", "bill evans", "wayne shorter", "hard bop", "bebop", "blue note", "bireli lagrene"],
     "Latin":                ["latin", "salsa", "cuban", "afro-cuban", "mambo", "cha cha", "rumba", "timba"],
     "Brazilian / MPB":      ["brazil", "bossa nova", "samba", "mpb", "baiao", "caetano", "jobim", "gilberto", "brazilian"],
-    "Soul & Groove":        ["soul", "groove", "r&b", "funk", "gospel", "motown", "incognito", "rhythm and blues"],
+    "Soul & Groove":        ["soul", "groove", "r&b", "funk", "motown", "incognito", "rhythm and blues"],
     "Experimental / Free":  ["free improv", "avant-garde", "experimental", "free jazz", "improvised music", "electroacoustic"],
-    "Fusion":               ["fusion", "mahavishnu", "weather report", "herbie hancock", "miles electric", "electric"],
+    "Fusion":               ["fusion", "mahavishnu", "weather report", "miles electric", "electric miles"],
     "Trad / Dixieland":     ["dixieland", "trad jazz", "new orleans", "traditional jazz", "ragtime"],
-    "Mainstream / Swing":   ["bebop", "hard bop", "swing", "mainstream", "standards", "quartet", "quintet", "blue note"],
-    "African Jazz":         ["afrobeat", "african", "west african", "south african", "ethiopian", "ethio", "highlife"],
-    "Sacred / Spiritual":   ["gospel", "sacred", "spiritual", "mass", "vespers", "church"],
+    "Mainstream / Swing":   ["swing", "mainstream", "standards"],
+    "African Jazz":         ["afrobeat", "west african", "south african", "ethiopian", "ethio", "highlife"],
+    "Sacred / Spiritual":   ["gospel", "sacred", "spiritual", "mass", "vespers"],
     "Gypsy / Manouche":     ["gypsy", "manouche", "django", "romani", "jazz gitane"],
     "Indo-Jazz":            ["indian", "carnatic", "hindustani", "raga", "shakti", "tabla"],
     "Caribbean Jazz":       ["caribbean", "calypso", "steel pan", "reggae jazz", "ska jazz"],
+    "Nordic / ECM":         ["nordic", "scandinavian", "norwegian", "swedish", "danish", "finnish", "ecm"],
+    "Nu Jazz / Electronic": ["nu jazz", "electronica", "electronic jazz"],
 }
 
+# ── Venue website fallbacks for ticket URL cleanup ────────────────
+# When a scraper can only provide a source URL (e.g. ukjazznews.com),
+# merge_gigs will substitute the venue's own website instead.
+VENUE_TICKET_FALLBACKS = {
+    "Bull & Gate":         "https://bullandgatehighgate.co.uk",
+    "Hampstead Jazz Club": "https://www.hampsteadjazzclub.co.uk",
+    "Oliver's Jazz Bar":   "https://oliversjazzbar.co.uk",
+}
+
+UKJAZZNEWS_DOMAIN = "ukjazznews.com"
+
 def detect_genre(text: str) -> str:
-    """Detect Tier 1 genre from event text."""
+    """Detect Tier 1 genre from event text. Returns 'Contemporary Jazz' as fallback."""
     text_lower = text.lower()
     for genre, signals in GENRE_SIGNALS.items():
         if any(s in text_lower for s in signals):
