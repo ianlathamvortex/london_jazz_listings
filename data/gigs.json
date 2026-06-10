@@ -1585,7 +1585,7 @@
     "genre_tier1": "Experimental / Free",
     "genre_tier2": "",
     "format_tags": "Standing / Gig",
-    "description": "Expect collisions of sound that refuse to follow any script, with players from across Europe treating the Vortex's intimate room like a laboratory for musical risk-taking. MOPOMOSO has been London's sharpest platform for unscripted improvisation since 1991 \u2014 if you've ever wondered how far music can stretch before it breaks, this is the night to find out.",
+    "description": "",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -1596,8 +1596,8 @@
     "last_updated": "2026-06-09 12:25",
     "verified": "Yes",
     "scraper_notes": "",
-    "description_verified": false,
-    "description_source": "auto",
+    "description_verified": true,
+    "description_source": "manual",
     "band_format": "Ensemble"
   },
   {
