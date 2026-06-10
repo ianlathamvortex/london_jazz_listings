@@ -62,6 +62,80 @@ function renderFooter() {
 
 // ── Gig card ─────────────────────────────────────────────────
 
+
+// ── MusicEvent schema helpers ────────────────────────────────
+const VENUE_ADDRESSES = {
+  "Vortex Jazz Club":        { streetAddress: "11 Gillett Square", addressLocality: "Dalston", postalCode: "N16 8AZ" },
+  "Ronnie Scott's":          { streetAddress: "47 Frith Street",   addressLocality: "Soho",    postalCode: "W1D 4HT" },
+  "606 Jazz Club":           { streetAddress: "90 Lots Road",      addressLocality: "Chelsea", postalCode: "SW10 0QD" },
+  "Barbican":                { streetAddress: "Silk Street",        addressLocality: "Barbican", postalCode: "EC2Y 8DS" },
+  "Cadogan Hall":            { streetAddress: "5 Sloane Terrace",  addressLocality: "Chelsea", postalCode: "SW1X 9DQ" },
+  "Royal Albert Hall":       { streetAddress: "Kensington Gore",   addressLocality: "South Kensington", postalCode: "SW7 2AP" },
+  "Wigmore Hall":            { streetAddress: "36 Wigmore Street", addressLocality: "Marylebone", postalCode: "W1U 2BP" },
+  "King's Place":            { streetAddress: "90 York Way",       addressLocality: "King's Cross", postalCode: "N1 9AG" },
+  "Royal Festival Hall":     { streetAddress: "Belvedere Road",    addressLocality: "South Bank", postalCode: "SE1 8XX" },
+  "Lauderdale House":        { streetAddress: "Highgate Hill",     addressLocality: "Highgate", postalCode: "N6 5HG" },
+  "Toulouse Lautrec":        { streetAddress: "140 Newington Butts", addressLocality: "Kennington", postalCode: "SE11 4RN" },
+  "East Side Jazz Club":     { streetAddress: "2 Station Road",    addressLocality: "Leytonstone", postalCode: "E11 1QW" },
+  "World Heart Beat":        { streetAddress: "3 Ponton Road",     addressLocality: "Nine Elms", postalCode: "SW11 7BD" },
+  "Café OTO":                { streetAddress: "18-22 Ashwin Street", addressLocality: "Dalston", postalCode: "E8 3DL" },
+  "Jazz Café":               { streetAddress: "5 Parkway",         addressLocality: "Camden",  postalCode: "NW1 7PG" },
+  "EartH Theatre":           { streetAddress: "11 Stoke Newington Road", addressLocality: "Hackney", postalCode: "N16 8BH" },
+};
+
+function gigSchema(gig) {
+  const addr = VENUE_ADDRESSES[gig.venue_name] || { streetAddress: "", addressLocality: gig.neighbourhood || gig.zone || "London", postalCode: "" };
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "MusicEvent",
+    "name": gig.artist_name,
+    "startDate": gig.start_time
+      ? gig.date + "T" + to24h(gig.start_time)
+      : gig.date,
+    "location": {
+      "@type": "MusicVenue",
+      "name": gig.venue_name + (gig.stage ? " — " + gig.stage : ""),
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": addr.streetAddress,
+        "addressLocality": addr.addressLocality,
+        "postalCode": addr.postalCode,
+        "addressCountry": "GB"
+      }
+    },
+    "description": gig.description || "",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "organizer": { "@type": "Organization", "name": gig.venue_name },
+    "performer": { "@type": "MusicGroup", "name": gig.artist_name },
+    "url": gig.ticket_url || ("https://londonjazzlist.co.uk/gigs.html"),
+  };
+  if (gig.price_from && gig.price_from !== 'Free') {
+    const price = gig.price_from.replace(/[^0-9.]/g, '');
+    if (price) {
+      schema.offers = {
+        "@type": "Offer",
+        "price": price,
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/InStock",
+        "url": gig.ticket_url || "https://londonjazzlist.co.uk/gigs.html"
+      };
+    }
+  }
+  return JSON.stringify(schema);
+}
+
+function to24h(timeStr) {
+  if (!timeStr) return "20:00:00";
+  const m = timeStr.match(/(\d{1,2})[.:]?(\d{2})\s*(am|pm)/i);
+  if (!m) return "20:00:00";
+  let h = parseInt(m[1]), min = m[2];
+  const isPm = m[3].toLowerCase() === 'pm';
+  if (isPm && h !== 12) h += 12;
+  if (!isPm && h === 12) h = 0;
+  return String(h).padStart(2,'0') + ':' + min + ':00';
+}
+
 function renderGigCard(gig) {
   const isEditorsPick = gig.editors_pick === true || gig.editors_pick === 'TRUE';
   const tags = [];
@@ -82,7 +156,10 @@ function renderGigCard(gig) {
     ? `<a href="${esc(gig.ticket_url)}" target="_blank" rel="noopener" class="gig-ticket-link">Book →</a>`
     : '';
 
+  const schemaJson = gigSchema(gig);
+
   return `
+    <script type="application/ld+json">${schemaJson}</script>
     <div class="gig-card ${isEditorsPick ? 'editors-pick' : ''}">
       <div class="gig-main">
         <div class="gig-artist">${esc(gig.artist_name)}</div>
