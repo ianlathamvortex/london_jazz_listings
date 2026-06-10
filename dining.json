@@ -424,5 +424,30 @@
     "editors_pick": true,
     "hidden": false,
     "last_verified": "2026-06-09"
+  },
+  {
+    "dining_id": "58th-street-jazz-age-experience",
+    "venue_name": "58th Street",
+    "address": "The Lost Estate, Peckham",
+    "postcode": "SE15",
+    "zone": "South East",
+    "neighbourhood": "Peckham",
+    "nearest_tube": "Peckham Rye (Overground)",
+    "venue_type": "Immersive dining experience",
+    "days_of_week": "Tuesday\u2013Sunday (evenings); Saturday matinees",
+    "frequency": "Tue\u2013Sun evenings from 7pm; Sat late show 11:10pm; matinees Sat",
+    "start_time": "19:00",
+    "end_time": "23:30",
+    "music_notes": "Three sets of live jazz from house band The 58th Street Stompers, led by trumpeter Rory Simmons",
+    "genre_tier1": "Jazz / Swing",
+    "price_type": "Ticketed",
+    "price_notes": "Experience only from \u00a374.85; six-course dining from \u00a3119.85",
+    "reservation_required": true,
+    "description": "Immersive 1930s New York speakeasy experience by The Lost Estate, based on the real story of socialite Belle Livingstone. Three sets of scorching jazz from The 58th Street Stompers, a six-course Park Avenue feast designed by chef Ash Clarke, and theatrical storytelling \u2014 covered by Vanity Fair, GQ, and the Evening Standard.",
+    "website": "https://58thstreet.co.uk/",
+    "booking_url": "https://tickets.thelostestate.com/event/17439?filters=tags%3Dafternoon&filters=tags%3Devening",
+    "editors_pick": true,
+    "hidden": false,
+    "last_verified": "2026-06-10"
   }
 ]
