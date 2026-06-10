@@ -477,9 +477,25 @@ def should_be_editors_pick(g: dict) -> bool:
     - Special occasion set
     - International signals in description
     - Vortex two-show (detected post-merge in flag_two_show_vortex)
+
+    EXCLUSIONS (never auto-pick regardless of other signals):
+    - Experimental / Free genre — not a general recommendation
+    - Youth bands / student ensembles
+    - Tier 3 venues
     """
     if g.get("editors_pick"):
         return True
+
+    # Hard exclusions — never auto-pick these
+    genre = g.get("genre_tier1", "")
+    if genre == "Experimental / Free":
+        return False
+    if g.get("venue_tier") == "3":
+        return False
+    desc_lower = (g.get("description", "") + " " + g.get("artist_name", "")).lower()
+    if any(x in desc_lower for x in ["youth big band", "jazz school graduates", "whirlpool"]):
+        return False
+
     venue = g.get("venue_name", "")
     if venue in PREMIUM_VENUES:
         return True
