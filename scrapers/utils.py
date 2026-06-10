@@ -360,6 +360,22 @@ def detect_band_format(artist_name: str, description: str) -> str:
                 inst_label = label
                 break
 
+    # Normalise instrument labels before assembly
+    # Sax varieties → plain Sax (no need to distinguish tenor/alto/soprano)
+    if inst_label in ("Tenor Sax", "Alto Sax", "Soprano Sax"):
+        inst_label = "Sax"
+
+    # Vocal → Vocal-Led (avoids implying multiple singers)
+    vocal_led_sizes = ("Quartet", "Quintet", "Sextet", "Septet", "Trio", "Duo", "Group", "Ensemble")
+    if inst_label == "Vocal" and size_label in vocal_led_sizes:
+        return electric_prefix + "Vocal-Led " + size_label
+    if inst_label == "Vocal" and not size_label:
+        return electric_prefix + "Solo Vocal"
+
+    # Trumpet as sole front-line instrument → drop prefix (standard assumption)
+    if inst_label == "Trumpet" and size_label and size_label != "Solo":
+        inst_label = ""   # just use the size label
+
     if size_label and inst_label:
         if size_label == "Solo":
             return electric_prefix + "Solo " + inst_label
