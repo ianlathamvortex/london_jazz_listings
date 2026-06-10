@@ -3008,9 +3008,9 @@
     "genre_tier1": "Contemporary Jazz",
     "genre_tier2": "",
     "format_tags": "Standing / Gig",
-    "description": "British-Bangladeshi pianist and Mercury Prize nominee. Rahman's duo album with her brother is one of the finest jazz recordings of recent years. Two shows in one day signals something special.",
+    "description": "MOBO Award winner, Mercury Prize nominee, Ivor Novello winner \u2014 RAM and Oxford trained, Berklee scholarship. Launching album *Colour of Sound*, Parliamentary Jazz Album of the Year 2024. Two shows.",
     "special_occasion": "Album launch",
-    "editors_pick": false,
+    "editors_pick": true,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -3021,7 +3021,11 @@
     "scraper_notes": "",
     "description_verified": true,
     "description_source": "manual",
-    "band_format": "Piano Trio"
+    "band_format": "Piano Trio",
+    "reference_urls": [
+      "https://www.vortexjazz.co.uk/event/zoe-rahman-trio/",
+      "https://www.zoerahman.com/"
+    ]
   },
   {
     "gig_id": "eym-trio-feat-varijashree-jazz-dinnerexperience-a-unique-musical-ladbroke-hall-2",
