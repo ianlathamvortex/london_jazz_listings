@@ -26,10 +26,6 @@
   <meta name="geo.placename" content="London">
 
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* Pre-rendered static cards — visible to Google, hidden once JS loads */
-    body.js-loaded #listings > .date-group { display: none; }
-  </style>
 
   <script type="application/ld+json">
   {
@@ -98,10 +94,11 @@
         </label>
       </div>
 
-      <div class="result-count" id="result-count">183 gigs</div>
+      <div class="result-count" id="result-count"></div>
 
       <div class="listings" id="listings">
-    <!-- content loaded by JavaScript -->
+        <div class="loading">Loading</div>
+      </div>
 
     </div>
   </main>
@@ -122,7 +119,6 @@
     let picksOnly    = false;
 
     async function init() {
-      document.body.classList.add('js-loaded');
       const gigs = await fetchData('gigs');
       const t = today();
       allGigs = gigs
