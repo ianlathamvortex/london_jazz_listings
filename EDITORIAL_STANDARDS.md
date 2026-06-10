@@ -101,6 +101,9 @@ Any of these in a generated description means rewrite or skip:
 - `"boundary-pushing"` — overused, meaningless
 - `"cinematic textures"` — enricher cliché
 - Never start with the artist name
+- Never mention the artist name anywhere in the description — it's already in the title
+- Never mention the venue in the description — it's shown separately
+- Never state "album launch" in the description — it's tagged in `special_occasion` and shown separately. Album launches are not a reliable indicator of strong music.
 - Never say `"jazz"`
 
 ---
