@@ -732,9 +732,11 @@ ul { list-style: none; }
   .site-footer { display: none; }
 }
 
-.free-name-link {
+.free-name-link,
+.jam-name-link {
   font-weight: 700;
   border-bottom: 1px solid var(--text);
   padding-bottom: 1px;
 }
-.free-name-link:hover { opacity: 0.7; text-decoration: none; }
+.free-name-link:hover,
+.jam-name-link:hover { opacity: 0.7; text-decoration: none; }
