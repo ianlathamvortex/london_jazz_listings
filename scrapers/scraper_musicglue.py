@@ -134,7 +134,7 @@ def scrape_karamel() -> list:
                 neighbourhood="Wood Green",
                 format_tags="Jazz Club",
                 genre_tier1="Contemporary Jazz",
-                venue_tier="2",
+                venue_tier="3",
             ))
         
         # Check if there's a next page
