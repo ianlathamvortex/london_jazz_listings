@@ -449,5 +449,19 @@
     "editors_pick": true,
     "hidden": false,
     "last_verified": "2026-06-10"
+  },
+  {
+    "name": "MU London",
+    "venue_type": "Restaurant / Bar",
+    "zone": "Central",
+    "neighbourhood": "Soho",
+    "nearest_tube": "Tottenham Court Road",
+    "address": "7 Bateman Street, Soho, London W1D 3AF",
+    "website": "https://mu-ldn.com/music",
+    "music_nights": "Regular live music programme",
+    "description": "Soho restaurant and bar with a regular live music programme including jazz.",
+    "price_guide": "\u00a3\u00a3",
+    "booking_url": "https://mu-ldn.com",
+    "hidden": false
   }
 ]
