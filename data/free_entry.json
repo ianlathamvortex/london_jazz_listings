@@ -615,5 +615,32 @@
     "source_url": "https://www.growhackney.co.uk/canalside-sessions",
     "hidden": false,
     "last_verified": "2026-06-10"
+  },
+  {
+    "gig_id": "nickel-stage-ned-recurring",
+    "date": "2026-06-11",
+    "end_date": "2026-12-31",
+    "recurrence": "Weekdays from 5pm, weekends from midday",
+    "start_time": "5pm",
+    "artist_name": "Nickel Stage at The Ned",
+    "venue_name": "The Ned \u2014 Nickel Bar",
+    "zone": "Central",
+    "neighbourhood": "City of London",
+    "nearest_tube": "Bank",
+    "ticket_url": "https://www.thened.com/london/whats-on",
+    "price_from": "Free",
+    "genre_tier1": "Contemporary Jazz",
+    "format_tags": "Standing / Gig",
+    "band_format": "Jazz Trio",
+    "description": "Daily live music in The Ned's Nickel Bar \u2014 jazz trios, blues and New Music Mondays. Walk-ins only, no cover charge, but this is a \u00a3\u00a3\u00a3 hotel bar: expect City prices for cocktails and bites.",
+    "description_verified": true,
+    "description_source": "manual",
+    "special_occasion": "",
+    "editors_pick": false,
+    "hidden": false,
+    "source_url": "https://www.thened.com/london/whats-on",
+    "date_scraped": "2026-06-11",
+    "last_updated": "2026-06-11",
+    "scraper_notes": "Recurring daily programme \u2014 no individual gig listings"
   }
 ]
