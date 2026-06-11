@@ -1,211 +1,163 @@
 """
 scraper_lauderdale.py — Lauderdale House, Highgate
-Source: https://www.lauderdalehouse.org.uk/whats-on/jazz-house
-         https://www.lauderdalehouse.org.uk/whats-on/open-air-summer-season
-         https://www.lauderdalehouse.org.uk/whats-on/music
-"This is, we believe, London's top gig" — London Jazz News
-Clean Drupal HTML — very reliable to scrape.
+https://www.lauderdalehouse.org.uk/whats-on/music
+Drupal CMS — server-rendered, no Playwright needed.
+Scrapes the music page and Jazz in the House series.
+Filters for jazz events only.
 """
-import re
-import sys
+import re, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from utils import fetch, gig, load, save, merge_gigs, clean_date, is_future
+import urllib.request
+from bs4 import BeautifulSoup
+from utils import gig, load, save, merge_gigs, clean_date, is_future, is_jazz_event
 
-VENUE    = "Lauderdale House"
-ZONE     = "North"
-HOOD     = "Highgate / Archway"
-BASE_URL = "https://www.lauderdalehouse.org.uk"
+VENUE   = "Lauderdale House"
+ZONE    = "North"
+HOOD    = "Highgate"
+TUBE    = "Highgate / Archway"
+TIER    = "1"
+BASE    = "https://www.lauderdalehouse.org.uk"
+PAGES   = [
+    f"{BASE}/whats-on/music",
+    f"{BASE}/whats-on/jazz-house",
+]
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,*/*;q=0.9",
+}
 
-# All jazz-relevant listing pages
-PAGES = [
-    f"{BASE_URL}/whats-on/jazz-house",
-    f"{BASE_URL}/whats-on/open-air-summer-season",
+JAZZ_SIGNALS = [
+    "jazz", "arq", "alison rayner", "improvisation", "blues",
+    "swing", "bebop", "quartet", "quintet", "trio", "sax",
 ]
 
-JAZZ_KEYWORDS = [
-    "jazz", "quintet", "quartet", "trio", "saxophone", "trumpet",
-    "latin", "soul", "swing", "bebop", "improvisation", "blues",
-    "big band", "hammond", "funk", "afrobeat", "bossa nova",
-]
-
-SKIP_KEYWORDS = [
-    "klezmer", "classical", "folk concert", "choir", "choral",
-    "opera", "poetry", "comedy", "yoga", "pilates", "art class",
-    "children", "kids", "watercolour", "drawing class",
-]
+MONTHS = {
+    "january":"01","february":"02","march":"03","april":"04",
+    "may":"05","june":"06","july":"07","august":"08",
+    "september":"09","october":"10","november":"11","december":"12",
+    "jan":"01","feb":"02","mar":"03","apr":"04","jun":"06",
+    "jul":"07","aug":"08","sep":"09","oct":"10","nov":"11","dec":"12",
+}
 
 
-def _is_jazz(text: str) -> bool:
-    t = text.lower()
-    if any(s in t for s in SKIP_KEYWORDS):
-        return False
-    return any(k in t for k in JAZZ_KEYWORDS)
+def _parse_date(text: str) -> str | None:
+    """Parse 'Thursday 11 June' or '11 June 2026' → '2026-06-11'"""
+    import datetime
+    m = re.search(
+        r"(\d{1,2})\s+(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|"
+        r"Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|"
+        r"Nov(?:ember)?|Dec(?:ember)?)(?:\s+(\d{4}))?",
+        text, re.I
+    )
+    if not m:
+        return None
+    day = int(m.group(1))
+    mon_key = m.group(2).lower()[:3]
+    mon = MONTHS.get(mon_key)
+    if not mon:
+        return None
+    year = m.group(3) or str(datetime.date.today().year)
+    # If month is earlier than current month and no year given, assume next year
+    if not m.group(3):
+        today = datetime.date.today()
+        candidate = f"{year}-{mon}-{day:02d}"
+        if candidate < today.isoformat():
+            year = str(int(year) + 1)
+    return f"{year}-{mon}-{day:02d}"
+
+
+def _is_jazz(title: str, desc: str) -> bool:
+    combined = (title + " " + desc).lower()
+    return any(s in combined for s in JAZZ_SIGNALS)
+
+
+def _fetch(url: str) -> BeautifulSoup | None:
+    try:
+        req = urllib.request.Request(url, headers=HEADERS)
+        with urllib.request.urlopen(req, timeout=20) as r:
+            return BeautifulSoup(r.read(), "html.parser")
+    except Exception as e:
+        print(f"  Failed to fetch {url}: {e}")
+        return None
 
 
 def scrape() -> list:
-    print(f"Scraping {VENUE}...")
+    print("Scraping Lauderdale House...")
     results = []
-    seen_urls = set()
+    seen_ids = set()
 
     for page_url in PAGES:
-        soup = fetch(page_url)
+        soup = _fetch(page_url)
         if not soup:
             continue
 
-        # Each event is a teaser with an h2/h3 link and a date
-        teasers = (
-            soup.select("article") or
-            soup.select("div.view-content > div") or
-            soup.select("div[class*='teaser']") or
-            []
-        )
-
-        # Also grab direct event links
-        event_links = soup.select("a[href*='/whats-on/']")
-        for link in event_links:
-            href = link.get("href", "")
-            if not href or href in seen_urls:
-                continue
-            # Skip listing pages, not event pages
-            skip_paths = ["/whats-on/by-day", "/whats-on/music",
-                         "/whats-on/jazz-house", "/whats-on/open-air",
-                         "/whats-on/adult", "/whats-on/children",
-                         "/whats-on/exhibitions", "/whats-on/free",
-                         "/whats-on/special", "/whats-on/highgate-festival"]
-            if any(href == p or href.startswith(p + "?") for p in skip_paths):
-                continue
-            if href.count("/") < 2:
+        # Each event is in a div/article with a heading and a date
+        # Drupal renders them as teaser nodes
+        for heading in soup.find_all(["h2", "h3"]):
+            title = heading.get_text(strip=True)
+            if not title or len(title) < 4:
                 continue
 
-            seen_urls.add(href)
-            full_url = href if href.startswith("http") else BASE_URL + href
-            result = _scrape_event(full_url)
-            if result and is_future(result["date"]):
-                results.append(result)
+            # Walk up to find the event container
+            container = heading.find_parent(["article", "div", "li", "section"])
+            if not container:
+                continue
 
-    # Deduplicate
-    seen_ids = set()
-    unique = []
-    for r in results:
-        if r["gig_id"] not in seen_ids:
-            unique.append(r)
-            seen_ids.add(r["gig_id"])
+            text = container.get_text(separator=" ", strip=True)
+            desc = ""
+            # Find description paragraph
+            for p in container.find_all("p"):
+                p_text = p.get_text(strip=True)
+                if len(p_text) > 30 and p_text != title:
+                    desc = p_text[:200]
+                    break
 
-    print(f"  Found {len(unique)} future Lauderdale gigs")
-    return unique
+            if not _is_jazz(title, desc):
+                continue
 
+            date_str = _parse_date(text)
+            if not date_str or not is_future(date_str):
+                continue
 
-def _scrape_event(url: str) -> dict | None:
-    soup = fetch(url)
-    if not soup:
-        return None
+            # Ticket/event link
+            link = heading.find("a") or container.find("a", href=re.compile(r"/whats-on/"))
+            if link and link.get("href", "").startswith("/"):
+                event_url = BASE + link["href"]
+            elif link:
+                event_url = link.get("href", page_url)
+            else:
+                event_url = page_url
 
-    text = soup.get_text(separator=" ", strip=True)
+            # Strip "Jazz in the House: " prefix from title for artist_name
+            artist = re.sub(r"^Jazz in the House:\s*", "", title, flags=re.I).strip()
+            artist = re.sub(r"^Jazz:\s*", "", artist, flags=re.I).strip()
 
-    # Jazz filter
-    if not _is_jazz(text):
-        return None
+            g = gig(
+                artist_name=artist, venue_name=VENUE, date=date_str,
+                ticket_url=event_url, source_url=page_url,
+                zone=ZONE, neighbourhood=HOOD,
+                venue_tier=TIER, format_tags="Concert Hall",
+                genre_tier1="Contemporary Jazz",
+                description=desc[:120] if desc else "",
+            )
+            gig_id = g["gig_id"]
+            if gig_id not in seen_ids:
+                results.append(g)
+                seen_ids.add(gig_id)
 
-    # Title — h1 with "Styled heading" prefix pattern
-    h1 = soup.find("h1")
-    if not h1:
-        return None
-    title = h1.get_text(strip=True)
-    # Clean up "Jazz in the House ARQ" → "ARQ" or keep full title
-    # Remove "Styled heading" prefix if present
-    title = re.sub(r"^Styled heading\s*", "", title).strip()
-    # Clean "Jazz in the House " prefix for artist name
-    artist = re.sub(r"^Jazz (?:in the House|on the Tea Lawn)[:\s]*", "", title).strip()
-    artist = re.sub(r"^Open-Air Thursdays:\s*", "", artist).strip()
-    if not artist:
-        artist = title
-
-    # Date — Lauderdale uses "Thursday 11 June" or "Thursday 11 June 8:00pm"
-    date_m = re.search(
-        r"(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+"
-        r"(\d{1,2})\s+"
-        r"(January|February|March|April|May|June|July|August|"
-        r"September|October|November|December)"
-        r"(?:\s+(\d{4}))?",
-        text, re.IGNORECASE
-    )
-    if not date_m:
-        return None
-    year = date_m.group(3) or "2026"
-    date_str = clean_date(f"{date_m.group(1)} {date_m.group(2)} {year}")
-
-    # Time
-    time_m = re.search(r"(\d{1,2}[:.]\d{2})\s*(pm|am)?", text, re.IGNORECASE)
-    start_time = time_m.group(0) if time_m else "20:00"
-
-    # Doors
-    doors_m = re.search(r"[Dd]oors?\s+open\s+at\s+(\d{1,2}[:.]\d{2})", text)
-    doors_time = doors_m.group(1) if doors_m else ""
-
-    # Price
-    price_m = re.search(r"Standard\s+£(\d+(?:\.\d{2})?)", text)
-    if not price_m:
-        price_m = re.search(r"£(\d+(?:\.\d{2})?)", text)
-    price = f"£{price_m.group(1)}" if price_m else ""
-
-    # Ticket link
-    book_link = soup.find("a", href=re.compile(r"ticketsolve|tickets"))
-    ticket_url = book_link["href"] if book_link else url
-
-    # Description — first substantial paragraph after h1
-    desc = ""
-    for p in soup.find_all("p"):
-        p_text = p.get_text(strip=True)
-        if len(p_text) > 80 and not any(
-            skip in p_text.lower() for skip in
-            ["cookie", "privacy", "terms", "booking fee", "concession"]
-        ):
-            desc = p_text[:400]
-            break
-
-    # Format — outdoor or indoor
-    is_outdoor = any(k in text.lower() for k in ["tea lawn", "outdoor", "open-air"])
-    fmt = "Outdoor" if is_outdoor else "Jazz Club"
-
-    # Genre
-    genre = "Contemporary Jazz"
-    if "latin" in text.lower():
-        genre = "Latin"
-    elif "soul" in text.lower() or "house" in text.lower():
-        genre = "Soul & Groove"
-
-    # Special occasion
-    special = ""
-    if "anniversary" in text.lower():
-        special = "Anniversary"
-    elif "album" in text.lower():
-        special = "Album feature"
-
-    return gig(
-        artist_name=artist,
-        venue_name=VENUE,
-        date=date_str,
-        start_time=start_time,
-        doors_time=doors_time,
-        price_from=price,
-        ticket_url=ticket_url,
-        source_url=url,
-        zone=ZONE,
-        neighbourhood=HOOD,
-        format_tags=fmt,
-        genre_tier1=genre,
-        description=desc,
-        special_occasion=special,
-        venue_tier="1",
-    )
+    print(f"  Found {len(results)} future Lauderdale jazz events")
+    return results
 
 
 def run():
     new_gigs = scrape()
     if not new_gigs:
-        print("  No gigs found")
+        print("  No Lauderdale gigs found")
         return
     existing = load("gigs")
     merged, added = merge_gigs(existing, new_gigs)
