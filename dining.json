@@ -451,16 +451,16 @@
     "last_verified": "2026-06-10"
   },
   {
-    "name": "MU London",
+    "name": "MU",
     "venue_type": "Restaurant / Bar",
-    "zone": "Central",
-    "neighbourhood": "Soho",
-    "nearest_tube": "Tottenham Court Road",
-    "address": "7 Bateman Street, Soho, London W1D 3AF",
+    "zone": "North",
+    "neighbourhood": "Hackney",
+    "nearest_tube": "Haggerston Overground",
+    "address": "433-434 Kingsland Road, Hackney, E8 4AA",
     "website": "https://mu-ldn.com/music",
-    "music_nights": "Regular live music programme",
-    "description": "Soho restaurant and bar with a regular live music programme including jazz.",
-    "price_guide": "\u00a3\u00a3",
+    "music_nights": "Wednesday to Sunday evenings",
+    "description": "From the team behind Brilliant Corners and Giant Steps \u2014 serious music programming in a robata grill restaurant. Named after Don Cherry's 1969 album. Expect the same quality jazz and global music curation as Brilliant Corners, in a dining context.",
+    "price_guide": "\u00a3\u00a3\u00a3",
     "booking_url": "https://mu-ldn.com",
     "hidden": false
   }
