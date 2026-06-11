@@ -115,7 +115,13 @@
         if (freeOnly && !d.price_type.includes('Free')) return false;
         if (noBooking && d.reservation_required === true) return false;
         return true;
-      });
+      })
+        .sort((a, b) => {
+          const ta = a.music_quality_tier || 2;
+          const tb = b.music_quality_tier || 2;
+          if (ta !== tb) return ta - tb;
+          return (a.venue_name || '').localeCompare(b.venue_name || '');
+        });
     }
 
     function render() {
