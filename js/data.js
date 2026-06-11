@@ -90,7 +90,7 @@ function uniqueValues(arr, field) {
 const PREMIUM_VENUES = new Set([
   "Barbican Centre", "Cadogan Hall", "Royal Albert Hall",
   "Royal Festival Hall", "Wigmore Hall", "Union Chapel",
-  "EartH Theatre", "Ronnie Scott's", "Ladbroke Hall",
+  "EartH Theatre", "Ronnie Scott's", "Ladbroke Hall", "PizzaExpress Jazz Club",
 ]);
 
 const INTERNATIONAL_SIGNALS = [
@@ -136,7 +136,7 @@ const VENUE_CAPACITY = {
   "World Heart Beat":       120,
   "East Side Jazz Club":    120,
   "Highams Park Jazz":      120,
-  "PizzaExpress Jazz Club": 120,
+  "PizzaExpress Jazz Club": 120,  // Soho — tier 1
   "Crazy Coqs / Brasserie Zedel": 100,
   "Jazz Café POSK":         100,
   "PizzaExpress The Pheasantry": 100,
