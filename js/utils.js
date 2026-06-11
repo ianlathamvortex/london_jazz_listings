@@ -206,21 +206,26 @@ function renderJamCard(jam) {
 // ── Brunch card ───────────────────────────────────────────────
 
 function renderBrunchCard(brunch) {
+  const isEditorsPick = brunch.editors_pick === true || brunch.editors_pick === 'TRUE';
   const when = [brunch.day_of_week, brunch.start_time, brunch.end_time]
     .filter(Boolean).join(' · ');
   const flags = [];
   if (brunch.food_served === true || brunch.food_served === 'TRUE') flags.push('Food served');
   if (brunch.family_friendly === true || brunch.family_friendly === 'TRUE') flags.push('Family friendly');
   if (brunch.reservation_required === true || brunch.reservation_required === 'TRUE') flags.push('Booking required');
+  const bookingUrl = brunch.booking_url || brunch.website || '';
+  const musicNotes = brunch.music_notes || '';
 
   return `
-    <div class="brunch-card">
-      <div class="brunch-venue">${esc(brunch.venue_name)}</div>
+    <div class="brunch-card ${isEditorsPick ? 'editors-pick' : ''}">
+      <div class="brunch-venue">${isEditorsPick ? '★ ' : ''}${esc(brunch.venue_name)}</div>
       <div class="brunch-when">${esc(when)}${brunch.neighbourhood ? ` · ${esc(brunch.neighbourhood)}` : ''}</div>
+      ${musicNotes ? `<div class="brunch-when" style="font-style:normal">${esc(musicNotes)}</div>` : ''}
       ${brunch.description ? `<div class="brunch-desc">${esc(brunch.description)}</div>` : ''}
       <div class="brunch-meta">
         ${esc(brunch.price_type || brunch.price_notes || '')}
         ${flags.map(f => `<span>· ${f}</span>`).join('')}
+        ${bookingUrl ? `<a href="${esc(bookingUrl)}" target="_blank" rel="noopener" class="brunch-book-link">Book →</a>` : ''}
       </div>
     </div>`;
 }
