@@ -20,8 +20,10 @@ BASE_URL  = "https://www.pizzaexpresslive.com"
 WHATS_ON  = f"{BASE_URL}/whats-on"
 
 VENUES = {
-    "soho":        ("PizzaExpress Jazz Club", "Central",    "Soho",             "2"),
+    "soho":        ("PizzaExpress Jazz Club",      "Central",   "Soho",    "1"),  # tier 1 — historic Soho room
     "pheasantry":  ("PizzaExpress The Pheasantry", "South West", "Chelsea", "2"),
+    "holborn":     ("PizzaExpress Jazz Club Holborn", "Central", "Holborn", "2"),
+    "aldgate":     ("PizzaExpress Jazz Club Aldgate", "East",    "Aldgate", "2"),
 }
 
 
