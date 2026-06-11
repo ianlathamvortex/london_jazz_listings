@@ -26,24 +26,12 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python run_all.py
-      - name: Pre-render gigs.html for SEO
-        run: python prerender.py
       - name: Copy data to root
         run: cp data/*.json .
       - name: Pre-render gigs.html
         run: python prerender.py
       - name: Update sitemap lastmod
-        run: |
-          python3 -c "
-import re, datetime
-today = datetime.date.today().isoformat()
-with open('sitemap.xml') as f:
-    s = f.read()
-s = re.sub(r'<lastmod>[0-9-]+</lastmod>', '<lastmod>' + today + '</lastmod>', s)
-with open('sitemap.xml', 'w') as f:
-    f.write(s)
-print('sitemap.xml lastmod ->', today)
-"
+        run: python update_sitemap.py
       - name: Commit
         run: |
           git config --local user.email "action@github.com"
