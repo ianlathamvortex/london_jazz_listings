@@ -32,7 +32,7 @@ VENUES = {
         "format": "Jazz Club", "genre": "Contemporary Jazz",
         "tier":   "1",
     },
-    "olivers_jazz": {
+    "olivers_jazz_DISABLED": {  # moved to scraper_olivers.py
         "name":   "Oliver's Jazz Bar",
         "url":    "https://oliversjazzbar.com/whats-on/",
         "zone":   "South East", "hood": "Greenwich",
