@@ -449,5 +449,30 @@
     "editors_pick": true,
     "hidden": false,
     "last_verified": "2026-06-10"
+  },
+  {
+    "dining_id": "the-parlour-ned",
+    "venue_name": "The Parlour at The Ned",
+    "address": "27 Poultry, City of London",
+    "postcode": "EC2R 8AJ",
+    "zone": "Central",
+    "neighbourhood": "City of London",
+    "nearest_tube": "Bank",
+    "venue_type": "Restaurant / Cabaret Bar",
+    "days_of_week": "Thursday, Friday, Saturday",
+    "frequency": "Thu\u2013Sat evenings",
+    "start_time": "19:00",
+    "end_time": "23:00",
+    "music_notes": "Intimate jazz and cabaret \u2014 live entertainment over dinner",
+    "genre_tier1": "Contemporary Jazz",
+    "price_type": "Ticketed dinner",
+    "price_notes": "Ticketed dinner \u2014 booking required",
+    "reservation_required": true,
+    "description": "Intimate jazz and cabaret room inside The Ned's converted 1924 Lutyens bank. Live entertainment over dinner \u2014 cocktails, classic dishes, candlelit dining. More supper club than jazz club.",
+    "website": "https://www.thened.com/london/restaurants/the-parlour",
+    "booking_url": "https://www.thened.com/london/restaurants/the-parlour",
+    "editors_pick": false,
+    "hidden": false,
+    "last_verified": "2026-06-11"
   }
 ]
