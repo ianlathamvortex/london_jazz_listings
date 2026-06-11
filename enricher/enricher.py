@@ -59,7 +59,17 @@ BAD (Matt Anderson):
 "Rarely does a tenor saxophonist make you forget to check your phone."
 → REJECTED: no facts, generic, could apply to anyone
 
-If unsure, SKIP. A blank description is better than a wrong one."""
+If unsure, SKIP. A blank description is better than a wrong one.
+
+OUTPUT FORMAT — CRITICAL:
+Return ONLY the final description text. No preamble, no reasoning, no bullet points,
+no "Good —", no "Here is the description:", no "---" separators, no notes.
+Just the description itself, or a completely blank response if skipping.
+Wrong: "Good — I have several facts. Here is the description:\n\nDerek Nash quartet..."
+Right: "Derek Nash quartet..."
+Wrong: "Strong facts found. Here is the listing description:\n\n---\n\nBirmingham-born..."
+Right: "Birmingham-born..."
+"""
 
 
 def generate_description(artist, venue, date, special=""):
