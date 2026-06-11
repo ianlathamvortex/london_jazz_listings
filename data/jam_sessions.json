@@ -624,29 +624,5 @@
     "hidden": false,
     "last_verified": "2026-06-09",
     "source_url": "https://highamsparkjazzclub.com/session-dates"
-  },
-  {
-    "session_id": "highams-park-jam-2026-06-21",
-    "session_name": "Jam Session feat. Rob Luft",
-    "venue_name": "Highams Park Jazz Club",
-    "address": "All Saints Church, Church Avenue",
-    "postcode": "E4 9QZ",
-    "zone": "East",
-    "neighbourhood": "Highams Park",
-    "nearest_tube": "Highams Park Overground",
-    "day_of_week": "Sunday",
-    "frequency": "One-off (2026-06-21)",
-    "start_time": "17:00",
-    "end_time": "20:00",
-    "free_or_paid": "Paid",
-    "price_notes": "Check website",
-    "booking_url": "https://highamsparkjazzclub.com/eventstickets",
-    "description": "Jam session at Highams Park Jazz Club featuring Rob Luft. House rhythm section: Soner Ersen (piano), Dave Manington (bass), Eric Ford (drums).",
-    "genre_tier1": "Contemporary Jazz",
-    "open_to_all": true,
-    "editors_pick": false,
-    "hidden": false,
-    "last_verified": "2026-06-21",
-    "source_url": "https://highamsparkjazzclub.com/session-dates"
   }
 ]
