@@ -122,7 +122,13 @@
         if (familyOnly && b.family_friendly !== true && b.family_friendly !== 'TRUE') return false;
         if (freeOnly   && b.price_type !== 'Free' && b.price_type !== 'Free (dining)') return false;
         return true;
-      });
+      })
+        .sort((a, b) => {
+          const ta = a.music_quality_tier || 2;
+          const tb = b.music_quality_tier || 2;
+          if (ta !== tb) return ta - tb;
+          return (a.venue_name || '').localeCompare(b.venue_name || '');
+        });
     }
 
     function render() {
