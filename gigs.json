@@ -440,23 +440,26 @@
     "zone": "South West",
     "neighbourhood": "Chelsea",
     "nearest_tube": "",
-    "ticket_url": "https://www.606club.co.uk",
+    "ticket_url": "https://www.606club.co.uk/events/view/dave-bristow-quintet-3/",
     "price_from": "\u00a315",
     "price_full_text": "",
     "genre_tier1": "Contemporary Jazz",
     "genre_tier2": "",
     "format_tags": "Jazz Club",
-    "band_format": "",
-    "description": "Birmingham-born pianist based in Paris. Debut album *Unknown Unknown* on Disques JMS.",
+    "band_format": "Piano Quintet",
+    "description": "Birmingham-born pianist based in Paris, bringing his full Parisian quintet to London. Debut album *Unknown Unknown* on Disques JMS.",
     "description_verified": true,
-    "description_source": "auto",
+    "description_source": "manual",
     "special_occasion": "",
     "editors_pick": false,
     "hidden": false,
     "source_url": "https://ukjazznews.com",
     "date_scraped": "2026-06-10",
     "last_updated": "2026-06-10",
-    "scraper_notes": "Added from UKJazzNews newsletter Jun 2026"
+    "scraper_notes": "Added from UKJazzNews newsletter Jun 2026",
+    "reference_urls": [
+      "https://www.606club.co.uk/events/view/dave-bristow-quintet-3/"
+    ]
   },
   {
     "gig_id": "leo-richardson-quartet-vortex-jazz-club-2026-06-12",
