@@ -55,7 +55,9 @@
     "hidden": false,
     "last_verified": "2026-06-08",
     "scraper_notes": "",
-    "music_quality_tier": 1
+    "music_quality_tier": 1,
+    "link_dead": true,
+    "link_dead_reason": "HTTP 404"
   },
   {
     "brunch_id": "boisdale-canary-wharf",
@@ -113,7 +115,9 @@
     "hidden": false,
     "last_verified": "2026-06-08",
     "scraper_notes": "",
-    "music_quality_tier": 2
+    "music_quality_tier": 2,
+    "link_dead": true,
+    "link_dead_reason": "URLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)"
   },
   {
     "brunch_id": "mamasaint-tooting",
@@ -227,7 +231,9 @@
     "hidden": false,
     "last_verified": "2026-06-08",
     "scraper_notes": "",
-    "music_quality_tier": 2
+    "music_quality_tier": 2,
+    "link_dead": true,
+    "link_dead_reason": "HTTP 404"
   },
   {
     "brunch_id": "st-pancras-jazz-brunch",
@@ -256,6 +262,8 @@
     "hidden": false,
     "last_verified": "2026-06-08",
     "scraper_notes": "",
-    "music_quality_tier": 3
+    "music_quality_tier": 3,
+    "link_dead": true,
+    "link_dead_reason": "HTTP 404"
   }
 ]
