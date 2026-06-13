@@ -47,6 +47,7 @@ SCRAPERS = [
     ("Lauderdale House",          "scraper_lauderdale"),
     ("MU Hackney",                 "scraper_mu"),
     ("Oliver's Jazz Bar",          "scraper_olivers"),
+    ("Jazz Café Camden",            "scraper_jazzcafe"),
 ]
 
 results = {}
