@@ -257,7 +257,9 @@
     "source_url": "https://www.gsmd.ac.uk/whats-on/final-recitals-2026",
     "editors_pick": true,
     "hidden": false,
-    "last_verified": "2026-06-09"
+    "last_verified": "2026-06-09",
+    "link_dead": false,
+    "link_dead_reason": ""
   },
   {
     "entry_id": "guildhall-jazz-voice",
