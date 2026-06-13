@@ -96,5 +96,19 @@
     "description": "Free jazz stage at the High Tide Festival in Twickenham. Artists include Denys Baptiste/Tony Kofi Quintet, Misha Mullov-Abbado Sextet, GAB Trio. 1pm\u20137:30pm.",
     "editors_pick": false,
     "hidden": false
+  },
+  {
+    "festival_id": "jazz-cafe-festival-2026",
+    "festival_name": "Jazz Caf\u00e9 Festival 2026",
+    "start_date": "2026-08-02",
+    "end_date": "2026-08-02",
+    "venue_summary": "Burgess Park, Camberwell, SE5",
+    "zone": "South East",
+    "website": "https://thejazzcafe.com/event/jazz-cafe-festival-2026/",
+    "ticketed": true,
+    "price_range": "",
+    "description": "Third edition of the Jazz Caf\u00e9's outdoor festival in Burgess Park. Headlined by Ari Lennox (her only UK show this year), with Greentea Peng, Jaz Karis, Durand Bernarr, Smino, Boldy James and more across four stages.",
+    "editors_pick": true,
+    "hidden": false
   }
 ]
