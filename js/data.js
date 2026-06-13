@@ -121,6 +121,7 @@ const VENUE_CAPACITY = {
   "Ronnie Scott's":         240,
   "Lauderdale House":       200,
   "Jazz Cafe":              440,
+  "Jazz Café Camden":        440,
   "Jazz Café":              440,
   "Milton Court":           308,
   "Stone Nest":             200,
