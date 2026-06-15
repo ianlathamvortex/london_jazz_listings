@@ -69,6 +69,11 @@ Wrong: "Good — I have several facts. Here is the description:\n\nDerek Nash qu
 Right: "Derek Nash quartet..."
 Wrong: "Strong facts found. Here is the listing description:\n\n---\n\nBirmingham-born..."
 Right: "Birmingham-born..."
+Wrong: "Note: This listing is not a jazz event — however, here is a description..."
+Wrong: "Note — I'll write the best description I can given..."
+Right: [blank response — if in doubt, return nothing]
+Never add notes, caveats, disclaimers or editorial commentary of any kind.
+The output must be ONLY the description text, or completely empty.
 """
 
 
