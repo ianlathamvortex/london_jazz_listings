@@ -1347,7 +1347,7 @@
     "genre_tier1": "Contemporary Jazz",
     "format_tags": "Standing / Gig",
     "band_format": "Jazz Ensemble",
-    "description": "Centenary celebration \u2014 full live band playing Kind of Blue, Bitches Brew and beyond. Miles Davis would have been 100 this year.",
+    "description": "London-based trumpeter Jay Phelps pays tribute to his hero Miles Davis \u2014 Kind of Blue to Bitches Brew and beyond. Centenary year.",
     "special_occasion": "Miles Davis Centenary",
     "editors_pick": false,
     "doors_time": "",
@@ -1362,7 +1362,10 @@
     "source_url": "https://thejazzcafelondon.com/whats-on/",
     "date_scraped": "2026-06-13",
     "last_updated": "2026-06-13",
-    "scraper_notes": "Jazz Caf\u00e9 Camden \u2014 manually added"
+    "scraper_notes": "Jazz Caf\u00e9 Camden \u2014 manually added",
+    "reference_urls": [
+      "https://youtu.be/hDTQ9nbvTzw"
+    ]
   },
   {
     "gig_id": "sarah-l-king-quartet-cadogan-hall-2026-06-16",
