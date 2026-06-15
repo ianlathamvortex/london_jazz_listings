@@ -2367,7 +2367,7 @@
     "editors_pick": false,
     "editors_note": "",
     "star_rating": "",
-    "hidden": false,
+    "hidden": true,
     "source_url": "https://www.trinitylaban.ac.uk/whats-on-performance/?artform=music",
     "date_scraped": "2026-06-15",
     "last_updated": "2026-06-15 18:12",
@@ -2498,7 +2498,7 @@
     "editors_pick": false,
     "editors_note": "",
     "star_rating": "",
-    "hidden": false,
+    "hidden": true,
     "source_url": "https://www.trinitylaban.ac.uk/whats-on-performance/?artform=music",
     "date_scraped": "2026-06-15",
     "last_updated": "2026-06-15 18:12",
@@ -6475,7 +6475,7 @@
     "genre_tier2": "",
     "format_tags": "Standing / Gig",
     "band_format": "",
-    "description": "PREP are an indie pop/jazz-funk band rather than a straightforward jazz act, but there are enough specific, verifiable facts to work with.",
+    "description": "Tokyo-based quartet blending jazz harmony, funk and city-pop \u2014 their album *Prep* drew comparisons to Thundercat and Hiatus Kaiyote.",
     "special_occasion": "EFG London Jazz Festival",
     "editors_pick": false,
     "editors_note": "",
@@ -6486,8 +6486,8 @@
     "last_updated": "2026-06-15 18:12",
     "verified": "Yes",
     "scraper_notes": "",
-    "description_verified": false,
-    "description_source": "auto"
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "amira-kheir-world-heart-beat-2026-11-19",
