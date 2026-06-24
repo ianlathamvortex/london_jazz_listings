@@ -247,8 +247,8 @@
     "hidden": false,
     "scraper_notes": "",
     "description": "LoKoJamm runs the Wednesday late session at Orleans in Finsbury Park \u2014 free entry, starting at 10pm and running to 3am. One of the few central London jams that genuinely goes all night.",
-    "link_dead": true,
-    "link_dead_reason": "URLError: _ssl.c:999: The handshake operation timed out"
+    "link_dead": false,
+    "link_dead_reason": ""
   },
   {
     "session_id": "white-horse-peckham",
@@ -385,8 +385,8 @@
     "hidden": false,
     "scraper_notes": "",
     "description": "Thursday night open mic at Orleans, Finsbury Park. \u00a33\u20135 entry, community-led, a mix of jazz, soul and improvised music with a welcoming crowd.",
-    "link_dead": true,
-    "link_dead_reason": "URLError: _ssl.c:999: The handshake operation timed out"
+    "link_dead": false,
+    "link_dead_reason": ""
   },
   {
     "session_id": "stratos-jam-grow",
