@@ -38,4 +38,5 @@ jobs:
           git config --local user.name "Jazz Scraper Bot"
           git add -A
           git diff --staged --quiet || git commit -m "Auto: nightly scrape $(date +'%Y-%m-%d')"
+          git pull --rebase origin main
           git push
