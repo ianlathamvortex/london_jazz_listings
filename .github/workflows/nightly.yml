@@ -30,6 +30,11 @@ jobs:
         run: cp data/*.json .
       - name: Pre-render gigs.html
         run: python prerender.py
+      - name: Check venue coverage
+        id: coverage
+        run: |
+          python coverage_check.py && echo "coverage_ok=true" >> $GITHUB_OUTPUT || echo "coverage_ok=false" >> $GITHUB_OUTPUT
+        continue-on-error: true
       - name: Update sitemap lastmod
         run: python update_sitemap.py
       - name: Commit
@@ -37,6 +42,10 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "Jazz Scraper Bot"
           git add -A
-          git diff --staged --quiet || git commit -m "Auto: nightly scrape $(date +'%Y-%m-%d')"
+          git diff --staged --quiet || if [ "${{ steps.coverage.outputs.coverage_ok }}" = "false" ]; then
+            git commit -m "Auto: nightly scrape $(date +'%Y-%m-%d') ⚠️ COVERAGE GAPS — check coverage_report.md"
+          else
+            git commit -m "Auto: nightly scrape $(date +'%Y-%m-%d')"
+          fi
           git pull --rebase origin main
           git push
