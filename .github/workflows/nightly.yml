@@ -37,6 +37,27 @@ jobs:
         continue-on-error: true
       - name: Update sitemap lastmod
         run: python update_sitemap.py
+      - name: Open issue if coverage gaps found
+        if: steps.coverage.outputs.coverage_ok == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          EXISTING=$(gh issue list --label "coverage-gap" --state open --json number --jq length)
+          if [ "$EXISTING" = "0" ]; then
+            gh issue create \
+              --title "⚠️ Coverage gaps detected $(date +'%Y-%m-%d')" \
+              --body "$(cat coverage_report.md)" \
+              --label "coverage-gap"
+          else
+            echo "Coverage gap issue already open — skipping"
+          fi
+      - name: Close coverage issue if gaps resolved
+        if: steps.coverage.outputs.coverage_ok == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list --label "coverage-gap" --state open --json number --jq '.[].number' | \
+          xargs -I{} gh issue close {} --comment "Coverage gaps resolved ✓"
       - name: Commit
         run: |
           git config --local user.email "action@github.com"
