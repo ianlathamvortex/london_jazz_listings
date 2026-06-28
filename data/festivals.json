@@ -110,5 +110,19 @@
     "description": "Third edition of the Jazz Caf\u00e9's outdoor festival in Burgess Park. Headlined by Ari Lennox (her only UK show this year), with Greentea Peng, Jaz Karis, Durand Bernarr, Smino, Boldy James and more across four stages.",
     "editors_pick": true,
     "hidden": false
+  },
+  {
+    "festival_id": "ealing-jazz-festival-2026",
+    "festival_name": "Ealing Jazz Festival 2026",
+    "start_date": "2026-07-25",
+    "end_date": "2026-07-26",
+    "venue_summary": "Walpole Park, Ealing, W5",
+    "zone": "West",
+    "website": "https://ealingsummerfestivals.com/jazz/",
+    "ticketed": true,
+    "price_range": "",
+    "description": "41st edition of London's most enduring outdoor jazz festival in Walpole Park. Saturday: Galliano (Acid Jazz era pioneers), Steve White Trio, The New Street Adventure. Sunday: Bukky Leo & Black Egypt, Mark Kavuma & The Banger Factory (curating the Big Top via Banger Factory Records). Rooted in West London's jazz-soul-funk lineage from 1984 to now.",
+    "editors_pick": true,
+    "hidden": false
   }
 ]
