@@ -26,6 +26,7 @@ TUBE     = "Leicester Square / Tottenham Court Road"
 TIER     = "1"
 BASE_URL = "https://www.ronniescotts.co.uk"
 LIST_URL = f"{BASE_URL}/find-a-show"
+CAL_URL  = f"{BASE_URL}/show-calendar"  # calendar view has all shows by date
 
 HEADERS = {
     "User-Agent": (
