@@ -93,8 +93,8 @@ def _stage_to_format(show_type: str) -> tuple:
     return "Main Stage", "Jazz Club", "20:00"
 
 
-def _fetch_page(page: int) -> BeautifulSoup | None:
-    url = LIST_URL if page == 1 else f"{LIST_URL}?page={page}"
+def _fetch_page(page: int, url: str = "") -> BeautifulSoup | None:
+    url = url or (LIST_URL if page == 1 else f"{LIST_URL}?page={page}")
     try:
         req = urllib.request.Request(url, headers=HEADERS)
         with urllib.request.urlopen(req, timeout=20) as r:
@@ -128,11 +128,17 @@ def scrape() -> list:
     total_pages = min(_count_pages(soup1), 8)  # cap at 8 pages (~3 months ahead)
     print(f"  {total_pages} pages to scrape")
 
-    soups = [soup1]
-    for page in range(2, total_pages + 1):
-        s = _fetch_page(page)
-        if s:
-            soups.append(s)
+    # Try show-calendar first — has all shows in date order, one page
+    cal_soup = _fetch_page(1, url=f"{BASE_URL}/show-calendar")
+    if cal_soup:
+        soups = [cal_soup]
+        print("  Using show-calendar view")
+    else:
+        soups = [soup1]
+        for page in range(2, total_pages + 1):
+            s = _fetch_page(page)
+            if s:
+                soups.append(s)
 
     for soup in soups:
         # Each show is a block containing: show type label, date, h2 title, description, link
