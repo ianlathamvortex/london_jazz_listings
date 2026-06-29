@@ -30,6 +30,8 @@ jobs:
         run: cp data/*.json .
       - name: Pre-render gigs.html
         run: python prerender.py
+      - name: Deduplicate gigs
+        run: python dedup.py
       - name: Check venue coverage
         id: coverage
         run: |
