@@ -1,159 +1,139 @@
 """
-scraper_pizzaexpress.py — PizzaExpress Jazz Club (Soho + Pheasantry)
-Source: https://www.pizzaexpresslive.com/whats-on
+scraper_pizzaexpress.py — PizzaExpress Live (Soho, Pheasantry, Holborn, Leicester Square)
+Source: https://api.pizzaexpresslive.com/products/search-event-information
 
-PizzaExpress blocks all plain HTTP requests (403). Requires Playwright.
-The site is Next.js — after JS renders, events appear as article/card elements.
-Also tries __NEXT_DATA__ JSON blob which is faster when available.
+Site rebranded to "PizzaExpress Live" and moved to a fully client-rendered
+Next.js frontend (no data in initial HTML, no __NEXT_DATA__ events blob).
+Discovered via DevTools Network tab that the frontend calls this public JSON
+API directly (Symfony API Platform / hydra format) — no auth required.
+This replaces the old Playwright-based scraper which returned 0 results
+after the rebrand broke every DOM selector it relied on.
 """
 
-import re
-import json
 import sys
 from pathlib import Path
+from datetime import datetime, timedelta
 sys.path.insert(0, str(Path(__file__).parent))
 
-from utils import gig, load, save, merge_gigs, clean_date, is_future
-from browser import fetch_browser, fetch_browser_json, PLAYWRIGHT_AVAILABLE
+from utils import gig, load, save, merge_gigs, is_future, HEADERS
+import requests
 
-BASE_URL  = "https://www.pizzaexpresslive.com"
-WHATS_ON  = f"{BASE_URL}/whats-on"
+API_URL = "https://api.pizzaexpresslive.com/products/search-event-information"
+WHATS_ON_URL = "https://www.pizzaexpresslive.com/whats-on"
 
+# location (from API) -> (venue_name, zone, neighbourhood, venue_tier)
 VENUES = {
-    "soho":        ("PizzaExpress Jazz Club",      "Central",   "Soho",    "1"),  # tier 1 — historic Soho room
-    "pheasantry":  ("PizzaExpress The Pheasantry", "South West", "Chelsea", "2"),
-    "holborn":     ("PizzaExpress Jazz Club Holborn", "Central", "Holborn", "2"),
-    "aldgate":     ("PizzaExpress Jazz Club Aldgate", "East",    "Aldgate", "2"),
+    "soho":             ("PizzaExpress Live Soho",            "Central",    "Soho",             "1"),
+    "chelsea":          ("PizzaExpress Live The Pheasantry",   "South West", "Chelsea",          "2"),
+    "holborn":          ("PizzaExpress Live Holborn",          "Central",    "Holborn",          "2"),
+    "leicester square": ("PizzaExpress Live Leicester Square", "Central",    "Leicester Square", "2"),
 }
 
 
-def _venue_from_url(href: str):
-    hl = href.lower()
-    for key, val in VENUES.items():
-        if key in hl:
-            return val
-    return VENUES["soho"]   # default
+def _venue_info(location: str):
+    key = (location or "").strip().lower()
+    return VENUES.get(key, (f"PizzaExpress Live {location}".strip(), "Central", location or "", "2"))
 
 
-def _parse_price(text: str) -> str:
-    m = re.search(r"£(\d+(?:\.\d{2})?)", text)
-    return f"£{m.group(1)}" if m else ""
+def _parse_event_date(raw: str) -> str:
+    """API gives dates like 'Saturday 4th July' with no year. Assume current
+    year, but roll forward to next year if that would put it > ~2 months
+    in the past (handles year-end -> new-year rollover)."""
+    from dateutil import parser as dp
+    if not raw:
+        return ""
+    try:
+        dt = dp.parse(raw, dayfirst=True, default=datetime.now())
+        if dt < datetime.now() - timedelta(days=60):
+            dt = dt.replace(year=dt.year + 1)
+        return dt.strftime("%Y-%m-%d")
+    except Exception:
+        return ""
+
+
+def _parse_time(raw: str) -> str:
+    if not raw:
+        return ""
+    raw = raw.strip().replace("AM", "am").replace("PM", "pm")
+    # "1:00pm" -> "1.00pm" to match site convention (e.g. "7.45pm")
+    return raw.replace(":", ".")
+
+
+def _parse_price(pence) -> str:
+    try:
+        pounds = int(pence) / 100
+        if pounds <= 0:
+            return ""
+        return f"£{pounds:.0f}" if pounds == int(pounds) else f"£{pounds:.2f}"
+    except (TypeError, ValueError):
+        return ""
 
 
 def scrape() -> list:
-    print("Scraping PizzaExpress Jazz (Playwright)...")
-    if not PLAYWRIGHT_AVAILABLE:
-        print("  Playwright not available — skipping")
-        return []
-
-    soup = fetch_browser(
-        WHATS_ON,
-        wait_for="article, [class*=\'event\'], [class*=\'show\'], [class*=\'listing\']",
-        timeout=40000,
-    )
-    if not soup:
-        print("  No response from PizzaExpress")
-        return []
-
+    print("Scraping PizzaExpress Live (JSON API)...")
     results = []
+    page = 1
+    seen_ids = set()
 
-    # Strategy 1: __NEXT_DATA__ JSON blob (fastest, most reliable)
-    script = soup.find("script", id="__NEXT_DATA__")
-    if script:
+    while True:
         try:
-            data = json.loads(script.string)
-            props = data.get("props", {}).get("pageProps", {})
-            events = (
-                props.get("events") or
-                props.get("shows") or
-                props.get("listings") or
-                props.get("data", {}).get("events") or
-                []
+            resp = requests.get(
+                API_URL,
+                params={"page": page, "itemsPerPage": 100, "expandDates": "false"},
+                headers=HEADERS,
+                timeout=20,
             )
-            if events:
-                print(f"  Found {len(events)} events in __NEXT_DATA__")
-                for ev in events:
-                    artist = (ev.get("name") or ev.get("title") or ev.get("artistName") or "").strip()
-                    if not artist:
-                        continue
-                    date_raw = ev.get("date") or ev.get("startDate") or ev.get("dateTime") or ""
-                    date_str = clean_date(str(date_raw)[:10]) if date_raw else ""
-                    if not date_str or not is_future(date_str):
-                        continue
-                    slug = ev.get("slug") or ev.get("url") or ""
-                    href = f"/whats-on/{slug}" if slug and not slug.startswith("http") else slug
-                    venue_name, zone, hood, tier = _venue_from_url(href)
-                    price_raw = ev.get("price") or ev.get("priceFrom") or ""
-                    price = f"£{price_raw}" if price_raw and not str(price_raw).startswith("£") else str(price_raw)
-                    ticket_url = BASE_URL + href if href.startswith("/") else (href or WHATS_ON)
-                    results.append(gig(
-                        artist_name=artist, venue_name=venue_name, date=date_str,
-                        price_from=price, ticket_url=ticket_url, source_url=WHATS_ON,
-                        zone=zone, neighbourhood=hood, venue_tier=tier,
-                        format_tags="Jazz Club", genre_tier1="Contemporary Jazz",
-                    ))
-                if results:
-                    print(f"  Parsed {len(results)} future gigs from JSON")
-                    return results
-        except Exception as e:
-            print(f"  __NEXT_DATA__ parse error: {e}")
-
-    # Strategy 2: Parse rendered HTML cards
-    selectors = [
-        "article",
-        "[class*=\'EventCard\']",
-        "[class*=\'event-card\']",
-        "[class*=\'show-card\']",
-        "[class*=\'listing-item\']",
-        "li[class*=\'event\']",
-    ]
-    cards = []
-    for sel in selectors:
-        cards = soup.select(sel)
-        if cards:
+        except requests.RequestException as e:
+            print(f"  Request error on page {page}: {e}")
             break
 
-    print(f"  Found {len(cards)} HTML cards")
-    for card in cards:
-        text = card.get_text(separator=" ", strip=True)
-        link = card.find("a", href=re.compile(r"/whats-on/"))
-        href = link["href"] if link else ""
-        if not href:
-            continue
+        if resp.status_code != 200:
+            print(f"  Page {page} returned HTTP {resp.status_code}")
+            break
 
-        # Artist name
-        h = card.find(["h1","h2","h3","h4"])
-        artist = h.get_text(strip=True) if h else ""
-        if not artist:
-            # Try data attribute or first substantial text
-            artist = card.get("data-name") or card.get("aria-label") or ""
-        if not artist or len(artist) < 3:
-            continue
+        data = resp.json()
+        members = data.get("hydra:member", [])
+        total = data.get("hydra:totalItems", 0)
+        if not members:
+            break
 
-        # Date
-        date_m = re.search(
-            r"(\d{1,2})\s+(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|"
-            r"Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|"
-            r"Nov(?:ember)?|Dec(?:ember)?)(?:\s+(\d{4}))?",
-            text, re.IGNORECASE
-        )
-        if not date_m:
-            continue
-        year = date_m.group(3) or "2026"
-        date_str = clean_date(f"{date_m.group(1)} {date_m.group(2)} {year}")
-        if not is_future(date_str):
-            continue
+        for ev in members:
+            eid = ev.get("id")
+            if eid in seen_ids:
+                continue
+            seen_ids.add(eid)
 
-        venue_name, zone, hood, tier = _venue_from_url(href)
-        price = _parse_price(text)
-        ticket_url = BASE_URL + href if href.startswith("/") else href
+            artist = (ev.get("name") or "").strip()
+            if not artist:
+                continue
 
-        results.append(gig(
-            artist_name=artist, venue_name=venue_name, date=date_str,
-            price_from=price, ticket_url=ticket_url, source_url=WHATS_ON,
-            zone=zone, neighbourhood=hood, venue_tier=tier,
-            format_tags="Jazz Club", genre_tier1="Contemporary Jazz",
-        ))
+            date_str = _parse_event_date(ev.get("eventDate", ""))
+            if not date_str or not is_future(date_str):
+                continue
+
+            venue_name, zone, hood, tier = _venue_info(ev.get("location", ""))
+            slug = ev.get("slug", "")
+            ticket_url = f"{WHATS_ON_URL}/{slug}" if slug else WHATS_ON_URL
+
+            results.append(gig(
+                artist_name=artist,
+                venue_name=venue_name,
+                date=date_str,
+                start_time=_parse_time(ev.get("showStartTime", "")),
+                doors_time=_parse_time(ev.get("doorsOpenTime", "")),
+                price_from=_parse_price(ev.get("price")),
+                ticket_url=ticket_url,
+                source_url=WHATS_ON_URL,
+                zone=zone,
+                neighbourhood=hood,
+                venue_tier=tier,
+                format_tags="Jazz Club",
+                genre_tier1="Contemporary Jazz",
+            ))
+
+        if page * 100 >= total:
+            break
+        page += 1
 
     print(f"  Found {len(results)} future PizzaExpress gigs")
     return results
