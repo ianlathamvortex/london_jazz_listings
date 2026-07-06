@@ -8,8 +8,8 @@
     "zone": "South West",
     "website": "https://www.batterseajazzfestival.co.uk",
     "ticketed": false,
-    "price_range": "Free \u2014 all events",
-    "description": "Ten days of completely free jazz across multiple Battersea venues. No booking required. Opens with a jazz ballet \u2014 Hugo Jennings Big Band performing Prokofiev's Romeo and Juliet at Clapham Grand. Includes Scott Hamilton & Nat Steele, Deschanel Gordon Trio, Dave O'Higgins closing party.",
+    "price_range": "Free — all events",
+    "description": "Ten days of completely free jazz across multiple Battersea venues. No booking required. Opens with a jazz ballet — Hugo Jennings Big Band performing Prokofiev's Romeo and Juliet at Clapham Grand. Includes Scott Hamilton & Nat Steele, Deschanel Gordon Trio, Dave O'Higgins closing party.",
     "editors_pick": true,
     "hidden": false
   },
@@ -18,11 +18,11 @@
     "festival_name": "Harry Styles' Meltdown 2026",
     "start_date": "2026-06-10",
     "end_date": "2026-06-17",
-    "venue_summary": "Southbank Centre \u2014 Royal Festival Hall, Queen Elizabeth Hall, Riverside Terrace",
+    "venue_summary": "Southbank Centre — Royal Festival Hall, Queen Elizabeth Hall, Riverside Terrace",
     "zone": "Central",
     "website": "https://www.southbankcentre.co.uk/events/meltdown/",
     "ticketed": true,
-    "price_range": "\u00a347+ (some free outdoor events)",
+    "price_range": "£47+ (some free outdoor events)",
     "description": "Harry Styles curates Meltdown 2026. Jazz highlights: Kamasi Washington plays two shows (3pm tribute to Coltrane & Miles Davis, 8pm Fearless Movement Live), plus Steam Down free outdoor terrace takeover on 14 June.",
     "editors_pick": true,
     "hidden": false
@@ -36,8 +36,8 @@
     "zone": "Various",
     "website": "https://efglondonjazzfestival.org.uk",
     "ticketed": true,
-    "price_range": "\u00a35\u2013\u00a375",
-    "description": "The UK's biggest jazz festival \u2014 10 days, 300+ events across 60+ London venues. 2026 highlights include Joe Lovano's Coltrane 100 project and Anouar Brahem. Also includes a free FreeStage at the Barbican.",
+    "price_range": "£5–£75",
+    "description": "The UK's biggest jazz festival — 10 days, 300+ events across 60+ London venues. 2026 highlights include Joe Lovano's Coltrane 100 project and Anouar Brahem. Also includes a free FreeStage at the Barbican.",
     "editors_pick": true,
     "hidden": false
   },
@@ -64,8 +64,8 @@
     "zone": "Central",
     "website": "https://serious.org.uk/summer-jazz-series-2026",
     "ticketed": true,
-    "price_range": "\u00a320\u2013\u00a365",
-    "description": "The EFG London Jazz Festival team's summer warm-up \u2014 global jazz stars across London's best venues. 2026 includes Pat Metheny (three shows at Barbican), Al Di Meola, Roberto Fonseca and more.",
+    "price_range": "£20–£65",
+    "description": "The EFG London Jazz Festival team's summer warm-up — global jazz stars across London's best venues. 2026 includes Pat Metheny (three shows at Barbican), Al Di Meola, Roberto Fonseca and more.",
     "editors_pick": true,
     "hidden": false
   },
@@ -78,8 +78,8 @@
     "zone": "South West",
     "website": "https://www.606club.co.uk/events/fulham-palace-1/",
     "ticketed": true,
-    "price_range": "\u00a325",
-    "description": "The 606 Club's 17th annual outdoor summer event on the lawns of Fulham Palace. Friday: The Coalminers \u2014 10-piece New Orleans swamp soul with Tommy Hare & Amy Bird. Saturday: 606 All Stars 9-piece celebrating the club's 50th anniversary, featuring Natalie Duncan, Polly Gibbons, Jo Harrop, Brandon Allen, Alec Harper & Denys Baptiste.",
+    "price_range": "£25",
+    "description": "The 606 Club's 17th annual outdoor summer event on the lawns of Fulham Palace. Friday: The Coalminers — 10-piece New Orleans swamp soul with Tommy Hare & Amy Bird. Saturday: 606 All Stars 9-piece celebrating the club's 50th anniversary, featuring Natalie Duncan, Polly Gibbons, Jo Harrop, Brandon Allen, Alec Harper & Denys Baptiste.",
     "editors_pick": true,
     "hidden": false
   },
@@ -93,13 +93,13 @@
     "website": "",
     "ticketed": false,
     "price_range": "Free entry",
-    "description": "Free jazz stage at the High Tide Festival in Twickenham. Artists include Denys Baptiste/Tony Kofi Quintet, Misha Mullov-Abbado Sextet, GAB Trio. 1pm\u20137:30pm.",
+    "description": "Free jazz stage at the High Tide Festival in Twickenham. Artists include Denys Baptiste/Tony Kofi Quintet, Misha Mullov-Abbado Sextet, GAB Trio. 1pm–7:30pm.",
     "editors_pick": false,
     "hidden": false
   },
   {
     "festival_id": "jazz-cafe-festival-2026",
-    "festival_name": "Jazz Caf\u00e9 Festival 2026",
+    "festival_name": "Jazz Café Festival 2026",
     "start_date": "2026-08-02",
     "end_date": "2026-08-02",
     "venue_summary": "Burgess Park, Camberwell, SE5",
@@ -107,7 +107,7 @@
     "website": "https://thejazzcafe.com/event/jazz-cafe-festival-2026/",
     "ticketed": true,
     "price_range": "",
-    "description": "Third edition of the Jazz Caf\u00e9's outdoor festival in Burgess Park. Headlined by Ari Lennox (her only UK show this year), with Greentea Peng, Jaz Karis, Durand Bernarr, Smino, Boldy James and more across four stages.",
+    "description": "Third edition of the Jazz Café's outdoor festival in Burgess Park. Headlined by Ari Lennox (her only UK show this year), with Greentea Peng, Jaz Karis, Durand Bernarr, Smino, Boldy James and more across four stages.",
     "editors_pick": true,
     "hidden": false
   },
@@ -122,6 +122,20 @@
     "ticketed": true,
     "price_range": "",
     "description": "41st edition of London's most enduring outdoor jazz festival in Walpole Park. Saturday: Galliano (Acid Jazz era pioneers), Steve White Trio, The New Street Adventure. Sunday: Bukky Leo & Black Egypt, Mark Kavuma & The Banger Factory (curating the Big Top via Banger Factory Records). Rooted in West London's jazz-soul-funk lineage from 1984 to now.",
+    "editors_pick": true,
+    "hidden": false
+  },
+  {
+    "festival_id": "polish-jazz-festival-2026",
+    "festival_name": "Polish Jazz Festival 2026",
+    "start_date": "2026-09-11",
+    "end_date": "2026-09-27",
+    "venue_summary": "Cadogan Hall, Union Chapel, King's Place",
+    "zone": "Central",
+    "website": "https://polishjazzfestival.com/",
+    "ticketed": true,
+    "price_range": "Ticketed — prices vary by venue",
+    "description": "Multi-venue festival of Polish jazz across three London halls. Opens with bassist Wojtek Mazolewski and Wrocław group EABS at Cadogan Hall, includes vocalists Kayah and Urszula Dudziak, a Chopin deconstruction project featuring Lee Ranaldo, pianist Leszek Możdżer playing Komeda, and closes with quartet Kosmonauci at King's Place.",
     "editors_pick": true,
     "hidden": false
   }
