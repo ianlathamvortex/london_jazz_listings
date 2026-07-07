@@ -173,7 +173,12 @@ def fetch(url: str, timeout: int = 15) -> BeautifulSoup | None:
     try:
         r = requests.get(url, headers=HEADERS, timeout=timeout)
         r.raise_for_status()
-        return BeautifulSoup(r.text, "lxml")
+        # Use raw bytes (not r.text) so BeautifulSoup/lxml can sniff the
+        # real encoding from <meta charset> etc. requests' own encoding
+        # guess defaults to ISO-8859-1 when a server omits charset in its
+        # Content-Type header, which mangles accented names (Möller ->
+        # MÃ¶ller) on any site that doesn't declare charset explicitly.
+        return BeautifulSoup(r.content, "lxml")
     except Exception as e:
         print(f"  ERROR fetching {url}: {e}")
         return None
