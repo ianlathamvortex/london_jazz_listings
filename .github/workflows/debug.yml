@@ -1,0 +1,21 @@
+name: Debug Jazzlive
+on:
+  workflow_dispatch:
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests beautifulsoup4 lxml python-dateutil
+      - run: python debug_jazzlive.py
+      - run: |
+          git config user.name "debug-bot"
+          git config user.email "debug@example.com"
+          git add debug_output.txt
+          git commit -m "debug output" || echo "nothing to commit"
+          git push
