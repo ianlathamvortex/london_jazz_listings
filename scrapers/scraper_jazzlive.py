@@ -34,38 +34,35 @@ def scrape() -> list:
 
     results = []
 
-    # Each gig block has a date header like "29May 2026" and an h3 title
-    # Find all date+title pairs
+    # Each gig card is <div class="box_blog_top"> containing exactly two
+    # children: <div class="blog_date"> (e.g. "03 July2026") and
+    # <div class="blog_title"><h3>Artist Name</h3></div>.
+    # NOTE: cards are nested (each blog_content wraps the next), NOT sibling
+    # divs, so walking up from the h3 to "the nearest div" landed on
+    # blog_title itself (title only, no date) rather than box_blog_top —
+    # that was the bug that made this scraper return 0 results for months.
+    # Selecting box_blog_top directly sidesteps the nesting entirely.
+    gig_blocks = soup.select("div.box_blog_top")
 
-    # The date appears as text like "29May\n  \n2026" in a div
-    # followed by an h3 with the artist name
-
-    # Strategy: find all h3 tags (artist names) and look backwards for the date
-    gig_blocks = soup.select("h3")
-
-    for h3 in gig_blocks:
-        artist = h3.get_text(strip=True)
+    for box in gig_blocks:
+        title_div = box.select_one("div.blog_title")
+        h3 = title_div.find("h3") if title_div else None
+        artist = h3.get_text(strip=True) if h3 else ""
         if not artist or len(artist) < 3:
             continue
 
-        # Walk up the DOM to find the containing section
-        parent = h3.parent
-        while parent and parent.name not in ("div", "section", "article", "body"):
-            parent = parent.parent
+        date_div = box.select_one("div.blog_date")
+        date_text = date_div.get_text(separator=" ", strip=True) if date_div else ""
 
-        if not parent:
-            continue
-
-        block_text = parent.get_text(separator=" ", strip=True)
-
-        # Extract date — format is "29May 2026" or "05June 2026" etc
+        # Format is "03 July2026" — day, space, month+year with no space
+        # between month and year.
         date_m = re.search(
             r"(\d{1,2})\s*"
             r"(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|"
             r"June?|July?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|"
             r"Nov(?:ember)?|Dec(?:ember)?)"
             r"\s*(\d{4})",
-            block_text, re.IGNORECASE
+            date_text, re.IGNORECASE
         )
         if not date_m:
             continue
@@ -76,12 +73,27 @@ def scrape() -> list:
         if not is_future(date_str):
             continue
 
-        # Description — paragraph text after the h3
+        # Full card wrapper. NOTE: each blog_content div nests the *next*
+        # event's blog_content inside it (not as a sibling), so a plain
+        # card.get_text() would bleed into the following event's price and
+        # description text. Only take this card's own direct children, up
+        # to (not including) the nested next blog_content div.
+        card = box.find_parent("div", class_="blog_content") or box
+        own_texts = []
+        for child in card.find_all(recursive=False):
+            if child.name == "div" and "blog_content" in (child.get("class") or []):
+                break
+            own_texts.append(child.get_text(separator=" ", strip=True))
+        block_text = " ".join(own_texts)
+
+        # Description — first paragraph after the h3 (find_next follows
+        # document order, so it naturally lands on this card's own
+        # paragraph before reaching the next nested event)
         desc_el = h3.find_next("p")
         description = desc_el.get_text(separator=" ", strip=True)[:400] if desc_el else ""
 
-        # Ticket link
-        ticket_link = parent.find("a", href=re.compile(r"wegottickets|tickets"))
+        # Ticket link — same document-order reasoning as description
+        ticket_link = h3.find_next("a", href=re.compile(r"wegottickets|tickets"))
         ticket_url = ticket_link["href"] if ticket_link else GIG_URL
 
         # Price — usually £8–£12 for Jazzlive
