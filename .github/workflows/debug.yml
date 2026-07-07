@@ -12,10 +12,10 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install requests beautifulsoup4 lxml python-dateutil
-      - run: python debug_jazzlive.py
+      - run: python debug_jazzlive2.py
       - run: |
           git config user.name "debug-bot"
           git config user.email "debug@example.com"
-          git add debug_output.txt
-          git commit -m "debug output" || echo "nothing to commit"
+          git add debug_output2.txt
+          git commit -m "debug output 2" || echo "nothing to commit"
           git push
