@@ -1,0 +1,35 @@
+HTTP status: 200
+Response length: 32749
+First 500 chars of raw HTML:
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Jazzlive at The Crypt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <!-- Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Jazzlive, The Crypt, Jazzlive at the Crypt, Jazz Club London, Jazz Club, Top Jazz Artists, Jazz Arti
+
+Number of h3 tags found: 7
+
+--- h3 #0: 'The Clock Winders' ---
+Walked up 0 levels to find parent tag: div
+Parent classes: ['blog_title']
+block_text length: 17
+block_text first 300 chars: 'The Clock Winders'
+
+--- h3 #1: 'Mark Lockheart & John Parricelli' ---
+Walked up 0 levels to find parent tag: div
+Parent classes: ['blog_title']
+block_text length: 32
+block_text first 300 chars: 'Mark Lockheart & John Parricelli'
+
+--- h3 #2: 'Axel Kaner-Lidstrom' ---
+Walked up 0 levels to find parent tag: div
+Parent classes: ['blog_title']
+block_text length: 19
+block_text first 300 chars: 'Axel Kaner-Lidstrom'
