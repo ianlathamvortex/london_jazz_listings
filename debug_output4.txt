@@ -2,7 +2,7 @@ Total gigs found: 6
 2026-07-10 | Mark Lockheart & John Parricelli | price=£10 | special='' | ticket=https://wegottickets.com/f/22493
   desc: Mark Lockheart- saxes & clarinets
 2026-07-17 | Axel Kaner-Lidstrom | price=£10 | special='' | ticket=https://wegottickets.com/f/22671
-  desc: Axel Kaner-LidstrÃ¶m is a London-based instrumentalist and composer emerging from the cityâs new jazz vanguard. A member of the Tomorrowâs Warrior
+  desc: Axel Kaner-Lidström is a London-based instrumentalist and composer emerging from the city’s new jazz vanguard. A member of the Tomorrow’s Warriors gen
 2026-07-19 | Camberwell Connection 10th Anniversary Celebration | price=£5 | special='Anniversary' | ticket=https://wegottickets.com/f/21647
   desc: Join Pearl & Toby as Dubplate Pearl & Mr Swing Easy to celebrate Camberwell Connection's 10th anniversary.
 2026-07-24 | Kourosh Kanani & Matt Davies + special guest Amena Labd | price=£10 | special='' | ticket=https://wegottickets.com/f/22595
