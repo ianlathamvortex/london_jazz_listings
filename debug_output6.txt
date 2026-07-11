@@ -1,7 +1,0 @@
-2026-07-23: 1 gig(s)
-  'Kate Williams Trio' | price=£15 | ticket=https://www.vortexjazz.co.uk/event/kate-williams-trio/
-2026-07-10: 1 gig(s)
-  'Zoe Rahman Trio – Album Launch (2 Shows)' | price=£20 | ticket=https://www.vortexjazz.co.uk/event/zoe-rahman-trio-album-launch-2-shows/
-2026-08-26: 1 gig(s)
-  'Sorin Zlat Trio “Changing Times”' | price=£15 | ticket=https://www.vortexjazz.co.uk/event/sorin-zlat-trio-changing-times/
-2026-07-13: 0 gig(s)
