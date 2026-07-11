@@ -1,0 +1,11 @@
+HTTP status: 200
+Response length: 57314
+article.type-tribe_events count: 1
+div.tribe-event count: 0
+
+Total <article> tags: 1
+  <article class=['post_entry', 'type-tribe_events', 'post-27326', 'tribe-clearfix', 'tribe-events-venue-65', 'tribe-events-last', 'tribe_events', 'status-publish', 'has-post-thumbnail', 'hentry']>
+
+'Kate Williams' text nodes found: 2
+  text='Kate Williams Trio' ancestor_chain=['h1.None', "a.['post_title']", "div.['post_excerpt']", "article.['post_entry', 'type-tribe_events', 'post-27326', 'tribe-clearfix', 'tribe-events-venue-65', 'tribe-events-last', 'tribe_events', 'status-publish', 'has-post-thumbnail', 'hentry']", "div.['tribe-events-day-time-slot']"]
+  text='Pianist/composer Kate Williams has gained a reputation as both a distinctive writer and performer. The performance will feature material from the album as well as some new tunes and arrangements.' ancestor_chain=['p.None', "div.['post_excerpt']", "article.['post_entry', 'type-tribe_events', 'post-27326', 'tribe-clearfix', 'tribe-events-venue-65', 'tribe-events-last', 'tribe_events', 'status-publish', 'has-post-thumbnail', 'hentry']", "div.['tribe-events-day-time-slot']", "div.['tribe-events-loop']"]
