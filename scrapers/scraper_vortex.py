@@ -93,16 +93,34 @@ def _scrape_day(url: str, date_str: str) -> list:
 def _parse_article(article, date_str: str, source_url: str) -> dict | None:
     from utils import gig as make_gig
 
-    title_el = (
-        article.find("h2", class_=re.compile("tribe-events")) or
-        article.find("h1", class_=re.compile("tribe-events")) or
-        article.find("h2") or
-        article.find("h3")
-    )
-    if not title_el:
-        return None
+    # Primary: real markup wraps the title in <a class="post_title"><h1>...</h1></a>
+    # with no class on the h1 itself, so h2/h1.tribe-events selectors never
+    # matched and every event was silently skipped. a.post_title gives us
+    # both the title text and the href in one element.
+    title_anchor = article.select_one("a.post_title")
+    if title_anchor:
+        artist = title_anchor.get_text(strip=True)
+        href = title_anchor.get("href")
+        ticket_url = href if href and href.startswith("http") else (BASE_URL + href if href else source_url)
+    else:
+        # Fallback for any other markup variant
+        title_el = (
+            article.find("h2", class_=re.compile("tribe-events")) or
+            article.find("h1", class_=re.compile("tribe-events")) or
+            article.find("h1") or
+            article.find("h2") or
+            article.find("h3")
+        )
+        if not title_el:
+            return None
+        artist = title_el.get_text(strip=True)
+        link = title_el.find("a", href=True) or article.find("a", href=True)
+        if link:
+            href = link["href"]
+            ticket_url = href if href.startswith("http") else BASE_URL + href
+        else:
+            ticket_url = source_url
 
-    artist = title_el.get_text(strip=True)
     if not artist or len(artist) < 3:
         return None
     if artist.lower().strip() in NAV_TITLES:
@@ -115,13 +133,6 @@ def _parse_article(article, date_str: str, source_url: str) -> dict | None:
     text = article.get_text(separator=" ", strip=True)
     time_m  = re.search(r"(\d{1,2}[:.]\d{2})\s*(pm|am)?", text, re.I)
     price_m = re.search(r"£(\d+)", text)
-
-    link = title_el.find("a", href=True) or article.find("a", href=True)
-    if link:
-        href = link["href"]
-        ticket_url = href if href.startswith("http") else BASE_URL + href
-    else:
-        ticket_url = source_url
 
     stage = ""
     if "downstairs" in text.lower():
