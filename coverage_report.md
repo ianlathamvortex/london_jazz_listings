@@ -15,7 +15,7 @@ Window: next 14 days
   - Fri 17 Jul – Sat 25 Jul (9 days)
 
 ## 🟢 OK — Vortex Jazz Club
-- Coverage: 9/8 days (112%)
+- Coverage: 12/8 days (150%)
 - Scraper: `scraper_vortex.py`
 
 ## 🔴 CRITICAL — PizzaExpress Jazz Club
