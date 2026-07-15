@@ -445,8 +445,8 @@
     "hidden": false,
     "scraper_notes": "",
     "description": "Groove-based open session at The Jago in Stoke Newington \u2014 more spontaneous and feel-led than a standards jam. Expect soul, funk and improvised music alongside jazz. Walk in, find your moment, join in.",
-    "link_dead": true,
-    "link_dead_reason": "Error: The read operation timed out"
+    "link_dead": false,
+    "link_dead_reason": ""
   },
   {
     "session_id": "jake-goss-washington-thursday",
