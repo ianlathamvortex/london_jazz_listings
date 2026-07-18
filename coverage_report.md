@@ -1,4 +1,4 @@
-# Coverage Report — 2026-07-17
+# Coverage Report — 2026-07-18
 Window: next 14 days
 
 ## 🟢 OK — Ronnie Scott's
@@ -11,7 +11,7 @@ Window: next 14 days
 - Coverage: 0/10 days (0%)
 - Scraper: `scraper_606.py`
 - Gaps (3+ days):
-  - Fri 17 Jul – Fri 31 Jul (15 days)
+  - Sat 18 Jul – Sat 01 Aug (15 days)
 
 ## 🟢 OK — Vortex Jazz Club
 - Coverage: 12/8 days (150%)
@@ -21,6 +21,6 @@ Window: next 14 days
 - Coverage: 0/6 days (0%)
 - Scraper: `scraper_pizzaexpress.py`
 - Gaps (3+ days):
-  - Fri 17 Jul – Fri 31 Jul (15 days)
+  - Sat 18 Jul – Sat 01 Aug (15 days)
 
 ⚠️ **Critical gaps: 606 Jazz Club, PizzaExpress Jazz Club**
