@@ -1,0 +1,16 @@
+HTTP status: 200
+Response length: 49480
+event-like links found: 77
+  href='/events/' text="What's On"
+  href='/events/fulham-palace-1/' text='Jazz on the Lawn, Fulham Palace'
+  href='/events/view/errol-linton-13/' text=''
+  href='/events/view/errol-linton-13/' text='Errol Linton'
+  href='/events/view/klara-devlin-quartet/' text=''
+  href='/events/view/klara-devlin-quartet/' text='Klara Devlin Quartet'
+  href='/events/view/natalie-duncan-13/' text=''
+  href='/events/view/natalie-duncan-13/' text='Natalie Duncan'
+  href='/events/view/trish-clowes-9/' text=''
+  href='/events/view/trish-clowes-9/' text='Trish Clowes'
+
+Body text length: 2849
+First 1000 chars: What’s On : 606 Club : Live Music Venue Jazz Club Restaurant, London | 020 7352 5953 | 020 7352 5953 | jazz@606club.co.uk | Facebook | Twitter | Instagram | YouTube | Jazz :: Latin :: Soul & More | Non-members welcome | Full Air Extract & A/C | Login | Home | Contact :: Find Us | What's On | Jazz on the Lawn, Fulham Palace | 2026 EFG London Jazz Festival | Booking | Visiting the 606 Club: FAQ's | Food | À La Carte Menu | Sunday Lunch | FIxed Price Menus | Blog :: News | Membership | Club Membership | Club Membership - Renewal | 606 Online Membership | 606 Online Membership - Renewal | About | Friends of the 606 Club | Times :: Prices | Venue Hire | Book A Table | Contact :: Find Us | Our Menus | Submit | Errol Linton | Klara Devlin Quartet | Natalie Duncan | Trish Clowes | Louise Balkwill | Around About Dusk | ‹ | › | Search by Date | PREV | NEXT | Jul | 2026 | m | t | w | t | f | s | s | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22
