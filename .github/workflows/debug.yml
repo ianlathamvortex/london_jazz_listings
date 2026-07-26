@@ -12,10 +12,10 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install requests beautifulsoup4 lxml python-dateutil
-      - run: python debug_606b.py
+      - run: python debug_606c.py
       - run: |
           git config user.name "debug-bot"
           git config user.email "debug@example.com"
-          git add debug_output_606b.txt
-          git commit -m "debug 606b output" || echo "nothing to commit"
+          git add debug_output_606c.txt
+          git commit -m "debug 606c output" || echo "nothing to commit"
           git push
