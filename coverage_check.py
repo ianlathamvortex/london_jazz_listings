@@ -14,10 +14,10 @@ ROOT = Path(__file__).parent
 
 # Core nightly venues — expected nights per week
 CORE_VENUES = {
-    "Ronnie Scott's":         {"min_per_week": 5, "scraper": "scraper_ronnies.py"},
-    "606 Jazz Club":          {"min_per_week": 5, "scraper": "scraper_606.py"},
-    "Vortex Jazz Club":       {"min_per_week": 4, "scraper": "scraper_vortex.py"},
-    "PizzaExpress Jazz Club": {"min_per_week": 3, "scraper": "scraper_pizzaexpress.py"},
+    "Ronnie Scott's":  {"min_per_week": 5, "scraper": "scraper_ronnies.py"},
+    "606 Club":        {"min_per_week": 5, "scraper": "scraper_606.py"},
+    "Vortex Jazz Club":{"min_per_week": 4, "scraper": "scraper_vortex.py"},
+    "PizzaExpress":    {"min_per_week": 3, "scraper": "scraper_pizzaexpress.py"},
 }
 
 # Check window — next 14 days (reasonable horizon for all scrapers)
