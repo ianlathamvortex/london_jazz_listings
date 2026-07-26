@@ -59,9 +59,9 @@ def _parse_calendar_text(soup) -> list:
 
     current_date = None
     for line in lines:
-        # Match date patterns like "Mon 01st Jun - 8:00pm" or "Thu 04th Jun - 8:00pm"
+        # Match date patterns like "Mon 01st Jun - 8:00pm" or "Thu 4 th Jun - 8:00pm"
         date_match = re.match(
-            r"(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+(\d{1,2})\w*\s+"
+            r"(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+(\d{1,2})(?:\s*(?:st|nd|rd|th))?\s+"
             r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)"
             r"(?:\s+(\d{4}))?\s*[-–]\s*(\d{1,2}:\d{2}(?:am|pm)?)",
             line, re.IGNORECASE
@@ -110,9 +110,12 @@ def _scrape_event_page(url: str) -> dict | None:
     if not artist:
         return None
 
-    # Date
+    # Date — site renders ordinal suffixes with a stray space (e.g.
+    # "Friday 7 th August 2026", not "7th August") likely from a <sup>th</sup>
+    # tag; the day-number/suffix/month pattern must tolerate that space.
     date_match = re.search(
-        r"(\d{1,2})\w*\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)"
+        r"(\d{1,2})(?:\s*(?:st|nd|rd|th))?\s+"
+        r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)"
         r"(?:\s+(\d{4}))?",
         text, re.IGNORECASE
     )
