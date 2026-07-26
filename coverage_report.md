@@ -7,20 +7,18 @@ Window: next 14 days
 - Gaps (3+ days):
   - Mon 03 Aug – Sat 08 Aug (6 days)
 
-## 🔴 CRITICAL — 606 Jazz Club
-- Coverage: 0/10 days (0%)
+## 🔴 CRITICAL — 606 Club
+- Coverage: 3/10 days (30%)
 - Scraper: `scraper_606.py`
 - Gaps (3+ days):
-  - Sun 26 Jul – Sun 09 Aug (15 days)
+  - Sun 26 Jul – Wed 05 Aug (11 days)
 
 ## 🟢 OK — Vortex Jazz Club
 - Coverage: 10/8 days (125%)
 - Scraper: `scraper_vortex.py`
 
-## 🔴 CRITICAL — PizzaExpress Jazz Club
-- Coverage: 0/6 days (0%)
+## 🟢 OK — PizzaExpress
+- Coverage: 15/6 days (250%)
 - Scraper: `scraper_pizzaexpress.py`
-- Gaps (3+ days):
-  - Sun 26 Jul – Sun 09 Aug (15 days)
 
-⚠️ **Critical gaps: 606 Jazz Club, PizzaExpress Jazz Club**
+⚠️ **Critical gaps: 606 Club**
