@@ -109,6 +109,12 @@ def _scrape_event_page(url: str) -> dict | None:
     artist = h.get_text(strip=True) if h else ""
     if not artist:
         return None
+    # Some linked pages (series/hub pages like Fulham Palace, or pages that
+    # fail to load their specific content) fall back to the site's generic
+    # header instead of a real artist name — reject those rather than
+    # polluting gigs.json with junk entries.
+    if artist.strip().lower() in ("what's on at the 606 club", "what's on", "606 club"):
+        return None
 
     # Date — site renders ordinal suffixes with a stray space (e.g.
     # "Friday 7 th August 2026", not "7th August") likely from a <sup>th</sup>
