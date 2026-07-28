@@ -1,4 +1,4 @@
-# Coverage Report — 2026-07-27
+# Coverage Report — 2026-07-28
 Window: next 14 days
 
 ## 🟡 LOW — Ronnie Scott's
@@ -14,9 +14,9 @@ Window: next 14 days
   - Mon 03 Aug – Wed 05 Aug (3 days)
 
 ## 🟢 OK — Vortex Jazz Club
-- Coverage: 10/8 days (125%)
+- Coverage: 11/8 days (138%)
 - Scraper: `scraper_vortex.py`
 
 ## 🟢 OK — PizzaExpress
-- Coverage: 15/6 days (250%)
+- Coverage: 14/6 days (233%)
 - Scraper: `scraper_pizzaexpress.py`
