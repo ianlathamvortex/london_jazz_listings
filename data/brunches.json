@@ -147,8 +147,8 @@
     "last_verified": "2026-06-08",
     "scraper_notes": "",
     "music_quality_tier": 2,
-    "link_dead": true,
-    "link_dead_reason": "URLError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)"
+    "link_dead": false,
+    "link_dead_reason": ""
   },
   {
     "brunch_id": "quaglinos-brunch",
