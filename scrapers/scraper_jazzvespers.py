@@ -129,10 +129,40 @@ def run():
     if not new_gigs:
         print("  No Jazz Vespers gigs found")
         return
+
     existing = load("gigs")
-    merged, added = merge_gigs(existing, new_gigs)
-    save("gigs", merged)
-    print(f"  Added {added} new Jazz Vespers gigs")
+
+    # This venue only ever has one Jazz Vespers gig per date. The church
+    # publishes a placeholder ("Jazz Vespers") months ahead and renames it
+    # to the real artist once booked/announced — that changes gig_id, so a
+    # plain merge_gigs() by gig_id would leave the stale placeholder in
+    # place AND add a duplicate for the same date. Match on (date, venue)
+    # instead and replace in place when the new scrape has more info.
+    by_date = {(g["date"], g["venue_name"]): i
+               for i, g in enumerate(existing) if g["venue_name"] == VENUE}
+
+    added, updated = 0, 0
+    for g in new_gigs:
+        key = (g["date"], g["venue_name"])
+        if key in by_date:
+            idx = by_date[key]
+            old = existing[idx]
+            # Only overwrite if the new scrape actually names a real artist
+            # (i.e. isn't itself still a placeholder) or adds a description
+            # the old entry didn't have — never downgrade a manually
+            # verified/edited entry back to a generic placeholder.
+            if old.get("description_source") == "manual":
+                continue
+            if g["artist_name"] != "Jazz Vespers" or not old.get("description"):
+                existing[idx] = g
+                updated += 1
+        else:
+            existing.append(g)
+            added += 1
+
+    existing.sort(key=lambda g: g["date"])
+    save("gigs", existing)
+    print(f"  Added {added} new, updated {updated} existing Jazz Vespers gigs")
 
 
 if __name__ == "__main__":
