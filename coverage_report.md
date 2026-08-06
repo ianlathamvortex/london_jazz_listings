@@ -1,16 +1,16 @@
-# Coverage Report — 2026-08-05
+# Coverage Report — 2026-08-06
 Window: next 14 days
 
 ## 🔴 CRITICAL — Ronnie Scott's
 - Coverage: 2/10 days (20%)
 - Scraper: `scraper_ronnies.py`
 - Gaps (3+ days):
-  - Wed 05 Aug – Sat 08 Aug (4 days)
+  - Thu 06 Aug – Sat 08 Aug (3 days)
   - Mon 10 Aug – Wed 12 Aug (3 days)
-  - Fri 14 Aug – Wed 19 Aug (6 days)
+  - Fri 14 Aug – Thu 20 Aug (7 days)
 
-## 🟢 OK — 606 Club
-- Coverage: 8/10 days (80%)
+## 🟡 LOW — 606 Club
+- Coverage: 7/10 days (70%)
 - Scraper: `scraper_606.py`
 - Gaps (3+ days):
   - Mon 10 Aug – Sun 16 Aug (7 days)
