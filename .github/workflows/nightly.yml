@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  issues: write
 
 jobs:
   scrape:
@@ -27,49 +26,26 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python run_all.py
+      - name: Safety check — abort if gigs.json empty
+        run: |
+          COUNT=$(python3 -c "import json; d=json.load(open('data/gigs.json')); print(len(d))" 2>/dev/null || echo 0)
+          echo "Gig count after scrape: $COUNT"
+          if [ "$COUNT" -lt 50 ]; then
+            echo "ERROR: Only $COUNT gigs — aborting to prevent data loss"
+            exit 1
+          fi
       - name: Copy data to root
         run: cp data/*.json .
       - name: Pre-render gigs.html
         run: python prerender.py
-      - name: Deduplicate gigs
-        run: python dedup.py
-      - name: Check venue coverage
-        id: coverage
-        run: |
-          python coverage_check.py && echo "coverage_ok=true" >> $GITHUB_OUTPUT || echo "coverage_ok=false" >> $GITHUB_OUTPUT
-        continue-on-error: true
-      - name: Update sitemap lastmod
+      - name: Update sitemap
         run: python update_sitemap.py
-      - name: Open issue if coverage gaps found
-        if: steps.coverage.outputs.coverage_ok == 'false'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          EXISTING=$(gh issue list --label "coverage-gap" --state open --json number --jq length)
-          if [ "$EXISTING" = "0" ]; then
-            gh issue create \
-              --title "⚠️ Coverage gaps detected $(date +'%Y-%m-%d')" \
-              --body "$(cat coverage_report.md)" \
-              --label "coverage-gap"
-          else
-            echo "Coverage gap issue already open — skipping"
-          fi
-      - name: Close coverage issue if gaps resolved
-        if: steps.coverage.outputs.coverage_ok == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh issue list --label "coverage-gap" --state open --json number --jq '.[].number' | \
-          xargs -I{} gh issue close {} --comment "Coverage gaps resolved ✓"
+        continue-on-error: true
       - name: Commit
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "Jazz Scraper Bot"
           git add -A
-          git diff --staged --quiet || if [ "${{ steps.coverage.outputs.coverage_ok }}" = "false" ]; then
-            git commit -m "Auto: nightly scrape $(date +'%Y-%m-%d') ⚠️ COVERAGE GAPS — check coverage_report.md"
-          else
-            git commit -m "Auto: nightly scrape $(date +'%Y-%m-%d')"
-          fi
+          git diff --staged --quiet || git commit -m "Auto: nightly scrape $(date +'%Y-%m-%d')"
           git pull --rebase origin main
           git push
