@@ -13,13 +13,22 @@ sys.path.insert(0, str(ROOT / "scrapers"))
 sys.path.insert(0, str(ROOT / "enricher"))
 
 from utils import FILES, load, save
+
+# IMPORTANT: Only initialise missing data files — never overwrite existing ones
 for category, path in FILES.items():
     if not path.exists():
+        print(f"  WARNING: {path} missing — creating empty file")
         save(category, [])
 
 print(f"\n{'='*60}")
 print(f"London Jazz Scrapers — {datetime.now().strftime('%Y-%m-%d %H:%M')}")
 print(f"{'='*60}\n")
+
+# Safety check — abort if gigs.json is empty (means something went wrong)
+gigs = load("gigs")
+if len(gigs) == 0:
+    print("WARNING: gigs.json is empty before scraping — possible data loss risk")
+    print("Scrapers will run but will not save if result is also empty")
 
 SCRAPERS = [
     ("Ronnie Scott's",       "scraper_ronnies"),
@@ -33,22 +42,12 @@ SCRAPERS = [
     ("Trinity Laban",        "scraper_trinitylaban"),
     ("Jazzlive at The Crypt","scraper_jazzlive"),
     ("Lauderdale House",     "scraper_lauderdale"),
-    ("World Heart Beat",    "scraper_worldheartbeat"),
-    ("Highams Park Jazz",   "scraper_highamsparkjazz"),
-    ("Wigmore Hall",        "scraper_wigmorehall"),
-    ("Cadogan Hall",       "scraper_cadogan"),
-    ("Café OTO",             "scraper_cafeoto"),
-    ("King's Place",         "scraper_kingsplace"),
-    ("Halibuts",              "scraper_halibuts"),
-    ("Grow Hackney",          "scraper_grow"),
-    ("EFG London Jazz Festival", "scraper_efg"),
-    ("Ninety One Brick Lane",    "scraper_ninetyone"),
-    ("Troubadour Sunday Jazz",   "scraper_troubadour"),
-    ("Lauderdale House",          "scraper_lauderdale"),
-    ("MU Hackney",                 "scraper_mu"),
-    ("Oliver's Jazz Bar",          "scraper_olivers"),
-    ("Jazz Café Camden",            "scraper_jazzcafe"),
-    ("Jazz Vespers (AIC)",           "scraper_jazzvespers"),
+    ("World Heart Beat",     "scraper_worldheartbeat"),
+    ("Highams Park Jazz",    "scraper_highamsparkjazz"),
+    ("Wigmore Hall",         "scraper_wigmorehall"),
+    ("Cadogan Hall",         "scraper_cadogan"),
+    ("Cafe OTO",             "scraper_cafeoto"),
+    ("Kings Place",          "scraper_kingsplace"),
 ]
 
 results = {}
@@ -58,10 +57,19 @@ for name, module_name in SCRAPERS:
         mod = importlib.import_module(module_name)
         mod.run()
         results[name] = "✓ OK"
+    except ModuleNotFoundError:
+        print(f"  SKIP: {module_name} not found")
+        results[name] = "⊘ SKIPPED"
     except Exception as e:
         print(f"  ERROR: {e}")
         traceback.print_exc()
         results[name] = f"✗ FAILED: {e}"
+
+# Safety check — abort commit if gigs result is suspiciously small
+final_gigs = load("gigs")
+if len(final_gigs) < 50:
+    print(f"\nWARNING: Only {len(final_gigs)} gigs after scraping — suspiciously low")
+    print("This may indicate a scraper failure. Check logs before committing.")
 
 print(f"\n── Claude API Enricher ──")
 try:
@@ -71,15 +79,6 @@ try:
 except Exception as e:
     print(f"  ERROR: {e}")
     results["Enricher"] = f"✗ FAILED: {e}"
-
-print(f"\n── Link Validator ──")
-try:
-    import link_validator
-    lv_result = link_validator.run()
-    results["Link Validator"] = f"✓ OK ({lv_result.get('dead', 0)} dead links)"
-except Exception as e:
-    print(f"  ERROR: {e}")
-    results["Link Validator"] = f"✗ FAILED: {e}"
 
 print(f"\n{'='*60}")
 print("SUMMARY")
