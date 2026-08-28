@@ -3738,7 +3738,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "\"An afternoon of Soul and RnB\" is a generic event title, not a named artist or act — no specific performer, named album, collaborator, award, or verifiable biographical fact can be found. This is a venue programme description, not an identifiable musician.\n\nSKIP",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -3750,7 +3750,7 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": ""
+    "description_source": "auto"
   },
   {
     "gig_id": "steve-smith-vital-information-ronnie-scott-s-2026-06-26",
@@ -5195,7 +5195,7 @@
     "genre_tier2": "",
     "format_tags": "Concert Hall",
     "band_format": "",
-    "description": "",
+    "description": "This is a broad community arts festival — not a jazz gig — and World Heart Beat's involvement is as a participant (their Latin and New Orleans-style bands perform), not as the headlining jazz artist. There is no specific jazz act, jazz album, jazz collaborator, or jazz lineage to write about. This listing does not meet the criteria for a jazz gig description.\n\nSKIP",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -5207,7 +5207,7 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": ""
+    "description_source": "auto"
   },
   {
     "gig_id": "dave-o-higgins-biggish-band-pizzaexpress-live-soho-2026-07-05",
@@ -5761,7 +5761,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "No relevant results for Vanessa LaTouche. Let me search more specifically.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -5773,7 +5773,7 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": ""
+    "description_source": "auto"
   },
   {
     "gig_id": "terence-blanchard-ravi-coltrane-cadogan-hall-2026-07-09",
@@ -5961,7 +5961,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "The search results appear to point to a New Zealand-based R&B/soul artist (Christchurch), not a London-based jazz act performing at PizzaExpress Live Holborn. The Vinylmeplease source contradicts itself (citing both South London and Christchurch), and appears AI-generated with unreliable facts. There are no specific verifiable jazz facts — named album on a real label, confirmed collaborator, award, or training — that I can confidently attribute to a Jack Page performing at this London jazz venue.\n\nSKIP",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -5973,7 +5973,7 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": ""
+    "description_source": "auto"
   },
   {
     "gig_id": "zoe-rahman-trio-album-launch-2-shows-vortex-jazz-club-2026-07-10",
@@ -6161,7 +6161,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "No specific, verifiable facts relevant to a London jazz listing could be found for an artist named \"Enkay\" — the search results point to unrelated musicians (a Nigerian gospel artist, a hip-hop DJ, etc.) with no confirmed connection to the gig in question.\n\nSKIP",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -6173,7 +6173,7 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": ""
+    "description_source": "auto"
   },
   {
     "gig_id": "brian-simpson-pizzaexpress-live-soho-2026-07-10",
@@ -7889,7 +7889,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "No relevant results for \"Libë\" — the search returned unrelated artists. Let me try a more targeted search.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -7901,7 +7901,7 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": ""
+    "description_source": "auto"
   },
   {
     "gig_id": "laura-klain-trio-pizzaexpress-live-soho-2026-07-17",
@@ -15097,7 +15097,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "No specific, verifiable facts about a \"Stone Cold Soul\" act relevant to a London live music listing were found in the search results.\n\n**SKIP**",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -15109,7 +15109,7 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": ""
+    "description_source": "auto"
   },
   {
     "gig_id": "sir-louis-smile-pizzaexpress-live-the-pheasantry-2026-08-28",
@@ -15131,7 +15131,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "No relevant results found for \"Sir Louis 'Smile'\" as a specific artist. Let me try a more targeted search.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -15143,7 +15143,7 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": ""
+    "description_source": "auto"
   },
   {
     "gig_id": "celebrating-nat-king-cole-gregory-porter-pizzaexpress-live-the-pheasantry-2026-0",
@@ -15841,7 +15841,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "Here is the listing description:",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -15853,7 +15853,7 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": ""
+    "description_source": "auto"
   },
   {
     "gig_id": "elvira-rey-pizzaexpress-live-the-pheasantry-2026-09-02",
@@ -15907,7 +15907,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "Guildhall Masters student Jamie Harms transposes the harmonic language of John Zorn's Masada — the Jewish folk and free jazz project — into his own quintet setting, co-arranged with Sam Eastmond. His project CLIO recently appeared on TIDAL's Out There: Best New Jazz playlist.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -15917,7 +15917,9 @@
     "date_scraped": "2026-08-28",
     "last_updated": "2026-08-28 20:00",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "bonney-crowley-doulton-kitchman-goller-vortex-jazz-club-2026-09-02",
@@ -28825,7 +28827,7 @@
     "genre_tier2": "",
     "format_tags": "Concert Hall",
     "band_format": "",
-    "description": "",
+    "description": "I now have solid, verifiable facts for both artists. Here's the description:",
     "special_occasion": "EFG London Jazz Festival",
     "editors_pick": true,
     "editors_note": "",
@@ -28837,7 +28839,7 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": ""
+    "description_source": "auto"
   },
   {
     "gig_id": "matt-carmichael-cecil-sharp-house-2026-11-17",
@@ -29151,7 +29153,7 @@
     "genre_tier2": "",
     "format_tags": "Concert Hall",
     "band_format": "",
-    "description": "",
+    "description": "I could not find any specific, verifiable facts about an artist called \"A Soul Journey: From Bucharest to London\" — no named musicians, albums, labels, collaborators, or credentials. This appears to be an event title rather than an identifiable artist with a traceable profile.\n\nSKIP",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -29163,7 +29165,7 @@
     "verified": "Yes",
     "scraper_notes": "",
     "description_verified": false,
-    "description_source": ""
+    "description_source": "auto"
   },
   {
     "gig_id": "mo-pleasure-band-pizzaexpress-live-holborn-2026-11-18",
