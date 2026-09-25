@@ -22265,9 +22265,9 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "Sonny Rollins — who died in 2024 aged 94, having recorded with Miles Davis, Thelonious Monk and Clifford Brown — is celebrated by two of the UK's most important saxophone voices. Gary Crosby founded Tomorrow's Warriors; Denys Baptiste is a MOBO Award winner and Mercury Prize nominee.",
+    "description": "",
     "special_occasion": "",
-    "editors_pick": true,
+    "editors_pick": false,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -22275,9 +22275,7 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:07",
     "verified": "Yes",
-    "scraper_notes": "",
-    "description_verified": true,
-    "description_source": "manual"
+    "scraper_notes": ""
   },
   {
     "gig_id": "the-swingtones-pizzaexpress-live-the-pheasantry-2026-09-26",
@@ -26338,7 +26336,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "Drummer and composer Henry Spencer presents his debut album The Defector at the Vortex — drawing on spiritual jazz and West African rhythmic traditions alongside some of London's most in-demand young musicians.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -26348,7 +26346,9 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:07",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "jon-regen-pizzaexpress-live-soho-2026-10-17",
@@ -27633,9 +27633,9 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "Tony Kofi — BBC Radio documentary subject and one of the UK's most celebrated saxophonists — joins Hans Koller to celebrate Steve Lacy, the alto saxophonist who spent decades as Thelonious Monk's sole horn and became one of the music's most distinctive voices.",
+    "description": "",
     "special_occasion": "",
-    "editors_pick": true,
+    "editors_pick": false,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -27643,9 +27643,7 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:07",
     "verified": "Yes",
-    "scraper_notes": "",
-    "description_verified": true,
-    "description_source": "manual"
+    "scraper_notes": ""
   },
   {
     "gig_id": "fleetwood-bac-pizzaexpress-live-holborn-2026-10-24",
@@ -27991,7 +27989,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "Canadian saxophonist Shirantha Beddage launches Departures at the Vortex — his ensemble has performed at the Montreal, TD Ottawa and Ottawa Jazz Festivals. An album release at one of Europe's most respected jazz venues marks his serious London arrival.",
+    "description": "",
     "special_occasion": "Album launch",
     "editors_pick": false,
     "editors_note": "",
@@ -28001,9 +27999,7 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:07",
     "verified": "Yes",
-    "scraper_notes": "",
-    "description_verified": true,
-    "description_source": "manual"
+    "scraper_notes": ""
   },
   {
     "gig_id": "tom-robinson-with-adam-phillips-then-and-now-pizzaexpress-live-holborn-2026-10-2",
@@ -28463,9 +28459,9 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "Orchestra",
-    "description": "",
+    "description": "Saxophonist and composer Josephine Davies leads her large ensemble through original compositions that have established her as one of the most significant orchestral voices in contemporary British jazz — a rarity on the London scene.",
     "special_occasion": "",
-    "editors_pick": false,
+    "editors_pick": true,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -28473,7 +28469,9 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:07",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "don-e-pizzaexpress-live-holborn-2026-10-29",
@@ -30783,9 +30781,9 @@
     "genre_tier2": "",
     "format_tags": "Concert Hall",
     "band_format": "Trio",
-    "description": "Jean Toussaint played with Art Blakey's Jazz Messengers in the 1980s alongside Wynton Marsalis and Terence Blanchard. Now a cornerstone of the London scene and mentor to generations of UK musicians, his quintet delivers hard bop of the highest order.",
+    "description": "",
     "special_occasion": "",
-    "editors_pick": true,
+    "editors_pick": false,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -30793,9 +30791,7 @@
     "date_scraped": "2026-07-29",
     "last_updated": "2026-07-29 01:22",
     "verified": "Yes",
-    "scraper_notes": "",
-    "description_verified": true,
-    "description_source": "manual"
+    "scraper_notes": ""
   },
   {
     "gig_id": "muireann-bradley-stone-nest-2026-11-13",
@@ -30885,9 +30881,9 @@
     "genre_tier2": "",
     "format_tags": "Concert Hall",
     "band_format": "Trio",
-    "description": "Jean Toussaint played with Art Blakey's Jazz Messengers in the 1980s alongside Wynton Marsalis and Terence Blanchard. Now a cornerstone of the London scene and mentor to generations of UK musicians, his quintet delivers hard bop of the highest order.",
+    "description": "",
     "special_occasion": "",
-    "editors_pick": true,
+    "editors_pick": false,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -30895,9 +30891,7 @@
     "date_scraped": "2026-07-30",
     "last_updated": "2026-07-30 01:15",
     "verified": "Yes",
-    "scraper_notes": "",
-    "description_verified": true,
-    "description_source": "manual"
+    "scraper_notes": ""
   },
   {
     "gig_id": "sarathy-korwar-the-wilds-barking-riverside-2026-11-13",
@@ -31191,9 +31185,9 @@
     "genre_tier2": "",
     "format_tags": "Concert Hall",
     "band_format": "",
-    "description": "Tony Kofi — who survived a near-death experience that led him to dedicate his life to music, a story told on BBC Radio — leads The Organisation in a centenary celebration of John Coltrane's music. Few saxophonists are better placed to carry this particular flame.",
+    "description": "",
     "special_occasion": "",
-    "editors_pick": true,
+    "editors_pick": false,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -31201,9 +31195,7 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:10",
     "verified": "Yes",
-    "scraper_notes": "",
-    "description_verified": true,
-    "description_source": "manual"
+    "scraper_notes": ""
   },
   {
     "gig_id": "faris-ishaq-stone-nest-2026-11-14",
@@ -31461,9 +31453,9 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "Trio",
-    "description": "New York drummer Ari Hoenig — whose harmonic approach to the drum kit has influenced a generation of players — brings his trio to the Vortex with guitarist Tom Ollendorff, one of the most quietly impressive voices on the UK scene.",
+    "description": "",
     "special_occasion": "",
-    "editors_pick": true,
+    "editors_pick": false,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -31471,9 +31463,7 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:08",
     "verified": "Yes",
-    "scraper_notes": "",
-    "description_verified": true,
-    "description_source": "manual"
+    "scraper_notes": ""
   },
   {
     "gig_id": "buena-vista-social-club-live-revue-pizzaexpress-live-holborn-2026-11-14",
@@ -32058,9 +32048,9 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "Big Band",
-    "description": "The big band arm of Gary Crosby's Tomorrow's Warriors — the mentoring programme that launched Nubya Garcia, Moses Boyd, Shabaka Hutchings and dozens more. An orchestra of the next generation of British jazz talent.",
+    "description": "",
     "special_occasion": "",
-    "editors_pick": true,
+    "editors_pick": false,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -32068,9 +32058,7 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:08",
     "verified": "Yes",
-    "scraper_notes": "",
-    "description_verified": true,
-    "description_source": "manual"
+    "scraper_notes": ""
   },
   {
     "gig_id": "london-jazz-orchestra-festival-special-vortex-jazz-club-2026-11-15",
@@ -32520,7 +32508,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "Swedish vocalist Emilia Martensson pairs with pianist Matt Robinson and guitarist Adam Waldmann — three musicians who have each built significant reputations on the London scene, here combining for what promises to be an uncommonly beautiful evening.",
+    "description": "",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -32530,9 +32518,7 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:08",
     "verified": "Yes",
-    "scraper_notes": "",
-    "description_verified": true,
-    "description_source": "manual"
+    "scraper_notes": ""
   },
   {
     "gig_id": "joe-bristow-pizzaexpress-live-soho-2026-11-17",
@@ -34678,7 +34664,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "Alto saxophonist and composer Reiss Ellis Beckles is one of London's most forward-looking young voices — his music blends modern swing, soul and global influences in a group sound that's both accessible and distinctly his own.",
+    "description": "",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -34688,9 +34674,7 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:08",
     "verified": "Yes",
-    "scraper_notes": "",
-    "description_verified": true,
-    "description_source": "manual"
+    "scraper_notes": ""
   },
   {
     "gig_id": "vox-collective-gle-ileg-j-l-pizzaexpress-live-the-pheasantry-2026-12-01",
