@@ -26,6 +26,21 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python run_all.py
+      - name: Check description coverage
+        run: |
+          python3 -c "
+import json, sys
+from datetime import datetime
+today = datetime.now().strftime('%Y-%m-%d')
+gigs = json.load(open('data/gigs.json'))
+future = [g for g in gigs if g.get('date','') >= today]
+no_desc = [g for g in future if not g.get('description','').strip()]
+pct = int(100*(len(future)-len(no_desc))/max(len(future),1))
+print(f'Description coverage: {len(future)-len(no_desc)}/{len(future)} ({pct}%)')
+if pct < 30:
+    print(f'WARNING: Only {pct}% of future gigs have descriptions')
+"
+        continue-on-error: true
       - name: Safety check — abort if gigs.json empty
         run: |
           COUNT=$(python3 -c "import json; d=json.load(open('data/gigs.json')); print(len(d))" 2>/dev/null || echo 0)
