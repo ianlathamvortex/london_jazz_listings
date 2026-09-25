@@ -23717,7 +23717,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "Brazilian vocalist Daniela Soledade and American guitarist Nate Najar present a programme of bossa nova — a format both have dedicated significant careers to recording and performing internationally.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -23727,7 +23727,9 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:08",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "simply-dan-play-steely-dan-pizzaexpress-live-holborn-2026-10-03",
@@ -28621,9 +28623,9 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "Son of conductor Claudio Abbado, Misha Mullov-Abbado has forged his own compelling identity as a bassist and composer — his albums on Edition Records blend jazz, classical and world influences with rare elegance.",
     "special_occasion": "",
-    "editors_pick": false,
+    "editors_pick": true,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -28631,7 +28633,9 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:08",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "mark-lettieri-group-ronnies-2026-10-30",
@@ -30345,7 +30349,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "Trio",
-    "description": "",
+    "description": "American pianist Larry Fuller — known for his work with Ernestine Anderson and the Jeff Hamilton Trio — brings his swinging mainstream approach to PizzaExpress, channelling the tradition of Oscar Peterson and Hank Jones.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -30355,7 +30359,9 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:08",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "family-band-vortex-jazz-club-2026-11-11",
@@ -34085,7 +34091,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "Vocalist Georgia Mancio pairs with Belgian guitarist Jeanfrançois Prins for an intimate duo evening — Mancio is known for her thoughtful repertoire choices and the interpretive depth she brings to the American Songbook.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -34095,7 +34101,9 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:08",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "kitty-whitelaw-pizzaexpress-live-the-pheasantry-2026-11-25",
@@ -34533,9 +34541,9 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "Quartet",
-    "description": "",
+    "description": "Trumpeter Eddie Henderson played on Herbie Hancock's Mwandishi albums in the early 1970s — fusion recordings that remain ahead of their time. Now in his 80s, Henderson continues to play with remarkable fluency and fire.",
     "special_occasion": "",
-    "editors_pick": false,
+    "editors_pick": true,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -34543,7 +34551,9 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:08",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "harold-l-pez-nussa-andr-da-silva-wigmore-hall-2026-11-30",
@@ -35848,9 +35858,9 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "Tenor saxophonist Binker Golding — half of the Mercury Prize-shortlisted duo Binker and Moses — is one of the most powerful and original voices to emerge from the London jazz scene in the last decade.",
     "special_occasion": "",
-    "editors_pick": false,
+    "editors_pick": true,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -35858,7 +35868,9 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:08",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "immy-churchill-quartet-highams-park-jazz-club-2026-12-12",
@@ -35976,7 +35988,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "Quartet",
-    "description": "",
+    "description": "Italian acoustic guitarist Antonio Forcione has recorded for Naim Audio and toured with Paco de Lucía — his quartet blends jazz, flamenco and world music with a warmth and virtuosity that consistently delights audiences.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -35986,7 +35998,9 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:08",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "lawrence-jones-quartet-pizzaexpress-live-the-pheasantry-2026-12-13",
