@@ -21779,9 +21779,9 @@
     "genre_tier2": "",
     "format_tags": "Concert Hall",
     "band_format": "",
-    "description": "",
+    "description": "Legendary sitarist Baluji Shrivastav — Commander of the British Empire and founder of the Inner Vision Orchestra — joins the Jazz Orient ensemble for a meeting of Indian classical and jazz improvisation at World Heart Beat.",
     "special_occasion": "",
-    "editors_pick": false,
+    "editors_pick": true,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -21789,7 +21789,9 @@
     "date_scraped": "2026-07-13",
     "last_updated": "2026-07-13 01:25",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "luiz-morais-brilliant-brazil-pizzaexpress-live-soho-2026-09-25",
@@ -22265,9 +22267,9 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "Sonny Rollins — who died in 2024 aged 94 — is celebrated by two of the UK's most important saxophone voices. Gary Crosby founded Tomorrow's Warriors; Denys Baptiste is a MOBO Award winner and Mercury Prize nominee.",
     "special_occasion": "",
-    "editors_pick": false,
+    "editors_pick": true,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -22275,7 +22277,9 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:07",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "the-swingtones-pizzaexpress-live-the-pheasantry-2026-09-26",
@@ -23943,9 +23947,9 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "Orchestra",
-    "description": "",
+    "description": "The London Jazz Orchestra's monthly Vortex residency takes on special significance with a programme marking 100 years since John Coltrane's birth — large ensemble arrangements of Coltrane's music is a rare treat.",
     "special_occasion": "",
-    "editors_pick": false,
+    "editors_pick": true,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -23953,7 +23957,9 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:07",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "ronnie-scott-s-blues-explosion-ronnies-2026-10-04",
@@ -29510,9 +29516,9 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "Trio",
-    "description": "",
+    "description": "BBC New Generation Artist and Mercury Prize-nominated trumpeter marks the centenary of Miles Davis's birth. Jurd is one of the most original compositional voices in British jazz — her band Dinosaur was shortlisted for the Mercury Prize.",
     "special_occasion": "",
-    "editors_pick": false,
+    "editors_pick": true,
     "editors_note": "",
     "star_rating": "",
     "hidden": false,
@@ -29520,7 +29526,9 @@
     "date_scraped": "2026-09-25",
     "last_updated": "2026-09-25 02:07",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "dennis-rollins-funky-funk-pizzaexpress-live-soho-2026-11-04",
