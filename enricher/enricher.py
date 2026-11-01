@@ -1,6 +1,6 @@
 """
 enricher.py — Claude API description generator with web search
-Runs nightly. Generates descriptions with a capped number of API attempts per run.
+Runs nightly.
 Reports coverage stats so the workflow can warn on gaps.
 """
 import os
@@ -13,8 +13,6 @@ from datetime import datetime
 
 MODEL       = "claude-sonnet-4-6"
 MAX_TOKENS  = 400
-MAX_PER_RUN = 100
-MAX_ATTEMPTS = 80  # cap API calls so a run can't hit the workflow timeout
 
 BAD_PATTERNS = [
     "no relevant results", "no specific", "couldn't find", "could not find",
@@ -73,65 +71,90 @@ def generate_description(artist, venue, date, special=""):
         return ""
 
 
+LEAK_PHRASES = ["no relevant results", "let me try", "more targeted search",
+                "let me search", "couldn't find", "unable to find", "based on my search"]
+TIME_BUDGET = 30 * 60   # seconds; workflow timeout is 45 min
+WORKERS = 6
+
+
+def _tidy(records):
+    """Blank leaked model text; move free-priced gigs to free_entry.json."""
+    cleared = 0
+    for r in records:
+        d = r.get("description", "").lower()
+        if d and any(p in d for p in LEAK_PHRASES):
+            r["description"] = ""; r["description_verified"] = False; r["description_source"] = ""
+            cleared += 1
+    free = [r for r in records if r.get("price_from", "").strip().lower() == "free"]
+    if free:
+        fe = load("free_entry")
+        have = {(e.get("artist_name") or e.get("event_name"), e.get("date")) for e in fe}
+        for g in free:
+            if (g.get("artist_name"), g.get("date")) in have:
+                continue
+            fe.append({"entry_id": "free-" + str(g.get("gig_id", "")), "event_name": g.get("artist_name", ""),
+                       "artist_name": g.get("artist_name", ""), "venue_name": g.get("venue_name", ""),
+                       "address": g.get("address", ""), "postcode": g.get("postcode", ""),
+                       "zone": g.get("zone", ""), "neighbourhood": g.get("neighbourhood", ""),
+                       "nearest_tube": g.get("nearest_tube", ""), "venue_type": "", "date": g.get("date", ""),
+                       "start_time": g.get("start_time", ""), "end_time": "", "frequency": "",
+                       "booking_required": False, "booking_url": g.get("ticket_url", ""),
+                       "free_entry_type": "Free", "genre_tier1": g.get("genre_tier1", ""),
+                       "format_tags": g.get("format_tags", ""), "description": g.get("description", ""),
+                       "source_url": g.get("ticket_url", ""), "editors_pick": False, "hidden": False,
+                       "last_verified": datetime.now().strftime("%Y-%m-%d")})
+        save("free_entry", fe)
+        records = [r for r in records if r not in free]
+    print(f"  Tidy: cleared {cleared} leaked descriptions, moved {len(free)} free gigs")
+    return records
+
+
 def run():
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
-    if not api_key:
-        print("  ANTHROPIC_API_KEY not set — skipping")
+    import time
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    if not os.environ.get("ANTHROPIC_API_KEY", ""):
+        print("  ANTHROPIC_API_KEY not set - skipping")
         return
 
     today = datetime.now().strftime("%Y-%m-%d")
-    records = load("gigs")
-    future = [r for r in records if r.get("date","") >= today]
-    no_desc = [r for r in future if not r.get("description","").strip()]
-    total = len(future)
-    coverage_pct = int(100 * (total - len(no_desc)) / max(total, 1))
+    records = _tidy(load("gigs"))
+    future = [r for r in records if r.get("date", "") >= today]
+    todo = [r for r in future if not r.get("description", "").strip() and r.get("artist_name") and r.get("venue_name")]
+    print(f"Description coverage: {len(future) - len(todo)}/{len(future)}")
 
-    print(f"Description coverage: {total - len(no_desc)}/{total} ({coverage_pct}%)")
-    if coverage_pct < 50:
-        print(f"  WARNING: COVERAGE BELOW 50% - {len(no_desc)} gigs need descriptions")
+    # One lookup per artist (PizzaExpress repeats acts across many dates)
+    first = {}
+    for r in todo:
+        first.setdefault(r["artist_name"], r)
+    artists = list(first)
+    print(f"  Researching {len(artists)} artists with {WORKERS} workers")
+
+    results = {}
+    start = time.time()
+    ex = ThreadPoolExecutor(WORKERS)
+    futs = {ex.submit(generate_description, a, first[a]["venue_name"], first[a]["date"],
+                      first[a].get("special_occasion", "")): a for a in artists}
+    try:
+        for f in as_completed(futs, timeout=TIME_BUDGET):
+            results[futs[f]] = f.result()
+    except Exception as e:
+        print(f"  Time budget reached ({e.__class__.__name__}) - saving what we have")
+    ex.shutdown(wait=False, cancel_futures=True)
 
     count = 0
-    attempts = 0
-    changed = False
-    for i, record in enumerate(records):
-        if count >= MAX_PER_RUN or attempts >= MAX_ATTEMPTS:
-            print(f"  Reached run limit (descriptions={count}, attempts={attempts})")
-            break
-        if record.get("description", "").strip():
-            continue
-        if record.get("date","") < today:
-            continue
-        artist  = record.get("artist_name", "")
-        venue   = record.get("venue_name", "")
-        date    = record.get("date", "")
-        special = record.get("special_occasion", "")
-        if not artist or not venue:
-            continue
-
-        print(f"  Researching: {artist[:45]}...")
-        attempts += 1
-        desc = generate_description(artist, venue, date, special)
-        if desc:
-            records[i]["description"] = desc
-            records[i]["description_verified"] = False
-            records[i]["description_source"] = "auto"
+    for r in todo:
+        d = results.get(r["artist_name"], "")
+        if d:
+            r["description"] = d
+            r["description_verified"] = False
+            r["description_source"] = "auto"
             count += 1
-            changed = True
-            print(f"  OK {artist[:40]}")
-        else:
-            print(f"  -> Skipped")
-
-    if changed:
-        save("gigs", records)
-        print(f"  Generated {count} new descriptions")
-    else:
-        print("  No new descriptions generated")
-
-    # Final coverage report
-    records2 = load("gigs")
-    future2 = [r for r in records2 if r.get("date","") >= today]
-    no_desc2 = [r for r in future2 if not r.get("description","").strip()]
-    print(f"  Final coverage: {len(future2)-len(no_desc2)}/{len(future2)} ({int(100*(len(future2)-len(no_desc2))/max(len(future2),1))}%)")
+    save("gigs", records)
+    got = sum(1 for v in results.values() if v)
+    print(f"  Artists done {len(results)}/{len(artists)}, described {got}; gigs updated {count}; {int(time.time()-start)}s")
+    future2 = [r for r in records if r.get("date", "") >= today]
+    have2 = [r for r in future2 if r.get("description", "").strip()]
+    print(f"  Final coverage: {len(have2)}/{len(future2)} ({100*len(have2)//max(len(future2),1)}%)")
 
 
 if __name__ == "__main__":
