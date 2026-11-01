@@ -12,5 +12,66 @@
       "description_verified": true,
       "description_source": "manual"
     }
+  },
+  {
+    "note": "Sorin Zlat Trio, PizzaExpress Soho 8 Nov 2026 - sourced from ICR profile",
+    "match": {
+      "artist_name": "Sorin Zlat Trio",
+      "date": "2026-11-08",
+      "venue_name": "PizzaExpress Live Soho"
+    },
+    "set": {
+      "description": "Romanian pianist who in 2015 became the first non-American to win the Grand Prix at the Jacksonville piano competition. He has shared a festival stage with Chick Corea and Gregory Porter.",
+      "description_verified": true,
+      "description_source": "manual"
+    }
+  },
+  {
+    "note": "Coltrane 100 at the Barbican, 13 Nov 2026 - user's top pick of the festival; facts from EFG LJF and Elbphilharmonie pages",
+    "match": {
+      "gig_id": "coltrane-100-joe-lovano-melissa-aldana-nduduzo-makhathini-linda-may-han-oh-jeff-",
+      "date": "2026-11-13"
+    },
+    "set": {
+      "description": "Produced with the approval of the Coltrane estate for the centenary of his birth, with Grammy-winning saxophonist Joe Lovano, Chilean tenor Melissa Aldana and South African pianist Nduduzo Makhathini, who draws on McCoy Tyner's legacy. Drummer Jeff “Tain” Watts toured extensively with Alice and Ravi Coltrane.",
+      "special_occasion": "Coltrane 100",
+      "editors_pick": true,
+      "description_verified": true,
+      "description_source": "manual"
+    }
+  },
+  {
+    "note": "Jean Toussaint Quintet, World Heart Beat 13 Nov 2026 - facts from Sandy Brown Jazz profile",
+    "match": {
+      "gig_id": "jean-toussaint-quintet-opener-nnamdi-nnachi-cole-trio-world-heart-beat-2026-11-1",
+      "date": "2026-11-13"
+    },
+    "set": {
+      "description": "Virgin Islands-born tenor saxophonist who joined Art Blakey's Messengers in 1982 and played on New York Scene, a 1985 Grammy winner. London-based since 1987, he led Brother Raymond (2018), his eleventh album as bandleader.",
+      "description_verified": true,
+      "description_source": "manual"
+    }
+  },
+  {
+    "note": "Duplicate of the Toussaint listing above (same show, 'Opening' vs 'Opener' wording) - hide",
+    "match": {
+      "gig_id": "jean-toussaint-quintet-opening-nnamdi-nnachi-cole-trio-world-heart-beat-2026-11-",
+      "date": "2026-11-13"
+    },
+    "set": {
+      "hidden": true
+    }
+  },
+  {
+    "note": "Morcheeba, Troxy 13 Nov 2026 - replaces leaked model text; facts from encyclopedia.com",
+    "match": {
+      "gig_id": "morcheeba-troxy-2026-11-13",
+      "date": "2026-11-13"
+    },
+    "set": {
+      "description": "Trip-hop trio formed in London in 1994 around singer Skye Edwards and brothers Paul and Ross Godfrey. Their debut Who Can You Trust? appeared in 1996, followed by Big Calm in 1998.",
+      "description_verified": true,
+      "description_source": "manual"
+    }
   }
 ]
