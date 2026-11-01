@@ -109,5 +109,17 @@
       "description_verified": true,
       "description_source": "manual"
     }
+  },
+  {
+    "note": "Julian Siegel Quartet, Highams Park 21 Nov - facts from Wikipedia",
+    "match": {
+      "gig_id": "julian-siegel-quartet-highams-park-jazz-club-2026-11-21",
+      "date": "2026-11-21"
+    },
+    "set": {
+      "description": "Tenor saxophonist and clarinettist who won Best Instrumentalist at the 2007 BBC awards. Swamp (2014, Whirlwind Recordings), by his band Partisans, took Album of the Year at the 2015 Parliamentary awards.",
+      "description_verified": true,
+      "description_source": "manual"
+    }
   }
 ]
