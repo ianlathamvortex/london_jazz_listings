@@ -291,7 +291,20 @@ def run():
 
     if free_events:
         existing = load("free_entry")
-        merged, added = merge_gigs(existing, free_events)
+        have = {(e.get("artist_name") or e.get("event_name"), e.get("date"), e.get("venue_name")) for e in existing}
+        merged, added = list(existing), 0
+        for g in free_events:
+            key = (g.get("artist_name"), g.get("date"), g.get("venue_name"))
+            if key in have:
+                continue
+            have.add(key)
+            entry = dict(g)
+            entry.setdefault("entry_id", "free-" + str(g.get("gig_id", "")))
+            entry["event_name"] = g.get("artist_name", "")
+            entry["booking_url"] = g.get("ticket_url", "")
+            entry["free_entry_type"] = "Free"
+            merged.append(entry)
+            added += 1
         save("free_entry", merged)
         print(f"  Added {added} new Trinity Laban free events")
 
