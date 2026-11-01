@@ -122,6 +122,25 @@ def _tidy(records):
     return records
 
 
+def _apply_overrides(records):
+    """Apply manual corrections from data/overrides.json (match on exact fields, then set fields)."""
+    import json
+    path = Path(__file__).parent.parent / "data" / "overrides.json"
+    try:
+        rules = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return records
+    n = 0
+    for r in records:
+        for rule in rules:
+            match = rule.get("match", {})
+            if match and all(r.get(k) == v for k, v in match.items()):
+                r.update(rule.get("set", {}))
+                n += 1
+    print(f"  Overrides applied: {n}")
+    return records
+
+
 def run():
     import time
     from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -130,7 +149,7 @@ def run():
         return
 
     today = datetime.now().strftime("%Y-%m-%d")
-    records = _tidy(load("gigs"))
+    records = _apply_overrides(_tidy(load("gigs")))
     future = [r for r in records if r.get("date", "") >= today]
     todo = [r for r in future if not r.get("description", "").strip() and r.get("artist_name") and r.get("venue_name")]
     print(f"Description coverage: {len(future) - len(todo)}/{len(future)}")
