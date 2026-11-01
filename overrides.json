@@ -1,0 +1,16 @@
+[
+  {
+    "note": "Benefit gig for Barry Green, 2 Nov 2026",
+    "match": {
+      "artist_name": "Barry Green",
+      "date": "2026-11-02",
+      "venue_name": "PizzaExpress Live Soho"
+    },
+    "set": {
+      "special_occasion": "Benefit Gig",
+      "description": "Benefit gig for Barry Green. He runs his own Mole Tone label and has recorded with New York drummer Tom Rainey, whom he met playing in saxophonist Ingrid Laubrock's band.",
+      "description_verified": true,
+      "description_source": "manual"
+    }
+  }
+]
