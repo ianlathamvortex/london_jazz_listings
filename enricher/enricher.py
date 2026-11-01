@@ -44,28 +44,71 @@ def _is_bad(text):
     return any(p in t for p in BAD_PATTERNS) or bool(LEAK_RE.search(text))
 
 
+def _clean(text):
+    text = re.sub(r"\s+([,.;:])", r"\1", text); text = re.sub(r"\s+", " ", text).replace("*", "")
+    return text.strip()
+
+
+def _check(text):
+    """Return '' if publishable, else the reason it was rejected."""
+    low = text.lower()
+    if not text or text.upper().startswith("SKIP") or len(text) < 20:
+        return "skip"
+    if _is_bad(text):
+        return "leak"
+    if "jazz" in low:
+        return "jazz"
+    if len(text.split()) > 60 or re.search(r"\b(tonight|this evening)\b", low):
+        return "form"
+    return ""
+
+
+def _ask(client, artist, venue, date, special, uses, hint=""):
+    prompt = f"Artist: {artist}\nVenue: {venue}, London\nDate: {date}"
+    if special:
+        prompt += f"\nOccasion: {special}"
+    if hint:
+        prompt += "\n\n" + hint
+    prompt += "\n\nWrite the description or SKIP:"
+    msg = client.messages.create(
+        model=MODEL, max_tokens=MAX_TOKENS, system=SYSTEM_PROMPT,
+        tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": uses}],
+        messages=[{"role": "user", "content": prompt}])
+    last = max([i for i, b in enumerate(msg.content) if getattr(b, "type", "") == "web_search_tool_result"], default=-1)
+    return _clean("".join(b.text for b in msg.content[last+1:] if getattr(b, "type", "") == "text"))
+
+
+def _rewrite(client, draft, why):
+    """No search: fix wording of a draft that failed a form check, keeping only facts already in it."""
+    fix = {"jazz": 'Remove the word "jazz" (and any "jazz club"/"jazz singer" phrasing; say pianist, saxophonist, singer, etc.).',
+           "form": "Cut to two sentences, under 55 words, and remove any reference to tonight or this evening."}[why]
+    msg = client.messages.create(
+        model=MODEL, max_tokens=300,
+        system="You edit short gig blurbs. Keep ONLY the facts in the draft; add nothing. Output only the edited text, no preamble.",
+        messages=[{"role": "user", "content": f"{fix} Do not start with the artist name.\n\nDraft: {draft}"}])
+    return _clean("".join(b.text for b in msg.content if getattr(b, "type", "") == "text"))
+
+
 def generate_description(artist, venue, date, special=""):
+    """Up to 3 stages: search; on a wording failure rewrite the draft; on SKIP search again, harder."""
     try:
         import anthropic
         client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-        prompt = f"Artist: {artist}\nVenue: {venue}, London\nDate: {date}"
-        if special:
-            prompt += f"\nOccasion: {special}"
-        prompt += "\n\nWrite the description or SKIP:"
-        msg = client.messages.create(
-            model=MODEL, max_tokens=MAX_TOKENS, system=SYSTEM_PROMPT,
-            tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 3}],
-            messages=[{"role": "user", "content": prompt}]
-        )
-        # Answer = text after the last web-search result (earlier text is preamble)
-        last = max([i for i, b in enumerate(msg.content) if getattr(b, "type", "") == "web_search_tool_result"], default=-1)
-        text = "".join(b.text for b in msg.content[last+1:] if getattr(b, "type", "") == "text").strip()
-        text = re.sub(r"\s+([,.;:])", r"\1", text); text = re.sub(r"\s+", " ", text).replace("*", "")
-        low = text.lower()
-        if (not text or text.upper().startswith("SKIP") or _is_bad(text) or len(text) < 20
-                or len(text.split()) > 60 or "jazz" in low or re.search(r"\b(tonight|this evening)\b", low)):
-            return ""
-        return text
+        text = _ask(client, artist, venue, date, special, 3)
+        why = _check(text)
+        if why in ("jazz", "form"):
+            text = _rewrite(client, text, why)
+            why = _check(text)
+        if why == "skip":
+            text = _ask(client, artist, venue, date, special, 5,
+                        "A first search found nothing usable. Try Wikipedia, AllMusic, the label or the artist's own site, "
+                        "and the venue listing. One concrete fact is enough: a named album and year, a band they lead or "
+                        "play in, a notable collaborator, an award, or where they are from.")
+            why = _check(text)
+            if why in ("jazz", "form"):
+                text = _rewrite(client, text, why)
+                why = _check(text)
+        return text if not why else ""
     except Exception as e:
         print(f"  API error for {artist}: {e}")
         return ""
