@@ -56,6 +56,8 @@ def _check(text):
         return "skip"
     if _is_bad(text):
         return "leak"
+    if text[-1] not in ".!?\"”)'’":
+        return "frag"
     if "jazz" in low:
         return "jazz"
     if len(text.split()) > 60 or re.search(r"\b(tonight|this evening)\b", low):
@@ -112,7 +114,7 @@ def generate_description(artist, venue, date, special="", extra=""):
             text = _rewrite(client, text, why)
             why = _check(text)
         first_why, first_text = why, text
-        if why in ("skip", "leak"):
+        if why in ("skip", "leak", "frag"):
             text = _ask(client, artist, venue, date, special, 5,
                         "A first search found nothing usable. Try Wikipedia, AllMusic, the label or the artist's own site, "
                         "and the venue listing. One concrete fact is enough: a named album and year, a band they lead or "
@@ -135,7 +137,7 @@ def generate_description(artist, venue, date, special="", extra=""):
 
 
 # Model reasoning that must never reach the site (applies to auto descriptions only)
-LEAK_RE = re.compile(r'''(^\W*(i |i'|no |now i|here is|here's|this is not|this artist|the search|the results|skip\b|\*\*skip)|verifiable|\bi cannot\b|\bi could not\b|\bi can't\b|\bi couldn't\b|\bi found\b|\bi have\b|\bi'll\b|search result|per my instr|artist name must|here is the (listing )?description|not a jazz|not a named|generic event title|\blet me\b|results (point|appear|pull)|\bi need to\b|\bi now\b)''', re.I)
+LEAK_RE = re.compile(r'''(^\W*(i |i'|no |now i|here is|here's|this is not|this artist|the search|the results|skip\b|\*\*skip)|verifiable|\bskip\b|<[^>]+>|could be verified|\bi must\b|not a real|\bi cannot\b|\bi could not\b|\bi can't\b|\bi couldn't\b|\bi found\b|\bi have\b|\bi'll\b|search result|per my instr|artist name must|here is the (listing )?description|not a jazz|not a named|generic event title|\blet me\b|results (point|appear|pull)|\bi need to\b|\bi now\b)''', re.I)
 TIME_BUDGET = 30 * 60   # seconds; workflow timeout is 45 min
 WORKERS = 6
 
@@ -158,7 +160,7 @@ def _tidy(records):
     cleared = 0
     for r in records:
         d = r.get("description", "").lower()
-        if d and r.get("description_source") != "manual" and LEAK_RE.search(r.get("description", "")):
+        if d and r.get("description_source") != "manual" and (LEAK_RE.search(r.get("description", "")) or r.get("description", "").strip()[-1:] not in ".!?\"”)'’"):
             r["description"] = ""; r["description_verified"] = False; r["description_source"] = ""
             cleared += 1
     free = [r for r in records if r.get("price_from", "").strip().lower() == "free"]
