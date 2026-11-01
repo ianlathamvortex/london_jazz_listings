@@ -212,6 +212,7 @@ def gig(
     zone: str = "",
     neighbourhood: str = "",
     venue_tier: str = "1",
+    nearest_tube: str = "",  # accepted for compatibility with scrapers that pass it
 ) -> dict:
     return {
         "gig_id":           make_gig_id(artist_name, venue_name, date),
