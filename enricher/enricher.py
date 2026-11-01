@@ -1,9 +1,10 @@
 """
 enricher.py — Claude API description generator with web search
-Runs nightly. Generates up to 50 descriptions per run.
+Runs nightly. Generates descriptions with a capped number of API attempts per run.
 Reports coverage stats so the workflow can warn on gaps.
 """
 import os
+import re
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "scrapers"))
@@ -11,8 +12,9 @@ from utils import load, save
 from datetime import datetime
 
 MODEL       = "claude-sonnet-4-6"
-MAX_TOKENS  = 150
-MAX_PER_RUN = 50  # raised from 20
+MAX_TOKENS  = 400
+MAX_PER_RUN = 100
+MAX_ATTEMPTS = 80  # cap API calls so a run can't hit the workflow timeout
 
 BAD_PATTERNS = [
     "no relevant results", "no specific", "couldn't find", "could not find",
@@ -54,17 +56,18 @@ def generate_description(artist, venue, date, special=""):
         prompt += "\n\nWrite the description or SKIP:"
         msg = client.messages.create(
             model=MODEL, max_tokens=MAX_TOKENS, system=SYSTEM_PROMPT,
-            tools=[{"type": "web_search_20250305", "name": "web_search"}],
+            tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 3}],
             messages=[{"role": "user", "content": prompt}]
         )
-        for block in msg.content:
-            if hasattr(block, "text"):
-                text = block.text.strip()
-                if not text or text.upper() == "SKIP" or _is_bad(text):
-                    return ""
-                if len(text) > 20:
-                    return text
-        return ""
+        # Answer = text after the last web-search result (earlier text is preamble)
+        last = max([i for i, b in enumerate(msg.content) if getattr(b, "type", "") == "web_search_tool_result"], default=-1)
+        text = "".join(b.text for b in msg.content[last+1:] if getattr(b, "type", "") == "text").strip()
+        text = re.sub(r"\s+([,.;:])", r"\1", text); text = re.sub(r"\s+", " ", text).replace("*", "")
+        low = text.lower()
+        if (not text or text.upper().startswith("SKIP") or _is_bad(text) or len(text) < 20
+                or len(text.split()) > 60 or "jazz" in low or re.search(r"\b(tonight|this evening)\b", low)):
+            return ""
+        return text
     except Exception as e:
         print(f"  API error for {artist}: {e}")
         return ""
@@ -85,13 +88,14 @@ def run():
 
     print(f"Description coverage: {total - len(no_desc)}/{total} ({coverage_pct}%)")
     if coverage_pct < 50:
-        print(f"  ⚠️  COVERAGE BELOW 50% — {len(no_desc)} gigs need descriptions")
+        print(f"  WARNING: COVERAGE BELOW 50% - {len(no_desc)} gigs need descriptions")
 
     count = 0
+    attempts = 0
     changed = False
     for i, record in enumerate(records):
-        if count >= MAX_PER_RUN:
-            print(f"  Reached {MAX_PER_RUN} limit for this run")
+        if count >= MAX_PER_RUN or attempts >= MAX_ATTEMPTS:
+            print(f"  Reached run limit (descriptions={count}, attempts={attempts})")
             break
         if record.get("description", "").strip():
             continue
@@ -105,6 +109,7 @@ def run():
             continue
 
         print(f"  Researching: {artist[:45]}...")
+        attempts += 1
         desc = generate_description(artist, venue, date, special)
         if desc:
             records[i]["description"] = desc
@@ -112,9 +117,9 @@ def run():
             records[i]["description_source"] = "auto"
             count += 1
             changed = True
-            print(f"  ✓ {artist[:40]}")
+            print(f"  OK {artist[:40]}")
         else:
-            print(f"  → Skipped")
+            print(f"  -> Skipped")
 
     if changed:
         save("gigs", records)
