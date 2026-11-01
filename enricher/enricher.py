@@ -111,7 +111,8 @@ def generate_description(artist, venue, date, special="", extra=""):
         if why in ("jazz", "form"):
             text = _rewrite(client, text, why)
             why = _check(text)
-        if why == "skip":
+        first_why, first_text = why, text
+        if why in ("skip", "leak"):
             text = _ask(client, artist, venue, date, special, 5,
                         "A first search found nothing usable. Try Wikipedia, AllMusic, the label or the artist's own site, "
                         "and the venue listing. One concrete fact is enough: a named album and year, a band they lead or "
@@ -124,6 +125,7 @@ def generate_description(artist, venue, date, special="", extra=""):
             text = _from_listing(client, artist, venue, extra)
             why = _check(text)
             if why:
+                print(f"  NO BLURB {artist}: first={first_why!r} {first_text[:90]!r} | listing={why!r} {text[:60]!r}")
                 return ""
             return "\x00" + text   # marker: listing-derived
         return text
