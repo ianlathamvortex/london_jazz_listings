@@ -121,5 +121,17 @@
       "description_verified": true,
       "description_source": "manual"
     }
+  },
+  {
+    "note": "Martin Speake's Charukesi, Lauderdale House 5 Nov - replaces truncated venue text; facts from Lauderdale House listing",
+    "match": {
+      "gig_id": "martin-speake-s-charukesi-lauderdale-house-2026-11-05",
+      "date": "2026-11-05"
+    },
+    "set": {
+      "description": "Alto saxophonist's group, named after an Indian raga, with tenor saxophonist Alyson Cawley, guitarist Mike Outram, tuba player Richard Fox and drummer Tom Hooper. Its groove-based music draws on Indian, Arabic, Turkish and African traditions.",
+      "description_verified": true,
+      "description_source": "manual"
+    }
   }
 ]
