@@ -80,7 +80,7 @@ def _ask(client, artist, venue, date, special, uses, hint=""):
 
 def _rewrite(client, draft, why):
     """No search: fix wording of a draft that failed a form check, keeping only facts already in it."""
-    fix = {"jazz": 'Remove the word "jazz" (and any "jazz club"/"jazz singer" phrasing; say pianist, saxophonist, singer, etc.).',
+    fix = {"jazz": 'Remove the word "jazz" everywhere. If it sits inside a proper name (a festival, prize, band or album), rephrase so the name is not needed (e.g. "a major international trumpet competition") rather than deleting the word from the name. Never alter or drop any fact.',
            "form": "Cut to two sentences, under 55 words, and remove any reference to tonight or this evening."}[why]
     msg = client.messages.create(
         model=MODEL, max_tokens=300,
@@ -89,7 +89,19 @@ def _rewrite(client, draft, why):
     return _clean("".join(b.text for b in msg.content if getattr(b, "type", "") == "text"))
 
 
-def generate_description(artist, venue, date, special=""):
+def _from_listing(client, artist, venue, extra):
+    """Last resort: one factual line built ONLY from the listing's own fields. Returns '' if nothing to say."""
+    msg = client.messages.create(
+        model=MODEL, max_tokens=150,
+        system=("You write one short factual line for a London gig listing using ONLY the listing fields given. "
+                "State only what the fields say (format, tribute subject, line-up, occasion, guests, venue session). "
+                "Add nothing from your own knowledge. Never say jazz, never start with the artist name, no praise, "
+                "no 'tonight'. Under 25 words. If the fields say nothing beyond a name, reply exactly: SKIP"),
+        messages=[{"role": "user", "content": f"Artist/title: {artist}\nVenue: {venue}\n{extra}"}])
+    return _clean("".join(b.text for b in msg.content if getattr(b, "type", "") == "text"))
+
+
+def generate_description(artist, venue, date, special="", extra=""):
     """Up to 3 stages: search; on a wording failure rewrite the draft; on SKIP search again, harder."""
     try:
         import anthropic
@@ -108,7 +120,13 @@ def generate_description(artist, venue, date, special=""):
             if why in ("jazz", "form"):
                 text = _rewrite(client, text, why)
                 why = _check(text)
-        return text if not why else ""
+        if why:
+            text = _from_listing(client, artist, venue, extra)
+            why = _check(text)
+            if why:
+                return ""
+            return "\x00" + text   # marker: listing-derived
+        return text
     except Exception as e:
         print(f"  API error for {artist}: {e}")
         return ""
@@ -165,6 +183,28 @@ def _tidy(records):
     return records
 
 
+def _repair_jazz(records, today):
+    """Rewrite any live blurb containing the word jazz (facts kept), once per distinct text."""
+    todo = [r for r in records if r.get("date", "") >= today and "jazz" in (r.get("description") or "").lower()]
+    if not todo or not os.environ.get("ANTHROPIC_API_KEY"):
+        return records
+    import anthropic
+    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    cache, fixed = {}, 0
+    for r in todo:
+        d = r["description"]
+        if d not in cache:
+            try:
+                new = _rewrite(client, d, "jazz")
+            except Exception as e:
+                print(f"  repair error: {e}"); new = ""
+            cache[d] = new if (new and not _check(new)) else ""
+        if cache[d]:
+            r["description"] = cache[d]; fixed += 1
+    print(f"  Repaired jazz wording in {fixed}/{len(todo)} blurbs")
+    return records
+
+
 def _apply_overrides(records):
     """Apply manual corrections from data/overrides.json (match on exact fields, then set fields)."""
     import json
@@ -184,6 +224,15 @@ def _apply_overrides(records):
     return records
 
 
+def _extra(r):
+    parts = []
+    for k, lab in (("event_title", "Event title"), ("supporting_acts", "Supporting acts"), ("band_format", "Format"),
+                   ("stage", "Stage"), ("special_occasion", "Occasion"), ("start_time", "Start")):
+        if r.get(k):
+            parts.append(f"{lab}: {r[k]}")
+    return "\n".join(parts)
+
+
 def run():
     import time
     from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -193,6 +242,7 @@ def run():
 
     today = datetime.now().strftime("%Y-%m-%d")
     records = _apply_overrides(_tidy(load("gigs")))
+    records = _repair_jazz(records, today)
     future = [r for r in records if r.get("date", "") >= today]
     todo = [r for r in future if not r.get("description", "").strip() and r.get("artist_name") and r.get("venue_name")]
     print(f"Description coverage: {len(future) - len(todo)}/{len(future)}")
@@ -208,7 +258,7 @@ def run():
     start = time.time()
     ex = ThreadPoolExecutor(WORKERS)
     futs = {ex.submit(generate_description, a, first[a]["venue_name"], first[a]["date"],
-                      first[a].get("special_occasion", "")): a for a in artists}
+                      first[a].get("special_occasion", ""), _extra(first[a])): a for a in artists}
     try:
         for f in as_completed(futs, timeout=TIME_BUDGET):
             results[futs[f]] = f.result()
@@ -220,12 +270,14 @@ def run():
     for r in todo:
         d = results.get(r["artist_name"], "")
         if d:
-            r["description"] = d
+            listing = d.startswith("\x00")
+            r["description"] = d.lstrip("\x00")
             r["description_verified"] = False
-            r["description_source"] = "auto"
+            r["description_source"] = "listing" if listing else "auto"
             count += 1
     save("gigs", records)
     got = sum(1 for v in results.values() if v)
+    print(f"  of which listing-derived: {sum(1 for v in results.values() if v.startswith(chr(0)))}")
     print(f"  Artists done {len(results)}/{len(artists)}, described {got}; gigs updated {count}; {int(time.time()-start)}s")
     future2 = [r for r in records if r.get("date", "") >= today]
     have2 = [r for r in future2 if r.get("description", "").strip()]
