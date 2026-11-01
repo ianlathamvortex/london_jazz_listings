@@ -77,6 +77,19 @@ TIME_BUDGET = 30 * 60   # seconds; workflow timeout is 45 min
 WORKERS = 6
 
 
+NOTE_VESPERS = ("Part of a light evening service at the American International Church, "
+               "broadly suitable for people of any religion or belief.")
+
+
+def _with_note(g):
+    """Description for the free page; Vespers/Carols get a note that they are part of a light service."""
+    d = (g.get("description") or "").strip()
+    if g.get("venue_name", "").lower() == "american international church":
+        if NOTE_VESPERS not in d:
+            d = (d + " " + NOTE_VESPERS).strip()
+    return d
+
+
 def _tidy(records):
     """Blank leaked model text; move free-priced gigs to free_entry.json."""
     cleared = 0
@@ -100,7 +113,7 @@ def _tidy(records):
                        "start_time": g.get("start_time", ""), "end_time": "", "frequency": "",
                        "booking_required": False, "booking_url": g.get("ticket_url", ""),
                        "free_entry_type": "Free", "genre_tier1": g.get("genre_tier1", ""),
-                       "format_tags": g.get("format_tags", ""), "description": g.get("description", ""),
+                       "format_tags": g.get("format_tags", ""), "description": _with_note(g),
                        "source_url": g.get("ticket_url", ""), "editors_pick": False, "hidden": False,
                        "last_verified": datetime.now().strftime("%Y-%m-%d")})
         save("free_entry", fe)
