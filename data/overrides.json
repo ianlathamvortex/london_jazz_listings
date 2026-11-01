@@ -73,5 +73,41 @@
       "description_verified": true,
       "description_source": "manual"
     }
+  },
+  {
+    "note": "Anouar Brahem, Barbican 15 Nov - replaces leaked model text; facts from EFG London Jazz Festival page",
+    "match": {
+      "gig_id": "anouar-brahem-after-the-last-sky-barbican-2026-11-15",
+      "date": "2026-11-15"
+    },
+    "set": {
+      "description": "Oud player's first project in eight years, since Blue Maqams, with cellist Anja Lechner and pianist Django Bates; Mats Eilertsen stands in for Dave Holland on bass. The title comes from a line by poet Mahmoud Darwish.",
+      "description_verified": true,
+      "description_source": "manual"
+    }
+  },
+  {
+    "note": "ARTEMIS, Ronnie's 17 Nov - facts from Ronnie Scott's listing",
+    "match": {
+      "gig_id": "artemis-ronnies-2026-11-17",
+      "date": "2026-11-17"
+    },
+    "set": {
+      "description": "Led by pianist Renee Rosnes with trumpeter Ingrid Jensen, tenor saxophonist Nicole Glover, bassist Noriko Ueda and drummer Allison Miller. Three Blue Note albums to date; the latest, Arboresque, made the Guardian's top ten of 2025.",
+      "description_verified": true,
+      "description_source": "manual"
+    }
+  },
+  {
+    "note": "Zoe Rahman Trio, PizzaExpress Soho 18 Nov - facts from Wikipedia",
+    "match": {
+      "gig_id": "zoe-rahman-trio-pizzaexpress-live-soho-2026-11-18",
+      "date": "2026-11-18"
+    },
+    "set": {
+      "description": "Pianist nominated for the 2006 Mercury Prize for Melting Pot and winner of the 2012 MOBO Award for Best Jazz Act. She studied at Berklee with Joanne Brackeen and toured with Jerry Dammers' Spatial AKA Orchestra.",
+      "description_verified": true,
+      "description_source": "manual"
+    }
   }
 ]
