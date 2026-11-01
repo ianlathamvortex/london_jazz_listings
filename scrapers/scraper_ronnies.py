@@ -114,6 +114,41 @@ def _count_pages(soup: BeautifulSoup) -> int:
     return max(pages) if pages else 1
 
 
+def _from_programme() -> list:
+    """Fallback: the live site blocks GitHub's servers (HTTP 403), so use the programme
+    saved in scrapers/ronnies_programme.json (captured from the live site in a normal browser)."""
+    import json
+    path = Path(__file__).parent / "ronnies_programme.json"
+    try:
+        shows = json.loads(path.read_text(encoding="utf-8")).get("shows", [])
+    except Exception as e:
+        print(f"  Could not read saved programme: {e}")
+        return []
+    results, seen_ids = [], set()
+    for s in shows:
+        date_str, title = s.get("date", ""), s.get("title", "")
+        if not date_str or not title or not is_future(date_str):
+            continue
+        stage, format_tags, start_time = _stage_to_format(s.get("type", ""))
+        gig_id = re.sub(r"[^a-z0-9]+", "-", f"{title}-ronnies-{date_str}".lower()).strip("-")[:80]
+        if gig_id in seen_ids:
+            continue
+        seen_ids.add(gig_id)
+        g = gig(
+            artist_name=title, venue_name=VENUE, date=date_str, start_time=start_time,
+            ticket_url=s.get("url") or LIST_URL, source_url=LIST_URL, stage=stage,
+            zone=ZONE, neighbourhood=HOOD, nearest_tube=TUBE, venue_tier=TIER,
+            format_tags=format_tags, genre_tier1="Contemporary Jazz", description="",
+        )
+        g["gig_id"] = gig_id
+        g["editors_pick"] = any(x in title.lower() for x in EDITORS_PICK_SIGNALS)
+        g["description_verified"] = False
+        g["description_source"] = ""
+        results.append(g)
+    print(f"  Using saved programme: {len(results)} future Ronnie's shows")
+    return results
+
+
 def scrape() -> list:
     print("Scraping Ronnie Scott's (paginated server-rendered)...")
     results = []
@@ -122,7 +157,7 @@ def scrape() -> list:
     # Get page 1 and find total pages
     soup1 = _fetch_page(1)
     if not soup1:
-        print("  Failed to fetch page 1")
+        print("  Live site blocked - using saved programme"); return _from_programme()
         return []
 
     total_pages = min(_count_pages(soup1), 8)  # cap at 8 pages (~3 months ahead)
