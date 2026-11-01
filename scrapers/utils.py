@@ -75,6 +75,7 @@ FREE_ENTRY_VENUES = {
     "the garden cafe, flower station",
     "croydon clock tower cafe",
     "highams park jazz club",   # jams only — actual gigs stay
+    "american international church",
 }
 
 FREE_ENTRY_PATTERNS = [
