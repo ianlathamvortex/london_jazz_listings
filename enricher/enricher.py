@@ -41,7 +41,7 @@ CRITICAL RULES:
 
 def _is_bad(text):
     t = text.lower()
-    return any(p in t for p in BAD_PATTERNS)
+    return any(p in t for p in BAD_PATTERNS) or bool(LEAK_RE.search(text))
 
 
 def generate_description(artist, venue, date, special=""):
@@ -71,8 +71,8 @@ def generate_description(artist, venue, date, special=""):
         return ""
 
 
-LEAK_PHRASES = ["no relevant results", "let me try", "more targeted search",
-                "let me search", "couldn't find", "unable to find", "based on my search"]
+# Model reasoning that must never reach the site (applies to auto descriptions only)
+LEAK_RE = re.compile(r'''(^\W*(i |i'|no |now i|here is|here's|this is not|this artist|the search|the results|skip\b|\*\*skip)|verifiable|\bi cannot\b|\bi could not\b|\bi can't\b|\bi couldn't\b|\bi found\b|\bi have\b|\bi'll\b|search result|per my instr|artist name must|here is the (listing )?description|not a jazz|not a named|generic event title|\blet me\b|results (point|appear|pull)|\bi need to\b|\bi now\b)''', re.I)
 TIME_BUDGET = 30 * 60   # seconds; workflow timeout is 45 min
 WORKERS = 6
 
@@ -95,7 +95,7 @@ def _tidy(records):
     cleared = 0
     for r in records:
         d = r.get("description", "").lower()
-        if d and any(p in d for p in LEAK_PHRASES):
+        if d and r.get("description_source") != "manual" and LEAK_RE.search(r.get("description", "")):
             r["description"] = ""; r["description_verified"] = False; r["description_source"] = ""
             cleared += 1
     free = [r for r in records if r.get("price_from", "").strip().lower() == "free"]
