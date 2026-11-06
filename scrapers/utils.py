@@ -193,6 +193,22 @@ def fetch_json(url: str, timeout: int = 15) -> dict | None:
         print(f"  ERROR fetching JSON {url}: {e}")
         return None
 
+import re as _re_cn
+
+_CN_TAIL = _re_cn.compile(r"\s*[–—-]?\s*(?:Part of (?:The )?EFG London Jazz Festival|EFG London Jazz Festival).*$", _re_cn.I)
+
+
+def clean_name(n: str) -> str:
+    """Repair artist names damaged by scraping: glued words, festival boilerplate tails."""
+    n = _re_cn.sub(r"[​ ]", " ", n or "")
+    n = _CN_TAIL.sub("", n)
+    # glued connector: 'Theatraliawith Steve' -> 'Theatralia with Steve'
+    n = _re_cn.sub(r"(?<=[a-z]{3})(with|featuring|feat|presents)(?=\s)", r" \1", n)
+    # glued capital word: 'QuintetPart' -> 'Quintet Part' (3+ lowercase before; leaves McCreadie, DeJohnette alone)
+    n = _re_cn.sub(r"(?<=[a-z]{3})(?=[A-Z][a-z]{2})", " ", n)
+    return _re_cn.sub(r"\s+", " ", n).strip(" –—-")
+
+
 def gig(
     artist_name: str,
     venue_name: str,
@@ -214,6 +230,7 @@ def gig(
     venue_tier: str = "1",
     nearest_tube: str = "",  # accepted for compatibility with scrapers that pass it
 ) -> dict:
+    artist_name = clean_name(artist_name)
     return {
         "gig_id":           make_gig_id(artist_name, venue_name, date),
         "date":             date,
