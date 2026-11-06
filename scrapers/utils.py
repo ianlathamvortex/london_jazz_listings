@@ -195,6 +195,7 @@ def fetch_json(url: str, timeout: int = 15) -> dict | None:
 
 import re as _re_cn
 
+_CN_KEEP = ("PizzaExpress", "FreeMonk", "SoulSessions", "SoulTrippers", "FitzRoy", "DoomCannon", "DeJohnette", "McCreadie")
 _CN_TAIL = _re_cn.compile(r"\s*[–—-]?\s*(?:Part of (?:The )?EFG London Jazz Festival|EFG London Jazz Festival).*$", _re_cn.I)
 
 
@@ -204,8 +205,17 @@ def clean_name(n: str) -> str:
     n = _CN_TAIL.sub("", n)
     # glued connector: 'Theatraliawith Steve' -> 'Theatralia with Steve'
     n = _re_cn.sub(r"(?<=[a-z]{3})(with|featuring|feat|presents)(?=\s)", r" \1", n)
-    # glued capital word: 'QuintetPart' -> 'Quintet Part' (3+ lowercase before; leaves McCreadie, DeJohnette alone)
-    n = _re_cn.sub(r"(?<=[a-z]{3})(?=[A-Z][a-z]{2})", " ", n)
+    # glued capital word: 'FriendsHenri' -> 'Friends Henri'. Only for long names (glue comes from description
+    # text being appended); short names and known brand spellings are left alone.
+    if len(n) > 40:
+        keep = {}
+        for i, k in enumerate(_CN_KEEP):
+            if k in n:
+                n = n.replace(k, "\x01%d\x01" % i)
+                keep[i] = k
+        n = _re_cn.sub(r"(?<=[a-z]{3})(?=[A-Z][a-z]{2})", " ", n)
+        for i, k in keep.items():
+            n = n.replace("\x01%d\x01" % i, k)
     return _re_cn.sub(r"\s+", " ", n).strip(" –—-")
 
 
