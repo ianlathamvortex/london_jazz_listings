@@ -1,8 +1,7 @@
 {
  "date": "2026-11-06",
- "upcoming": 696,
+ "upcoming": 695,
  "blank": [
-  "Anastasia Donna – EFG London Jazz FestivalMulti-talented jazz",
   "Ben Goodman",
   "CHLOE JET",
   "Eliza Leng",
@@ -30,16 +29,21 @@
   "London Jazz Orchestra Festival Special"
  ],
  "promo_or_name_first": [
-  "Filomena Campus Quartet with Steve Lodder, Rod Youngs and Charlie Pyne",
-  "Jérémy Dumont QuintetPart of The EFG London Jazz Festival —",
-  "Kitty Whitelaw",
   "Lizz Wright with Kenny Banks Sr.",
   "London Jazz Orchestra Festival Special",
-  "Martin Nodeland Quartet feat Will VinsonPart of The EFG London Jazz Festival —",
   "Muireann Bradley"
  ],
  "too_long": [],
  "editors_picks_blank": [],
+ "suspect_names": [
+  "Coltrane 100: Joe Lovano, Melissa Aldana, Nduduzo Makhathini, Linda May Han Oh, Jeff \"Tain\" Watts",
+  "Dave Okumu & Friends present DVTN: Music that Changes the World: from Nina Simone to Sly Stone",
+  "Izo FitzRoy",
+  "PizzaExpress Live Jazz Orchestra feat. Georgia Cécile",
+  "The Downstairs Living Presents: Songs of Joni Mitchell with Rebecka Edlund and Immy Churchill",
+  "The SoulTrippers New Year’s Eve Party"
+ ],
+ "suspect_venues": [],
  "ronnies_missing_days_next_30": [],
  "venue_counts": {
   "PizzaExpress Live The Pheasantry": 55,
@@ -67,7 +71,6 @@
   "Union Chapel": 2,
   "Jazz Café Camden": 1,
   "Royal Albert Hall": 1,
-  "Tue 17 Nov 2026": 1,
   "Cecil Sharp House": 1,
   "East Side Jazz Club": 3,
   "Lauderdale House": 9,
