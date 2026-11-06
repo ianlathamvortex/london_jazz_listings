@@ -257,6 +257,8 @@ def _site_check(records, today):
         "promo_or_name_first": sorted({r["artist_name"] for r in up if _needs_style(r)}),
         "too_long": [r["artist_name"] for r in up if len(desc(r).split()) > 60],
         "editors_picks_blank": [r["artist_name"] for r in up if r.get("editors_pick") and not desc(r)],
+        "suspect_names": sorted({r["artist_name"] for r in up if len(r["artist_name"]) > 90 or re.search(r"[a-z]{3}[A-Z][a-z]{2}|Part of", r["artist_name"])}),
+        "suspect_venues": sorted({r.get("venue_name", "") for r in up if _DAY_VENUE.match(r.get("venue_name", "")) or len(r.get("venue_name", "")) > 45}),
     }
     ronnies = {r["date"] for r in up if r.get("venue_name") == "Ronnie Scott's"}
     d0 = datetime.strptime(today, "%Y-%m-%d")
@@ -271,6 +273,36 @@ def _site_check(records, today):
     except Exception as e:
         print(f"  site_check write error: {e}")
     print("  SITE CHECK: " + "; ".join(f"{k}={len(v)}" for k, v in rep.items() if isinstance(v, list)))
+
+
+_DAY_VENUE = re.compile(r"^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\b", re.I)
+
+
+def _fix_names(records):
+    """Repair names damaged by scraping, drop rows whose venue is really a date, and merge resulting duplicates."""
+    from utils import clean_name, make_gig_id
+    seen, out, n, dropped = {}, [], 0, 0
+    for r in records:
+        if _DAY_VENUE.match(r.get("venue_name", "")):
+            dropped += 1
+            continue
+        c = clean_name(r.get("artist_name", ""))
+        if c != r.get("artist_name"):
+            r["artist_name"] = c
+            r["gig_id"] = make_gig_id(c, r.get("venue_name", ""), r.get("date", ""))
+            n += 1
+        k = r.get("gig_id")
+        if k in seen:
+            keep = seen[k]
+            if not (keep.get("description") or "").strip() and (r.get("description") or "").strip():
+                out[out.index(keep)] = r
+                seen[k] = r
+            dropped += 1
+            continue
+        seen[k] = r
+        out.append(r)
+    print(f"  Names repaired: {n}; rows dropped (bad venue or duplicate): {dropped}")
+    return out
 
 
 def _apply_overrides(records):
@@ -309,7 +341,7 @@ def run():
         return
 
     today = datetime.now().strftime("%Y-%m-%d")
-    records = _apply_overrides(_tidy(load("gigs")))
+    records = _apply_overrides(_tidy(_fix_names(load("gigs"))))
     records = _repair_jazz(records, today)
     records = _style_pass(records, today)
     future = [r for r in records if r.get("date", "") >= today]
