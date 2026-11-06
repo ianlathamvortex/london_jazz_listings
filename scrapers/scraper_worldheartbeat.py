@@ -189,13 +189,13 @@ def _parse_block(block) -> dict | None:
 
     # Title
     h = block.find(["h2", "h3", "h4"])
-    title = h.get_text(strip=True) if h else ""
+    title = h.get_text(" ", strip=True) if h else ""
     if not title or len(title) < 3:
         return None
 
     # Categories from links
     cat_links = block.select("a[href*='event_category']")
-    categories = [a.get_text(strip=True) for a in cat_links]
+    categories = [a.get_text(" ", strip=True) for a in cat_links]
 
     if not _is_jazz_event(title, categories):
         return None
