@@ -83,6 +83,7 @@ def _ask(client, artist, venue, date, special, uses, hint=""):
 def _rewrite(client, draft, why):
     """No search: fix wording of a draft that failed a form check, keeping only facts already in it."""
     fix = {"jazz": 'Remove the word "jazz" everywhere. If it sits inside a proper name (a festival, prize, band or album), rephrase so the name is not needed (e.g. "a major international trumpet competition") rather than deleting the word from the name. Never alter or drop any fact.',
+           "tone": "Remove promotional or time-specific language (returns, brings, one of the, legendary, expect, tonight and similar). Keep every fact; if nothing but promotion remains, output only the plain facts in one or two sentences.",
            "form": "Cut to two sentences, under 55 words, and remove any reference to tonight or this evening."}[why]
     msg = client.messages.create(
         model=MODEL, max_tokens=300,
@@ -209,6 +210,69 @@ def _repair_jazz(records, today):
     return records
 
 
+PROMO_RE = re.compile(r"\b(returns? to|brings? (her|his|their|the)|one of (london|the uk|the most)|storied|restless|vital force|unmissable|not to be missed|expect |delights?|stunning|legendary|iconic|masterclass|breathtaking|electrifying|must-see|spellbinding|virtuosity|luminous|soulful grace|tonight|this evening)\b", re.I)
+
+
+def _needs_style(r):
+    d = (r.get("description") or "").strip()
+    a = (r.get("artist_name") or "").strip().lower()
+    return bool(d) and (bool(PROMO_RE.search(d)) or (len(a) >= 6 and d.lower().startswith(a[:max(6, min(len(a), 14))])))
+
+
+def _style_pass(records, today):
+    """Rewrite promotional, time-specific or name-first blurbs into plain facts (once per distinct text)."""
+    todo = [r for r in records if r.get("date", "") >= today and _needs_style(r)]
+    if not todo or not os.environ.get("ANTHROPIC_API_KEY"):
+        return records
+    import anthropic
+    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    cache, fixed = {}, 0
+    for r in todo:
+        d = r["description"]
+        if d not in cache:
+            try:
+                new = _rewrite(client, d, "tone")
+            except Exception as e:
+                print(f"  style error: {e}"); new = ""
+            cache[d] = new if (new and not _check(new) and not PROMO_RE.search(new)) else ""
+        if cache[d]:
+            r["description"] = cache[d]; fixed += 1
+    print(f"  Style pass: rewrote {fixed}/{len(todo)} blurbs")
+    return records
+
+
+def _site_check(records, today):
+    """Daily self-check. Prints a report and writes data/site_check.json (never fails the build)."""
+    import json
+    from datetime import timedelta
+    up = [r for r in records if r.get("date", "") >= today and not r.get("hidden")]
+    desc = lambda r: (r.get("description") or "").strip()
+    rep = {
+        "date": today,
+        "upcoming": len(up),
+        "blank": sorted({r["artist_name"] for r in up if not desc(r)}),
+        "fragments": [r["artist_name"] for r in up if desc(r) and desc(r)[-1] not in ".!?\"”)'’"],
+        "leaks": [r["artist_name"] for r in up if desc(r) and (LEAK_RE.search(desc(r)) or "<" in desc(r))],
+        "jazz_in_blurb": sorted({r["artist_name"] for r in up if "jazz" in desc(r).lower()}),
+        "promo_or_name_first": sorted({r["artist_name"] for r in up if _needs_style(r)}),
+        "too_long": [r["artist_name"] for r in up if len(desc(r).split()) > 60],
+        "editors_picks_blank": [r["artist_name"] for r in up if r.get("editors_pick") and not desc(r)],
+    }
+    ronnies = {r["date"] for r in up if r.get("venue_name") == "Ronnie Scott's"}
+    d0 = datetime.strptime(today, "%Y-%m-%d")
+    rep["ronnies_missing_days_next_30"] = [(d0 + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(30)
+                                           if (d0 + timedelta(days=i)).strftime("%Y-%m-%d") not in ronnies]
+    by_venue = {}
+    for r in up:
+        by_venue[r.get("venue_name", "")] = by_venue.get(r.get("venue_name", ""), 0) + 1
+    rep["venue_counts"] = by_venue
+    try:
+        (Path(__file__).parent.parent / "data" / "site_check.json").write_text(json.dumps(rep, indent=1, ensure_ascii=False), encoding="utf-8")
+    except Exception as e:
+        print(f"  site_check write error: {e}")
+    print("  SITE CHECK: " + "; ".join(f"{k}={len(v)}" for k, v in rep.items() if isinstance(v, list)))
+
+
 def _apply_overrides(records):
     """Apply manual corrections from data/overrides.json (match on exact fields, then set fields)."""
     import json
@@ -247,6 +311,7 @@ def run():
     today = datetime.now().strftime("%Y-%m-%d")
     records = _apply_overrides(_tidy(load("gigs")))
     records = _repair_jazz(records, today)
+    records = _style_pass(records, today)
     future = [r for r in records if r.get("date", "") >= today]
     todo = [r for r in future if not r.get("description", "").strip() and r.get("artist_name") and r.get("venue_name")]
     print(f"Description coverage: {len(future) - len(todo)}/{len(future)}")
@@ -286,6 +351,7 @@ def run():
     future2 = [r for r in records if r.get("date", "") >= today]
     have2 = [r for r in future2 if r.get("description", "").strip()]
     print(f"  Final coverage: {len(have2)}/{len(future2)} ({100*len(have2)//max(len(future2),1)}%)")
+    _site_check(records, today)
 
 
 if __name__ == "__main__":
