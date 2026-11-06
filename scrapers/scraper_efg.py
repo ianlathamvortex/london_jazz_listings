@@ -148,7 +148,7 @@ def scrape() -> list:
                 )
                 if date_m and not date_str:
                     date_str = _parse_date(line)
-                elif not venue_raw and len(line) > 2:
+                elif not venue_raw and len(line) > 2 and not date_m:
                     venue_raw = line
 
             if not date_str or not is_future(date_str):
