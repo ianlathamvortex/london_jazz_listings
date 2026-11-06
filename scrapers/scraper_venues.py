@@ -168,11 +168,11 @@ def scrape_venue(key: str, config: dict) -> list:
         event_links = soup.select("a[href]")
         for link in event_links:
             href = link.get("href","")
-            text = link.get_text(strip=True)
+            text = link.get_text(" ", strip=True)
             if not text or len(text) < 5:
                 continue
             # Check for date-like patterns nearby
-            parent_text = link.parent.get_text(strip=True) if link.parent else ""
+            parent_text = link.parent.get_text(" ", strip=True) if link.parent else ""
             if re.search(r"\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)", parent_text, re.I):
                 if needs_jazz_filter and not _is_jazz(parent_text):
                     continue
@@ -200,7 +200,7 @@ def _parse_block(block, config: dict) -> dict | None:
 
     # Artist
     h = block.find(["h1","h2","h3","h4","strong"])
-    artist = h.get_text(strip=True) if h else ""
+    artist = h.get_text(" ", strip=True) if h else ""
     if not artist or len(artist) < 3:
         return None
     # Hard limit on title length — artist names should never exceed 70 chars
@@ -280,7 +280,7 @@ def _scrape_event_page(url: str, config: dict) -> dict | None:
     text = soup.get_text(separator=" ", strip=True)
 
     h1 = soup.find("h1")
-    artist = h1.get_text(strip=True) if h1 else ""
+    artist = h1.get_text(" ", strip=True) if h1 else ""
     if not artist:
         return None
 
