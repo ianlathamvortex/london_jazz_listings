@@ -1,12 +1,17 @@
 {
- "date": "2026-11-06",
- "upcoming": 695,
+ "date": "2026-11-07",
+ "upcoming": 694,
  "blank": [
   "Ben Goodman",
   "CHLOE JET",
   "Eliza Leng",
+  "Gordon Giltrap & John Etheridge",
+  "Grace Elliott",
+  "Hannes Riepler Quartet feat Alex Hitchcock",
+  "Holland Park Sinfonia - Featuring Camille Rose",
   "James Junior",
   "Joe Martin (UK) and band",
+  "John Adams",
   "Keith Jack",
   "LAPP and The Fellas",
   "Let Loose",
@@ -18,15 +23,19 @@
   "Russia Neumann",
   "Simply Pink Floyd",
   "Son Con To Sexteto",
+  "Soultime!",
   "The Commission for New and Old Art presents: I Am Nobody – London Show",
   "The Funki Ducks",
   "The Oritsé Williams Experience",
+  "The Sting Operation",
+  "The Yacht Brothers",
   "West End Introducing"
  ],
  "fragments": [],
  "leaks": [],
  "jazz_in_blurb": [
-  "London Jazz Orchestra Festival Special"
+  "London Jazz Orchestra Festival Special",
+  "Zoe Rahman Trio"
  ],
  "promo_or_name_first": [
   "Lizz Wright with Kenny Banks Sr.",
@@ -46,14 +55,14 @@
  "suspect_venues": [],
  "ronnies_missing_days_next_30": [],
  "venue_counts": {
-  "PizzaExpress Live The Pheasantry": 55,
-  "PizzaExpress Live Leicester Square": 15,
-  "PizzaExpress Live Soho": 126,
-  "Vortex Jazz Club": 43,
-  "PizzaExpress Live Holborn": 88,
-  "606 Club": 10,
+  "PizzaExpress Live The Pheasantry": 56,
+  "PizzaExpress Live Leicester Square": 14,
+  "PizzaExpress Live Soho": 127,
+  "PizzaExpress Live Holborn": 90,
+  "Vortex Jazz Club": 42,
+  "606 Club": 9,
   "Wigmore Hall": 2,
-  "Ronnie Scott's": 263,
+  "Ronnie Scott's": 261,
   "Barbican": 6,
   "Troxy": 1,
   "King's Place": 6,
@@ -75,8 +84,8 @@
   "East Side Jazz Club": 3,
   "Lauderdale House": 9,
   "Trinity Laban": 5,
-  "Jazzlive at The Crypt": 7,
+  "Jazzlive at The Crypt": 6,
   "Grow": 1,
-  "Ladbroke Hall": 7
+  "Ladbroke Hall": 8
  }
 }
