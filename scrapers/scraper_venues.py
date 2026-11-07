@@ -199,8 +199,11 @@ def _parse_block(block, config: dict) -> dict | None:
     text = block.get_text(separator=" ", strip=True)
 
     # Artist
-    h = block.find(["h1","h2","h3","h4","strong"])
-    artist = h.get_text(" ", strip=True) if h else ""
+    # Prefer the card's own aria-label (exact title); heading text can include the blurb
+    artist = (block.get("aria-label") or "").strip()
+    if not artist:
+        h = block.find(["h1","h2","h3","h4","strong"])
+        artist = h.get_text(" ", strip=True) if h else ""
     if not artist or len(artist) < 3:
         return None
     # Hard limit on title length — artist names should never exceed 70 chars
