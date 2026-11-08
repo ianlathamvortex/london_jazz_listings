@@ -1,6 +1,6 @@
 {
- "date": "2026-11-07",
- "upcoming": 694,
+ "date": "2026-11-08",
+ "upcoming": 680,
  "blank": [
   "Ben Goodman",
   "CHLOE JET",
@@ -55,14 +55,14 @@
  "suspect_venues": [],
  "ronnies_missing_days_next_30": [],
  "venue_counts": {
-  "PizzaExpress Live The Pheasantry": 56,
+  "PizzaExpress Live The Pheasantry": 55,
   "PizzaExpress Live Leicester Square": 14,
-  "PizzaExpress Live Soho": 127,
-  "PizzaExpress Live Holborn": 90,
-  "Vortex Jazz Club": 42,
-  "606 Club": 9,
+  "Vortex Jazz Club": 40,
+  "PizzaExpress Live Holborn": 89,
+  "PizzaExpress Live Soho": 125,
+  "606 Club": 8,
   "Wigmore Hall": 2,
-  "Ronnie Scott's": 261,
+  "Ronnie Scott's": 258,
   "Barbican": 6,
   "Troxy": 1,
   "King's Place": 6,
@@ -86,6 +86,6 @@
   "Trinity Laban": 5,
   "Jazzlive at The Crypt": 6,
   "Grow": 1,
-  "Ladbroke Hall": 8
+  "Ladbroke Hall": 4
  }
 }

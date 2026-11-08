@@ -133,5 +133,45 @@
       "description_verified": true,
       "description_source": "manual"
     }
+  },
+  {
+    "note": "Stale Ladbroke Hall record with blurb text glued into the name (scraper now uses the exact title) - hide",
+    "match": {
+      "gig_id": "silvia-leonzio-exposedjoin-vocalist-and-composer-silvia-leonzio-and-ladbroke-hal",
+      "date": "2026-11-12"
+    },
+    "set": {
+      "hidden": true
+    }
+  },
+  {
+    "note": "Stale Ladbroke Hall record with blurb text glued into the name (scraper now uses the exact title) - hide",
+    "match": {
+      "gig_id": "the-selmer-jam-damon-oliver-and-friends-henri-selmer-paris-and-ladbroke-hall-202",
+      "date": "2026-11-14"
+    },
+    "set": {
+      "hidden": true
+    }
+  },
+  {
+    "note": "Stale Ladbroke Hall record with blurb text glued into the name (scraper now uses the exact title) - hide",
+    "match": {
+      "gig_id": "dany-noel-cuban-project-cuban-bassist-and-composer-dany-noel-ladbroke-hall-2026-",
+      "date": "2026-11-27"
+    },
+    "set": {
+      "hidden": true
+    }
+  },
+  {
+    "note": "Stale Ladbroke Hall record with blurb text glued into the name (scraper now uses the exact title) - hide",
+    "match": {
+      "gig_id": "elio-rojas-the-cuban-canvas-led-by-cuban-pianist-elio-rojas-the-ladbroke-hall-20",
+      "date": "2026-12-11"
+    },
+    "set": {
+      "hidden": true
+    }
   }
 ]
