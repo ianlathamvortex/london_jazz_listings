@@ -1,11 +1,11 @@
 {
- "date": "2026-11-10",
- "upcoming": 678,
+ "date": "2026-11-11",
+ "upcoming": 677,
  "blank": [
   "Ben Goodman",
   "CHLOE JET",
+  "Casey Whyte Quartet",
   "Cohen & Kavuma Quintet",
-  "Dan Reinstein",
   "Eliza Leng",
   "Fraser Urquhart Quartet ft. Sam Braysher",
   "Gordon Giltrap & John Etheridge",
@@ -18,6 +18,7 @@
   "Joe Martin (UK) and band",
   "John Adams",
   "Keith Jack",
+  "Koller/Kofi/Gourlay/Ojumu play Monk with special guest Louis Koller",
   "LAPP and The Fellas",
   "Leee John Jazz Quartet",
   "Let Loose",
@@ -35,6 +36,8 @@
   "Simply Pink Floyd",
   "Son Con To Sexteto",
   "Soultime!",
+  "Steve Norman & The Sleevz",
+  "Tamara Barschak’s Kaleidoscope Quartet",
   "The Commission for New and Old Art presents: I Am Nobody – London Show",
   "The Funki Ducks",
   "The Oritsé Williams Experience",
@@ -69,11 +72,11 @@
  "suspect_venues": [],
  "ronnies_missing_days_next_30": [],
  "venue_counts": {
-  "PizzaExpress Live The Pheasantry": 55,
+  "PizzaExpress Live The Pheasantry": 56,
   "PizzaExpress Live Leicester Square": 14,
-  "PizzaExpress Live Soho": 124,
-  "Vortex Jazz Club": 39,
-  "PizzaExpress Live Holborn": 90,
+  "Vortex Jazz Club": 38,
+  "PizzaExpress Live Holborn": 92,
+  "PizzaExpress Live Soho": 123,
   "Barbican": 6,
   "Troxy": 1,
   "King's Place": 6,
@@ -96,10 +99,11 @@
   "Lauderdale House": 9,
   "Trinity Laban": 5,
   "Wigmore Hall": 1,
-  "606 Club": 13,
+  "606 Club": 12,
   "Jazzlive at The Crypt": 6,
-  "Ronnie Scott's": 253,
+  "Ronnie Scott's": 251,
   "Ladbroke Hall": 4,
-  "Grow": 1
+  "Grow": 1,
+  "Toulouse Lautrec": 1
  }
 }
