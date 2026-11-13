@@ -1,13 +1,12 @@
 {
- "date": "2026-11-12",
- "upcoming": 670,
+ "date": "2026-11-13",
+ "upcoming": 665,
  "blank": [
   "Ben Goodman",
   "CHLOE JET",
-  "Casey Whyte Quartet",
   "Cohen & Kavuma Quintet",
+  "Dean Friedman",
   "Eliza Leng",
-  "Fraser Urquhart Quartet ft. Sam Braysher",
   "Gordon Giltrap & John Etheridge",
   "Grace Elliott",
   "Guildhall Jazz Showcase (Upstairs & Downstairs) – Day 2",
@@ -40,6 +39,7 @@
   "Steve Norman & The Sleevz",
   "Tamara Barschak’s Kaleidoscope Quartet",
   "The Commission for New and Old Art presents: I Am Nobody – London Show",
+  "The Forty Fours",
   "The Funki Ducks",
   "The Oritsé Williams Experience",
   "The Sting Operation",
@@ -74,10 +74,8 @@
  "suspect_venues": [],
  "ronnies_missing_days_next_30": [],
  "venue_counts": {
-  "PizzaExpress Live The Pheasantry": 55,
-  "PizzaExpress Live Leicester Square": 14,
-  "PizzaExpress Live Soho": 121,
-  "PizzaExpress Live Holborn": 92,
+  "PizzaExpress Live The Pheasantry": 59,
+  "PizzaExpress Live Leicester Square": 13,
   "Barbican": 6,
   "Troxy": 1,
   "King's Place": 6,
@@ -86,7 +84,9 @@
   "World Heart Beat": 22,
   "Stone Nest": 3,
   "The Wilds, Barking Riverside": 1,
-  "Vortex Jazz Club": 37,
+  "Vortex Jazz Club": 36,
+  "PizzaExpress Live Holborn": 91,
+  "PizzaExpress Live Soho": 119,
   "British Airways ARC": 1,
   "Queen Elizabeth Hall": 1,
   "Cadogan Hall": 4,
@@ -101,11 +101,10 @@
   "Lauderdale House": 9,
   "Trinity Laban": 5,
   "Wigmore Hall": 1,
-  "606 Club": 11,
+  "606 Club": 10,
   "Jazzlive at The Crypt": 6,
-  "Ronnie Scott's": 249,
+  "Ronnie Scott's": 247,
   "Ladbroke Hall": 4,
-  "Grow": 1,
-  "Toulouse Lautrec": 1
+  "Grow": 1
  }
 }
