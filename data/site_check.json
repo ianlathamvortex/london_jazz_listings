@@ -1,6 +1,6 @@
 {
- "date": "2026-11-16",
- "upcoming": 624,
+ "date": "2026-11-17",
+ "upcoming": 620,
  "blank": [
   "A Night of Brazilian Delights with “Samara” ft Francesca Confortini",
   "Alex Hitchcock Quartet ft Jasper Blom",
@@ -35,6 +35,7 @@
   "Let Loose",
   "Liane Carroll",
   "Maria & Ryota",
+  "Mark Kavuma & Rachael Cohen Quintet",
   "Mo Pleasure Band",
   "Nina 仁奈",
   "Pete Roth Trio ft. Bill Bruford",
@@ -46,6 +47,7 @@
   "Simply Billy Joel",
   "Simply Pink Floyd",
   "Son Con To Sexteto",
+  "SoulSessions: The Neo Soul Experience",
   "Soultime!",
   "Steve Norman & The Sleevz",
   "Søren Bebe Trio ‘Time Being’",
@@ -74,21 +76,21 @@
  "editors_picks_blank": [],
  "suspect_names": [
   "Izo FitzRoy",
+  "SoulSessions: The Neo Soul Experience",
   "The Downstairs Living Presents: Songs of Joni Mitchell with Rebecka Edlund and Immy Churchill",
   "The SoulTrippers New Year’s Eve Party"
  ],
  "suspect_venues": [],
  "ronnies_missing_days_next_30": [],
  "venue_counts": {
-  "PizzaExpress Live The Pheasantry": 61,
+  "PizzaExpress Live The Pheasantry": 62,
   "PizzaExpress Live Leicester Square": 12,
-  "Royal Albert Hall": 1,
-  "World Heart Beat": 19,
-  "PizzaExpress Live Soho": 122,
   "Milton Court": 1,
   "Cecil Sharp House": 1,
   "Union Chapel": 1,
+  "World Heart Beat": 17,
   "Vortex Jazz Club": 33,
+  "PizzaExpress Live Soho": 122,
   "East Side Jazz Club": 3,
   "Cadogan Hall": 2,
   "KOKO": 1,
@@ -100,7 +102,7 @@
   "Wigmore Hall": 1,
   "606 Club": 13,
   "Jazzlive at The Crypt": 4,
-  "Ronnie Scott's": 239,
+  "Ronnie Scott's": 237,
   "Ladbroke Hall": 2,
   "Grow": 1
  }
