@@ -175,5 +175,29 @@
       "hidden": false,
       "artist_name": "Elio Rojas & The Cuban Canvas"
     }
+  },
+  {
+    "note": "Whirlpool series at the Vortex - blurb agreed with Ian",
+    "match": {
+      "gig_id": "whirlpool-sessions-downstairs-vortex-jazz-club-2026-11-25",
+      "date": "2026-11-25"
+    },
+    "set": {
+      "description": "Vortex series promoting recent music-school graduates.",
+      "description_verified": true,
+      "description_source": "manual"
+    }
+  },
+  {
+    "note": "Whirlpool series at the Vortex - blurb agreed with Ian",
+    "match": {
+      "gig_id": "whirlpool-jonah-phillips-vortex-jazz-club-2026-09-09",
+      "date": "2026-09-09"
+    },
+    "set": {
+      "description": "Vortex series promoting recent music-school graduates.",
+      "description_verified": true,
+      "description_source": "manual"
+    }
   }
 ]
