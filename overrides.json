@@ -155,23 +155,25 @@
     }
   },
   {
-    "note": "Stale Ladbroke Hall record with blurb text glued into the name (scraper now uses the exact title) - hide",
+    "note": "Ladbroke Hall record: restore and use clean title",
     "match": {
       "gig_id": "dany-noel-cuban-project-cuban-bassist-and-composer-dany-noel-ladbroke-hall-2026-",
       "date": "2026-11-27"
     },
     "set": {
-      "hidden": true
+      "hidden": false,
+      "artist_name": "Dany Noel - Cuban Project"
     }
   },
   {
-    "note": "Stale Ladbroke Hall record with blurb text glued into the name (scraper now uses the exact title) - hide",
+    "note": "Ladbroke Hall record: restore and use clean title",
     "match": {
       "gig_id": "elio-rojas-the-cuban-canvas-led-by-cuban-pianist-elio-rojas-the-ladbroke-hall-20",
       "date": "2026-12-11"
     },
     "set": {
-      "hidden": true
+      "hidden": false,
+      "artist_name": "Elio Rojas & The Cuban Canvas"
     }
   }
 ]

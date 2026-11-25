@@ -1,6 +1,6 @@
 {
  "date": "2026-11-25",
- "upcoming": 588,
+ "upcoming": 597,
  "blank": [
   "Aimée McQueen",
   "Alex Webb & The Copasetics",
@@ -12,6 +12,7 @@
   "Citizens of the World Choir",
   "Clearwater Creedence Revival",
   "Cohen & Kavuma Quintet",
+  "DUJO LIVE",
   "Dean Friedman",
   "Deirdre Cartwright’s Picnic",
   "Down for the Count Motown",
@@ -24,6 +25,11 @@
   "Flo Collective",
   "Gordon Giltrap & John Etheridge",
   "Grace Elliott",
+  "Guildhall Big Band: The Evolution of Jazz Dance",
+  "Guildhall Improvisers' Ensemble with Kendrick Scott",
+  "Guildhall Jazz Orchestra with Melissa Aldana",
+  "Guildhall Jazz Orchestra: Jobim Centenary with Luiz Morais",
+  "Guildhall Studio Orchestra with Cleveland Watkiss",
   "HACKNEY WICK ‘CANALSIDE SESSIONS’ WITH WILLIAMS CUMBERBACHE AND",
   "Hannes Riepler Quartet feat Alex Hitchcock",
   "Hetty and the Jazzato Band",
@@ -43,6 +49,7 @@
   "Joe Martin (UK) and band",
   "John Adams",
   "John Horler Trio",
+  "Jonny Liebeck Quintet",
   "Joy Rose",
   "Julian Joseph",
   "Julian Siegel Quartet",
@@ -131,7 +138,7 @@
  "venue_counts": {
   "PizzaExpress Live The Pheasantry": 65,
   "Vortex Jazz Club": 37,
-  "PizzaExpress Live Soho": 121,
+  "PizzaExpress Live Soho": 123,
   "Trinity Laban": 4,
   "PizzaExpress Live Holborn": 98,
   "Wigmore Hall": 1,
@@ -142,8 +149,9 @@
   "Jazzlive at The Crypt": 4,
   "World Heart Beat": 7,
   "Ronnie Scott's": 215,
-  "Ladbroke Hall": 1,
+  "Ladbroke Hall": 3,
   "Grow": 1,
-  "East Side Jazz Club": 1
+  "East Side Jazz Club": 1,
+  "Milton Court": 5
  }
 }
