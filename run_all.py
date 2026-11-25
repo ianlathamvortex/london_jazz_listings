@@ -30,28 +30,47 @@ if len(gigs) == 0:
     print("WARNING: gigs.json is empty before scraping — possible data loss risk")
     print("Scrapers will run but will not save if result is also empty")
 
+# (name, module, cadence): "daily" | "weekly" (Sundays) | "monthly" (1st of month).
+# Manual runs (workflow_dispatch) or RUN_ALL=1 always run everything.
 SCRAPERS = [
-    ("Ronnie Scott's",       "scraper_ronnies"),
-    ("606 Club",             "scraper_606"),
-    ("Vortex",               "scraper_vortex"),
-    ("PizzaExpress Jazz",    "scraper_pizzaexpress"),
-    ("MusicGlue venues",     "scraper_musicglue"),
-    ("Serious Promotions",   "scraper_serious"),
-    ("Smaller venues",       "scraper_venues"),
-    ("UK Jazz News",         "scraper_ukjazznews"),
-    ("Trinity Laban",        "scraper_trinitylaban"),
-    ("Jazzlive at The Crypt","scraper_jazzlive"),
-    ("Lauderdale House",     "scraper_lauderdale"),
-    ("World Heart Beat",     "scraper_worldheartbeat"),
-    ("Highams Park Jazz",    "scraper_highamsparkjazz"),
-    ("Wigmore Hall",         "scraper_wigmorehall"),
-    ("Cadogan Hall",         "scraper_cadogan"),
-    ("Cafe OTO",             "scraper_cafeoto"),
-    ("Kings Place",          "scraper_kingsplace"),
+    ("Ronnie Scott's", "scraper_ronnies", "weekly"),
+    ("606 Club", "scraper_606", "weekly"),
+    ("Vortex", "scraper_vortex", "weekly"),
+    ("PizzaExpress Jazz", "scraper_pizzaexpress", "weekly"),
+    ("MusicGlue venues", "scraper_musicglue", "weekly"),
+    ("Serious Promotions", "scraper_serious", "monthly"),
+    ("Smaller venues", "scraper_venues", "weekly"),
+    ("UK Jazz News", "scraper_ukjazznews", "weekly"),
+    ("Jazzlive at The Crypt", "scraper_jazzlive", "weekly"),
+    ("Lauderdale House", "scraper_lauderdale", "weekly"),
+    ("World Heart Beat", "scraper_worldheartbeat", "weekly"),
+    ("Highams Park Jazz", "scraper_highamsparkjazz", "weekly"),
+    ("Trinity Laban", "scraper_trinitylaban", "monthly"),
+    ("Guildhall (GSMD)", "scraper_gsmd", "monthly"),
+    ("Wigmore Hall", "scraper_wigmorehall", "monthly"),
+    ("Cadogan Hall", "scraper_cadogan", "monthly"),
+    ("Cafe OTO", "scraper_cafeoto", "monthly"),
+    ("Kings Place", "scraper_kingsplace", "monthly"),
 ]
 
+import os
+_now = datetime.now()
+_force = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch" or os.environ.get("RUN_ALL") == "1"
+
+def due(cadence):
+    if _force or cadence == "daily":
+        return True
+    if cadence == "weekly":
+        return _now.weekday() == 6
+    if cadence == "monthly":
+        return _now.day == 1
+    return True
+
 results = {}
-for name, module_name in SCRAPERS:
+for name, module_name, cadence in SCRAPERS:
+    if not due(cadence):
+        results[name] = f"- not due ({cadence})"
+        continue
     print(f"\n── {name} ──")
     try:
         mod = importlib.import_module(module_name)
