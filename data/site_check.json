@@ -1,6 +1,6 @@
 {
- "date": "2026-11-25",
- "upcoming": 597,
+ "date": "2026-11-26",
+ "upcoming": 590,
  "blank": [
   "Aimée McQueen",
   "Alex Webb & The Copasetics",
@@ -17,7 +17,6 @@
   "Deirdre Cartwright’s Picnic",
   "Down for the Count Motown",
   "Downstairs Living Room: Rebecka Edlund & Rob Luft",
-  "Dulcie May Moreno",
   "Eliza Leng",
   "FIRE Feat. ERWIN",
   "Five Star’s Deniece Pearson",
@@ -96,7 +95,6 @@
   "The Filthy Six",
   "The Forty Fours",
   "The Funki Ducks",
-  "The Oritsé Williams Experience",
   "The Roberto Pla Latin Ensemble",
   "The Royal Jam",
   "The Soul Steppers",
@@ -112,7 +110,6 @@
   "Vince Dunn & the Medicine Band",
   "Viviana Zarbo",
   "West End Introducing",
-  "Whirlpool Sessions (Downstairs)",
   "Yuri Goloubev Trio"
  ],
  "fragments": [],
@@ -134,21 +131,23 @@
   "The SoulTrippers New Year’s Eve Party"
  ],
  "suspect_venues": [],
- "ronnies_missing_days_next_30": [],
+ "ronnies_missing_days_next_30": [
+  "2026-12-25"
+ ],
  "venue_counts": {
-  "PizzaExpress Live The Pheasantry": 65,
-  "Vortex Jazz Club": 37,
-  "PizzaExpress Live Soho": 123,
+  "PizzaExpress Live The Pheasantry": 64,
   "Trinity Laban": 4,
-  "PizzaExpress Live Holborn": 98,
+  "PizzaExpress Live Holborn": 97,
+  "PizzaExpress Live Soho": 122,
   "Wigmore Hall": 1,
   "Lauderdale House": 9,
   "PizzaExpress Live Leicester Square": 12,
   "Highams Park Jazz Club": 1,
-  "606 Club": 11,
+  "606 Club": 10,
+  "Vortex Jazz Club": 35,
   "Jazzlive at The Crypt": 4,
   "World Heart Beat": 7,
-  "Ronnie Scott's": 215,
+  "Ronnie Scott's": 214,
   "Ladbroke Hall": 3,
   "Grow": 1,
   "East Side Jazz Club": 1,

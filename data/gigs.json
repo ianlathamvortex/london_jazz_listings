@@ -17785,7 +17785,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "Vortex series promoting recent music-school graduates.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -17795,7 +17795,9 @@
     "date_scraped": "2026-09-09",
     "last_updated": "2026-09-09 01:46",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "olga-amelchenko-vortex-jazz-club-2026-09-09",
@@ -54942,7 +54944,7 @@
     "genre_tier2": "",
     "format_tags": "Jazz Club",
     "band_format": "",
-    "description": "",
+    "description": "Vortex series promoting recent music-school graduates.",
     "special_occasion": "",
     "editors_pick": false,
     "editors_note": "",
@@ -54952,7 +54954,9 @@
     "date_scraped": "2026-11-25",
     "last_updated": "2026-11-25 21:10",
     "verified": "Yes",
-    "scraper_notes": ""
+    "scraper_notes": "",
+    "description_verified": true,
+    "description_source": "manual"
   },
   {
     "gig_id": "jess-hayes-scott-mckeon-pizzaexpress-live-holborn-2027-01-17",
